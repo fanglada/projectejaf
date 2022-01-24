@@ -6,7 +6,9 @@ public class Vehicle {
 	private String marca;
 	private String model;
 	private TipusVehicle tipus;
-	private 
+	private int cv;
+	private int numRodes;
+	
 	
 
 }
