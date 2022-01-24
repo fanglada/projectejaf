@@ -1,13 +1,23 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Supervisor extends Empleat {
 
 	private String telefonEmpresa;
 
-	public Supervisor(String dNI, String nombre, String ape1, String ape2, String fNacimiento, String telefono,
-			String direccion, String mail) {
-		super(dNI, nombre, ape1, ape2, fNacimiento, telefono, direccion, mail);
-		// TODO Auto-generated constructor stub
+	public Supervisor(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
+			String direccio, String mail,String telefonEmpresa) {
+		super(dni, nom, cognom1, cognom2, dataNaixament, telefon, direccio, mail);
+		this.telefonEmpresa = telefonEmpresa;
+	}
+	
+	public String getTelefonEmpresa() {
+		return telefonEmpresa;
+	}
+
+	public void setTelefonEmpresa(String telefonEmpresa) {
+		this.telefonEmpresa = telefonEmpresa;
 	}
 
 }

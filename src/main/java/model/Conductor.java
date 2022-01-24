@@ -1,14 +1,24 @@
 package model;
 
+import java.time.*;
+
 public class Conductor extends Persona {
 	
-	private int carnet;
-	
-	public Conductor(String dNI, String nombre, String ape1, String ape2, String fNacimiento, String telefono,
-			String direccion, String mail) {
-		super(dNI, nombre, ape1, ape2, fNacimiento, telefono, direccion, mail);
-		// TODO Auto-generated constructor stub
+	private Carnet carnet;
+
+	public Conductor(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
+			String direccio, String mail,Carnet carnet) {
+		super(dni, nom, cognom1, cognom2, dataNaixament, telefon, direccio, mail);
+		this.carnet = carnet;
 	}
+
+	public Carnet getCarnet() {
+		return carnet;
+	}
+
+	public void setCarnet(Carnet carnet) {
+		this.carnet = carnet;
+	}	
 	
 	
 }

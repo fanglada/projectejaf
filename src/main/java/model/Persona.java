@@ -1,68 +1,71 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Persona {
-	private String DNI;
-	private String nombre;
-	private String ape1;
-	private String ape2;
-	private String fNacimiento;
-	private String telefono;
-	private String direccion;
+	
+	private String dni;
+	private String nom;
+	private String cognom1;
+	private String cognom2;
+	private LocalDate dataNaixament;
+	private String telefon;
+	private String direccio;
 	private String mail;
 	
-	public Persona(String dNI, String nombre, String ape1, String ape2, String fNacimiento, String telefono,
-			String direccion, String mail) {
-		DNI = dNI;
-		this.nombre = nombre;
-		this.ape1 = ape1;
-		this.ape2 = ape2;
-		this.fNacimiento = fNacimiento;
-		this.telefono = telefono;
-		this.direccion = direccion;
+	public Persona(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
+			String direccio, String mail) {
+		this.dni = dni;
+		this.nom = nom;
+		this.cognom1 = cognom1;
+		this.cognom2 = cognom2;
+		this.dataNaixament = dataNaixament;
+		this.telefon = telefon;
+		this.direccio = direccio;
 		this.mail = mail;
 	}
 	
 	public String getDNI() {
-		return DNI;
+		return dni;
 	}
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setDNI(String dni) {
+		this.dni = dni;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNom() {
+		return nom;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNom(String nombre) {
+		this.nom = nombre;
 	}
-	public String getApe1() {
-		return ape1;
+	public String getCognom1() {
+		return cognom1;
 	}
-	public void setApe1(String ape1) {
-		this.ape1 = ape1;
+	public void setCognom1(String ape1) {
+		this.cognom1 = ape1;
 	}
-	public String getApe2() {
-		return ape2;
+	public String getCognom2() {
+		return cognom2;
 	}
-	public void setApe2(String ape2) {
-		this.ape2 = ape2;
+	public void setCognom2(String ape2) {
+		this.cognom2 = ape2;
 	}
-	public String getfNacimiento() {
-		return fNacimiento;
+	public LocalDate getDataNaixament() {
+		return dataNaixament;
 	}
-	public void setfNacimiento(String fNacimiento) {
-		this.fNacimiento = fNacimiento;
+	public void setfNacimiento(LocalDate dataNaixament) {
+		this.dataNaixament = dataNaixament;
 	}
-	public String getTelefono() {
-		return telefono;
+	public String getTelefon() {
+		return telefon;
 	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTelefon(String telefono) {
+		this.telefon = telefono;
 	}
-	public String getDireccion() {
-		return direccion;
+	public String getDireccio() {
+		return direccio;
 	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setDireccio(String direccion) {
+		this.direccio = direccion;
 	}
 	public String getMail() {
 		return mail;
