@@ -1,7 +1,7 @@
 package model;
 
-public class Canvi {
-	private int idCanvi;
+public class Extra {
+	
+	private int idExtra;
 	private String descripcio;
-
 }
