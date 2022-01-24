@@ -1,5 +1,5 @@
 package model;
 
-public class Conductor {
-
+public class Conductor extends Persona {
+	private int carnet;
 }
