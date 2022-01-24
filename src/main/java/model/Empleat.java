@@ -1,5 +1,6 @@
 package model;
 
-public class Empleat {
+public class Empleat extends Persona{
 
+	
 }

@@ -1,5 +1,6 @@
 package model;
 
-public class Supervisor {
+public class Supervisor extends Empleat {
 
+	private String telefonEmpresa;
 }

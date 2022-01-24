@@ -1,13 +1,15 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Persona {
-	private String DNI;
-	private String nombre;
-	private String ape1;
-	private String ape2;
-	private String fNacimiento;
-	private String telefono;
-	private String direccion;
+	private String dni;
+	private String nom;
+	private String cognom1;
+	private String cognom2;
+	private LocalDate dataNaixement;
+	private String telefon;
+	private String direccio;
 	private String mail;
 
 }
