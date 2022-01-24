@@ -1,7 +1,7 @@
 package model;
 
-public class Carnet {
-
-	private int idCarnet;
+public class Extra {
+	
+	private int idExtra;
 	private String descripcio;
 }
