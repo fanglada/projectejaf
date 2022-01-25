@@ -8,7 +8,6 @@ public class Botiga {
 	private String descripcio;
 
 	public Botiga(String idBotiga, String telefon, String direccio, String descripcio) {
-		super();
 		this.idBotiga = idBotiga;
 		this.telefon = telefon;
 		this.direccio = direccio;
@@ -51,7 +50,4 @@ public class Botiga {
 	public String toString() {
 		return idBotiga;
 	}
-	
-	
-	
 }

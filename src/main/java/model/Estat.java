@@ -6,17 +6,16 @@ public class Estat {
 	private String descripcio;
 	
 	public Estat(int idEstat, String descripcio) {
-		super();
 		this.idEstat = idEstat;
+		this.descripcio = descripcio;
+	}
+	
+	public Estat(String descripcio) {
 		this.descripcio = descripcio;
 	}
 
 	public int getIdEstat() {
 		return idEstat;
-	}
-
-	public void setIdEstat(int idEstat) {
-		this.idEstat = idEstat;
 	}
 
 	public String getDescripcio() {

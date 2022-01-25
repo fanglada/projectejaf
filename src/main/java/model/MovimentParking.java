@@ -9,5 +9,7 @@ public class MovimentParking {
 	private Parking desti;
 	private Vehicle vehicle;
 	private LocalDateTime dataHora;
+	
+	
 
 }
