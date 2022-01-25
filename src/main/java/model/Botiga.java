@@ -50,4 +50,16 @@ public class Botiga {
 	public String toString() {
 		return idBotiga;
 	}
+	
+	public boolean altaBotiga() {
+		return false;
+	}
+
+	public boolean baixaBotiga() {
+		return false;
+	}
+	
+	public boolean modificarBotiga() {
+		return false;
+	}
 }

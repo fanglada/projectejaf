@@ -97,10 +97,20 @@ public class Contracte {
 	}
 
 	@Override
-	public String toString() { // Triar camps
-		return "Contracte [idContracte=" + idContracte + ", client=" + client + ", empleat=" + empleat + ", conductor="
-				+ conductor + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", estat=" + estat + ", vehicle="
+	public String toString() {
+		return "Contracte [client=" + client + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", estat=" + estat + ", vehicle="
 				+ vehicle + "]";
 	}
-
+	
+	public boolean altaContracte() {
+		return false;
+	}
+	
+	public boolean baixaContracte() {
+		return false;
+	}
+	
+	public boolean modificarContracte() {
+		return false;
+	}
 }

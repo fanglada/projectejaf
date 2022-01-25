@@ -30,4 +30,16 @@ public class Extra {
 	public String toString() {
 		return descripcio;
 	}
+	
+	public boolean altaExtra() {
+		return false;
+	}
+
+	public boolean baixaExtra() {
+		return false;
+	}
+
+	public boolean modificarExtra() {
+		return false;
+	}
 }

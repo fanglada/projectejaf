@@ -30,4 +30,16 @@ public class Carnet {
 	public String toString() {
 		return descripcio;
 	}
+	
+	public boolean altaCarnet() {
+		return false;
+	}
+	
+	public boolean baixaCarnet() {
+		return false;
+	}
+
+	public boolean modificarCarnet() {
+		return false;
+	}
 }

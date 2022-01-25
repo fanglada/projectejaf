@@ -31,6 +31,15 @@ public class Estat {
 		return descripcio;
 	}
 	
-	
+	public boolean altaEstat() {
+		return false;
+	}
 
+	public boolean baixaEstat() {
+		return false;
+	}
+	
+	public boolean modificarEstat() {
+		return false;
+	}
 }

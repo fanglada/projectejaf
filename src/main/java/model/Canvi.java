@@ -30,6 +30,16 @@ public class Canvi {
 	public String toString() {
 		return descripcio;
 	}
-
 	
+	public boolean altaCanvi() {
+		return false;
+	}
+
+	public boolean baixaCanvi() {
+		return false;
+	}
+	
+	public boolean modificarCanvi() {
+		return false;
+	}
 }

@@ -24,4 +24,16 @@ public class Conductor extends Persona {
 	public String toString() {
 		return super.toString();
 	}
+	
+	public boolean altaConductor() {
+		return false;
+	}
+
+	public boolean baixaConductor() {
+		return false;
+	}
+
+	public boolean modificarConductor() {
+		return false;
+	}
 }

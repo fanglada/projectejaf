@@ -14,4 +14,16 @@ public class Client extends Persona{
 	public String toString() {
 		return super.toString();
 	}
+	
+	public boolean altaClient() {
+		return false;
+	}
+	
+	public boolean baixaClient() {
+		return false;
+	}
+	
+	public boolean modificarClient() {
+		return false;
+	}
 }

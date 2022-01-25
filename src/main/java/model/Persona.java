@@ -13,7 +13,6 @@ public class Persona {
 	private String direccio;
 	private String mail;
 	
-
 	public Persona(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
 			String direccio, String mail) {
 		this.dni = dni;
@@ -95,5 +94,15 @@ public class Persona {
 		return nom + " " + cognom1 + " " + cognom2;
 	}
 	
+	public boolean altaPersona() {
+		return false;
+	}
 	
+	public boolean baixaPersona() {
+		return false;
+	}
+	
+	public boolean modificarPersona() {
+		return false;
+	}
 }

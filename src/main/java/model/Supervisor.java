@@ -20,4 +20,20 @@ public class Supervisor extends Empleat {
 		this.telefonEmpresa = telefonEmpresa;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	
+	public boolean altaSupervisor() {
+		return false;
+	}
+
+	public boolean baixaSupervisor() {
+		return false;
+	}
+
+	public boolean modificarSupervisor() {
+		return false;
+	}
 }
