@@ -1,7 +1,7 @@
 package model;
 
 public class Persona {
-	private String DNI;
+	private String dni;
 	private String nombre;
 	private String ape1;
 	private String ape2;
@@ -12,7 +12,7 @@ public class Persona {
 	
 	public Persona(String dNI, String nombre, String ape1, String ape2, String fNacimiento, String telefono,
 			String direccion, String mail) {
-		DNI = dNI;
+		dni = dni;
 		this.nombre = nombre;
 		this.ape1 = ape1;
 		this.ape2 = ape2;
@@ -22,11 +22,11 @@ public class Persona {
 		this.mail = mail;
 	}
 	
-	public String getDNI() {
-		return DNI;
+	public String getDni() {
+		return dni;
 	}
 	public void setDNI(String dNI) {
-		DNI = dNI;
+		dni = dni;
 	}
 	public String getNombre() {
 		return nombre;
