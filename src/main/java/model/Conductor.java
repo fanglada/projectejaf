@@ -3,23 +3,6 @@ package model;
 import java.time.*;
 
 public class Conductor extends Persona {
-<<<<<<< HEAD
-	private int carnet;
-
-	public Conductor(String dni, String nombre, String ape1, String ape2, String fNacimiento, String telefono,
-			String direccion, String mail, int carnet) {
-		super(dni, nombre, ape1, ape2, fNacimiento, telefono, direccion, mail);
-		this.carnet = carnet;
-	}
-
-	public int getCarnet() {
-		return carnet;
-	}
-
-	public void setCarnet(int carnet) {
-		this.carnet = carnet;
-	}
-=======
 	
 	private Carnet carnet;
 
@@ -35,8 +18,10 @@ public class Conductor extends Persona {
 
 	public void setCarnet(Carnet carnet) {
 		this.carnet = carnet;
-	}	
-	
->>>>>>> branch 'master' of git@github.com:fanglada/projectejaf.git
-	
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

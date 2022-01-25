@@ -1,22 +1,22 @@
 package model;
 
-public class Canvi {
+public class Estat {
 	
-	private int idCanvi;
+	private int idEstat;
 	private String descripcio;
 	
-	public Canvi(int idCanvi, String descripcio) {
+	public Estat(int idEstat, String descripcio) {
 		super();
-		this.idCanvi = idCanvi;
+		this.idEstat = idEstat;
 		this.descripcio = descripcio;
 	}
 
-	public int getIdCanvi() {
-		return idCanvi;
+	public int getIdEstat() {
+		return idEstat;
 	}
 
-	public void setIdCanvi(int idCanvi) {
-		this.idCanvi = idCanvi;
+	public void setIdEstat(int idEstat) {
+		this.idEstat = idEstat;
 	}
 
 	public String getDescripcio() {
@@ -31,6 +31,7 @@ public class Canvi {
 	public String toString() {
 		return descripcio;
 	}
-
 	
+	
+
 }
