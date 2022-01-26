@@ -25,15 +25,18 @@ public class Supervisor extends Empleat {
 		return super.toString();
 	}
 	
-	public boolean altaSupervisor() {
+	@Override
+	public boolean altaEmplet() {
+		return false;
+	}
+	
+	@Override
+	public boolean baixaEmplet() {
 		return false;
 	}
 
-	public boolean baixaSupervisor() {
-		return false;
-	}
-
-	public boolean modificarSupervisor() {
+	@Override
+	public boolean modificarEmplet() {
 		return false;
 	}
 }

@@ -93,16 +93,4 @@ public class Persona {
 	public String toString() {
 		return nom + " " + cognom1 + " " + cognom2;
 	}
-	
-	public boolean altaPersona() {
-		return false;
-	}
-	
-	public boolean baixaPersona() {
-		return false;
-	}
-	
-	public boolean modificarPersona() {
-		return false;
-	}
 }
