@@ -98,8 +98,7 @@ public class Contracte {
 
 	@Override
 	public String toString() {
-		return "Contracte [client=" + client + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", estat=" + estat + ", vehicle="
-				+ vehicle + "]";
+		return client.toString() + " " + vehicle.toString();
 	}
 	
 	public boolean altaContracte() {
