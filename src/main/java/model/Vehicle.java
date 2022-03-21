@@ -1,6 +1,7 @@
 package model;
 
 import java.time.*;
+import java.util.*;
 
 public class Vehicle {
 	
@@ -14,6 +15,7 @@ public class Vehicle {
 	private int numPortes;
 	private LocalDate dataMatriculacio;
 	private int capacitat;
+	private ArrayList<Extra> extres;
 	
 	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, Canvi canvi, int cv, int numRodes,
 			int numPortes, LocalDate dataMatriculacio, int capacitat) {
@@ -27,6 +29,7 @@ public class Vehicle {
 		this.numPortes = numPortes;
 		this.dataMatriculacio = dataMatriculacio;
 		this.capacitat = capacitat;
+		this.extres = new ArrayList<Extra>();
 	}
 	
 	public String getMatricula() {
@@ -109,6 +112,22 @@ public class Vehicle {
 		this.capacitat = capacitat;
 	}
 
+	public ArrayList<Extra> getExtres() {
+		return extres;
+	}
+
+	public void setExtres(ArrayList<Extra> extres) {
+		this.extres = extres;
+	}
+
+	public void addExtres(Extra extra) {
+		this.extres.add(extra);
+	}
+	
+	public void delExtres(Extra extra) {
+		this.extres.remove(extra);
+	}
+	
 	@Override
 	public String toString() {
 		return matricula;

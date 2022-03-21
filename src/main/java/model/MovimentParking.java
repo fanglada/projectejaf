@@ -25,6 +25,14 @@ public class MovimentParking {
 		this.vehicle = vehicle;
 		this.dataHora = dataHora;
 	}
+	
+	public void setIdMovimentParking(int idMovimentParking) {
+		this.idMovimentParking = idMovimentParking;
+	}
+
+	public int getIdMovimentParking() {
+		return idMovimentParking;
+	}
 
 	public Parking getOrigen() {
 		return origen;
@@ -56,10 +64,6 @@ public class MovimentParking {
 
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
-	}
-
-	public int getIdMovimentParking() {
-		return idMovimentParking;
 	}
 
 	@Override

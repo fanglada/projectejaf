@@ -14,6 +14,10 @@ public class Canvi {
 		this.descripcio = descripcio;
 	}
 
+	public void setIdCanvi(int idCanvi) {
+		this.idCanvi = idCanvi;
+	}
+
 	public int getIdCanvi() {
 		return idCanvi;
 	}

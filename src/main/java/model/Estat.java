@@ -13,6 +13,10 @@ public class Estat {
 	public Estat(String descripcio) {
 		this.descripcio = descripcio;
 	}
+	
+	public void setIdEstat(int idEstat) {
+		this.idEstat = idEstat;
+	}
 
 	public int getIdEstat() {
 		return idEstat;

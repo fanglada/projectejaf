@@ -14,6 +14,10 @@ public class Carnet {
 		this.descripcio = descripcio;
 	}
 
+	public void setIdCarnet(int idCarnet) {
+		this.idCarnet = idCarnet;
+	}
+
 	public int getIdCarnet() {
 		return idCarnet;
 	}

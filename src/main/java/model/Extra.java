@@ -13,6 +13,10 @@ public class Extra {
 	public Extra(String descripcio) {
 		this.descripcio = descripcio;
 	}
+	
+	public void setIdExtra(int idExtra) {
+		this.idExtra = idExtra;
+	}
 
 	public int getIdExtra() {
 		return idExtra;

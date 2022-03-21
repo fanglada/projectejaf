@@ -13,6 +13,14 @@ public class TipusVehicle {
 	public TipusVehicle(String descripcio) {
 		this.descripcio = descripcio;
 	}
+	
+	public void setIdTipusVehicle(int idTipusVehicle) {
+		this.idTipusVehicle = idTipusVehicle;
+	}
+
+	public int getIdTipusVehicle() {
+		return idTipusVehicle;
+	}
 
 	public String getDescripcio() {
 		return descripcio;
@@ -22,10 +30,6 @@ public class TipusVehicle {
 		this.descripcio = descripcio;
 	}
 
-	public int getIdTipusVehicle() {
-		return idTipusVehicle;
-	}
-	
 	@Override
 	public String toString() {
 		return descripcio;

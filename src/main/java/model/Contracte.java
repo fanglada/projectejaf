@@ -36,6 +36,14 @@ public class Contracte {
 		this.vehicle = vehicle;
 	}
 
+	public void setIdContracte(int idContracte) {
+		this.idContracte = idContracte;
+	}
+	
+	public int getIdContracte() {
+		return idContracte;
+	}
+
 	public Client getClient() {
 		return client;
 	}
@@ -90,10 +98,6 @@ public class Contracte {
 
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
-	}
-
-	public int getIdContracte() {
-		return idContracte;
 	}
 
 	@Override

@@ -2,23 +2,29 @@ package model;
 
 public class Botiga {
 
-	private String idBotiga;
+	private int idBotiga;
 	private String telefon;
 	private String direccio;
 	private String descripcio;
 
-	public Botiga(String idBotiga, String telefon, String direccio, String descripcio) {
+	public Botiga(int idBotiga, String telefon, String direccio, String descripcio) {
 		this.idBotiga = idBotiga;
 		this.telefon = telefon;
 		this.direccio = direccio;
 		this.descripcio = descripcio;
 	}
+	
+	public Botiga(String telefon, String direccio, String descripcio) {
+		this.telefon = telefon;
+		this.direccio = direccio;
+		this.descripcio = descripcio;
+	}
 
-	public String getIdBotiga() {
+	public int getIdBotiga() {
 		return idBotiga;
 	}
 
-	public void setIdBotiga(String idBotiga) {
+	public void setIdBotiga(int idBotiga) {
 		this.idBotiga = idBotiga;
 	}
 
@@ -48,7 +54,7 @@ public class Botiga {
 
 	@Override
 	public String toString() {
-		return idBotiga;
+		return direccio;
 	}
 	
 	public boolean altaBotiga() {

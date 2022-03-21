@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Parking {
 	
-	private String idParking;
+	private int idParking;
 	private Botiga botiga;
 	private String direccio;
 	private String telefon;
@@ -12,7 +12,7 @@ public class Parking {
 	private String capacitat;
 	ArrayList<Vehicle> vehicles;
 	
-	public Parking(String idParking, Botiga botiga, String direccio, String telefon, String descripcio,
+	public Parking(int idParking, Botiga botiga, String direccio, String telefon, String descripcio,
 			String capacitat) {
 		this.idParking = idParking;
 		this.botiga = botiga;
@@ -22,12 +22,22 @@ public class Parking {
 		this.capacitat = capacitat;
 		this.vehicles = new ArrayList<Vehicle>();
 	}
+	
+	public Parking(Botiga botiga, String direccio, String telefon, String descripcio,
+			String capacitat) {
+		this.botiga = botiga;
+		this.direccio = direccio;
+		this.telefon = telefon;
+		this.descripcio = descripcio;
+		this.capacitat = capacitat;
+		this.vehicles = new ArrayList<Vehicle>();
+	}
 
-	public String getIdParking() {
+	public int getIdParking() {
 		return idParking;
 	}
 
-	public void setIdParking(String idParking) {
+	public void setIdParking(int idParking) {
 		this.idParking = idParking;
 	}
 
@@ -89,7 +99,7 @@ public class Parking {
 
 	@Override
 	public String toString() {
-		return idParking;
+		return direccio;
 	}
 	
 	public boolean altaParking() {

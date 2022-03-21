@@ -2,6 +2,7 @@ package model;
 
 import java.time.*;
 
+
 public class Conductor extends Persona {
 	
 	private Carnet carnet;
