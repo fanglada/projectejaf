@@ -19,12 +19,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        scene = new Scene(loadFXML("Menu"));
-//        stage.setScene(scene);
-//        stage.setMinHeight(640);
-//        stage.setMinWidth(800);
-//        stage.show();
-    	System.out.println("Hola");
+        scene = new Scene(loadFXML("Menu"));
+        stage.setScene(scene);
+        stage.setMinHeight(640);
+        stage.setMinWidth(800);
+        stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
