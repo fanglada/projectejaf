@@ -9,15 +9,15 @@ public class Vehicle {
 	private String marca;
 	private String model;
 	private TipusVehicle tipus;
-	private Canvi canvi;
+	private String canvi;
 	private int cv;
 	private int numRodes;
 	private int numPortes;
 	private LocalDate dataMatriculacio;
 	private int capacitat;
-	private ArrayList<Extra> extres;
+	private List<Extra> extres;
 	
-	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, Canvi canvi, int cv, int numRodes,
+	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, String canvi, int cv, int numRodes,
 			int numPortes, LocalDate dataMatriculacio, int capacitat) {
 		this.matricula = matricula;
 		this.marca = marca;
@@ -64,11 +64,11 @@ public class Vehicle {
 		this.tipus = tipus;
 	}
 	
-	public Canvi getCanvi() {
+	public String getCanvi() {
 		return canvi;
 	}
 	
-	public void setCanvi(Canvi canvi) {
+	public void setCanvi(String canvi) {
 		this.canvi = canvi;
 	}
 	
@@ -112,11 +112,11 @@ public class Vehicle {
 		this.capacitat = capacitat;
 	}
 
-	public ArrayList<Extra> getExtres() {
+	public List<Extra> getExtres() {
 		return extres;
 	}
 
-	public void setExtres(ArrayList<Extra> extres) {
+	public void setExtres(List<Extra> extres) {
 		this.extres = extres;
 	}
 
