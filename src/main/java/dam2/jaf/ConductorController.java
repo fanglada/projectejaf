@@ -1,5 +1,6 @@
 package dam2.jaf;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -130,7 +131,8 @@ public class ConductorController implements Initializable{
     }
 
     @FXML
-    void tornar(ActionEvent event) {
+    void tornar(ActionEvent event) throws IOException {
+    	App.setRoot("menu");
 
     }
 
