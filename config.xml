@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config>
 	<bbdd>
-		<host>localhost</host>
+		<host>ffames.cat</host>
 		<port>3306</port>
-		<bd>practica</bd>
-		<user>fanglada</user>
+		<bd>projecte_jafm</bd>
+		<user>fora</user>
 		<passwd>Dam2020!</passwd>
 	</bbdd>
 </config>
