@@ -1,9 +1,6 @@
 package model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -12,7 +9,6 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 	public static int Tots(Connexio con, List<Carnet> carnets) {
 
-		int size=0;
 		try {
 
 			String sql = "SELECT * FROM carnet;";
@@ -23,15 +19,13 @@ public class CarnetDAOImpl implements CarnetDAO {
 			while(resultSet.next()) {
 				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
 			}
-			size=carnets.size();
+			return carnets.size();
 		}
-
-		catch (SQLException e) 
-		{
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
 		}
-		return size;
 	}
 
 	@Override
@@ -45,8 +39,17 @@ public class CarnetDAOImpl implements CarnetDAO {
 			stm.setString(1, carnet.getDescripcio());
 
 			resultat = stm.executeUpdate();
+			
+			ResultSet rst = stm.executeQuery("SELECT @@Identity AS id");
+			
+			if(rst.next())
+			{
+				carnet.setIdCarnet(rst.getInt("id"));
+			}
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -59,13 +62,16 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Carnet SET idCarnet = ?, descripcio = ?");				
-			stm.setInt(1, carnet.getIdCarnet());
-			stm.setString(2, carnet.getDescripcio());
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Carnet SET descripcio = ? WHERE idCarnet = ?");				
+			
+			stm.setString(1, carnet.getDescripcio());
+			stm.setInt(2, carnet.getIdCarnet());
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -84,7 +90,9 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;

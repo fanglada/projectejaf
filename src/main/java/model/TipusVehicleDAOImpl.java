@@ -12,7 +12,6 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 	public static int Tots(Connexio con, List<TipusVehicle> tipusVehicles) {
 
-		int size=0;
 		try {
 
 			String sql = "SELECT * FROM tipusVehicle;";
@@ -23,15 +22,12 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 			while(resultSet.next()) {
 				tipusVehicles.add(new TipusVehicle(resultSet.getInt("idTipusVehicle"), resultSet.getString("descripcio")));
 			}
-			size=tipusVehicles.size();
+			return tipusVehicles.size();
 		}
-
-		catch (SQLException e) 
-		{
+		catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
 		}
-		return size;
 	}
 	
 	@Override
@@ -45,8 +41,16 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 			stm.setString(1, tipusVehicle.getDescripcio());
 
 			resultat = stm.executeUpdate();
+			
+			ResultSet rst = stm.executeQuery("SELECT @@Identity AS id");
+			
+			if(rst.next())
+			{
+				tipusVehicle.setIdTipusVehicle(rst.getInt("id"));
+			}
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -59,13 +63,16 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE TipusVehicle SET idTipusVehicle = ?, descripcio = ?");				
-			stm.setInt(1, tipusVehicle.getIdTipusVehicle());
-			stm.setString(2, tipusVehicle.getDescripcio());
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE TipusVehicle SET descripcio = ? WHERE idTipusVehicle = ?");				
+			stm.setString(1, tipusVehicle.getDescripcio());
+			stm.setInt(2, tipusVehicle.getIdTipusVehicle());
+
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -83,7 +90,9 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;

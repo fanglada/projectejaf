@@ -1,9 +1,6 @@
 package model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -12,7 +9,6 @@ public class EstatDAOImpl implements EstatDAO {
 
 	public static int Tots(Connexio con, List<Estat> estats) {
 
-		int size=0;
 		try {
 
 			String sql = "SELECT * FROM estat;";
@@ -23,15 +19,14 @@ public class EstatDAOImpl implements EstatDAO {
 			while(resultSet.next()) {
 				estats.add(new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")));
 			}
-			size=estats.size();
+			
+			return estats.size();
 		}
-
-		catch (SQLException e) 
-		{
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
 		}
-		return size;
 	}
 	
 	@Override
@@ -45,8 +40,17 @@ public class EstatDAOImpl implements EstatDAO {
 			stm.setString(1, estat.getDescripcio());
 
 			resultat = stm.executeUpdate();
+			
+			ResultSet rst = stm.executeQuery("SELECT @@Identity AS id");
+			
+			if(rst.next())
+			{
+				estat.setIdEstat(rst.getInt("id"));
+			}
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -59,13 +63,16 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Estat SET idEstat = ?, descripcio = ?");				
-			stm.setInt(1, estat.getIdEstat());
-			stm.setString(2, estat.getDescripcio());
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Estat SET descripcio = ? WHERE idEstat = ?");				
+			stm.setString(1, estat.getDescripcio());
+			stm.setInt(2, estat.getIdEstat());
+
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
@@ -83,7 +90,9 @@ public class EstatDAOImpl implements EstatDAO {
 
 			resultat = stm.executeUpdate();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return resultat;
