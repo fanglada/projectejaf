@@ -10,7 +10,7 @@ import dam2.jaf.Connexio;
 
 public class EstatDAOImpl implements EstatDAO {
 
-	static int Tots(Connexio con, List<Estat> estats) {
+	public static int Tots(Connexio con, List<Estat> estats) {
 
 		int size=0;
 		try {

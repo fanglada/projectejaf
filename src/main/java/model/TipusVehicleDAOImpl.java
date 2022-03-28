@@ -10,7 +10,7 @@ import dam2.jaf.Connexio;
 
 public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
-	static int Tots(Connexio con, List<TipusVehicle> tipusVehicles) {
+	public static int Tots(Connexio con, List<TipusVehicle> tipusVehicles) {
 
 		int size=0;
 		try {

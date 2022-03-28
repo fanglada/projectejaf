@@ -10,7 +10,7 @@ import dam2.jaf.Connexio;
 
 public class CarnetDAOImpl implements CarnetDAO {
 
-	static int Tots(Connexio con, List<Carnet> carnets) {
+	public static int Tots(Connexio con, List<Carnet> carnets) {
 
 		int size=0;
 		try {
