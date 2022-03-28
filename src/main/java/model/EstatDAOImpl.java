@@ -71,7 +71,6 @@ public class EstatDAOImpl implements EstatDAO {
 		return resultat;
 	}
 
-
 	@Override
 	public int Delete(Connexio con, int id) {
 
@@ -79,7 +78,7 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Carnet WHERE idEstat = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Estat WHERE idEstat = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();
