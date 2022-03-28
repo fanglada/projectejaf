@@ -21,8 +21,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			while(resultSet.next()) {
-				Carnet carnet = new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio"));
-				carnets.add(carnet);
+				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
 			}
 			size=carnets.size();
 		}
@@ -45,9 +44,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO Carnet VALUES (NULL,?)");				
 			stm.setString(1, carnet.getDescripcio());
 
-			stm.executeUpdate();
-
-			resultat = 1;
+			resultat = stm.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,9 +63,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 			stm.setInt(1, carnet.getIdCarnet());
 			stm.setString(2, carnet.getDescripcio());
 
-			stm.executeUpdate();
-
-			resultat = 1;
+			resultat = stm.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,9 +82,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE from Carnet where idCarnet = ?");				
 			stm.setInt(1, id);
 
-			stm.executeUpdate();
-
-			resultat = 1;
+			resultat = stm.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
