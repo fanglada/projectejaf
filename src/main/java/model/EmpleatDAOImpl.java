@@ -5,7 +5,7 @@ import dam2.jaf.Connexio;
 
 public class EmpleatDAOImpl implements EmpleatDAO {
 	
-	static int Tots(List<Empleat> empleats) {
+	static int Tots(Connexio con, List<Empleat> empleats) {
 		return 0;	
 	}
 
@@ -16,15 +16,15 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 	}
 
 	@Override
-	public boolean update(Connexio con, Empleat empleat) {
+	public int update(Connexio con, Empleat empleat) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 	@Override
-	public boolean delete(Connexio con, int id) {
+	public int delete(Connexio con, int id) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 }

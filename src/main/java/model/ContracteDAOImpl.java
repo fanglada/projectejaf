@@ -5,7 +5,7 @@ import dam2.jaf.Connexio;
 
 public class ContracteDAOImpl implements ContracteDAO {
 	
-	static int Tots(List<Contracte> contractes) {
+	static int Tots(Connexio con, List<Contracte> contractes) {
 		return 0;	
 	}
 
@@ -16,15 +16,15 @@ public class ContracteDAOImpl implements ContracteDAO {
 	}
 
 	@Override
-	public boolean update(Connexio con, Contracte contracte) {
+	public int update(Connexio con, Contracte contracte) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 	@Override
-	public boolean delete(Connexio con, int id) {
+	public int delete(Connexio con, int id) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 }

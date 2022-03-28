@@ -5,12 +5,12 @@ import dam2.jaf.Connexio;
 
 public interface ContracteDAO {
 	
-	static int Tots(List<Contracte> contractes) {
+	static int Tots(Connexio con, List<Contracte> contractes) {
 		return 0;	
 	}
 	
 	int create(Connexio con, Contracte contracte);
-	boolean update(Connexio con, Contracte contracte);
-	boolean delete(Connexio con, int id);
+	int update(Connexio con, Contracte contracte);
+	int delete(Connexio con, int id);
 
 }

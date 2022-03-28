@@ -6,11 +6,11 @@ import dam2.jaf.Connexio;
 
 public interface ClientDAO {
 	
-	static int Tots(List<Client> clients) {
+	static int Tots(Connexio con, List<Client> clients) {
 		return 0;	
 	}
 	
-	int create(Connexio con, Client clinet);
-	boolean update(Connexio con, Client client);
-	boolean delete(Connexio con, int id);
+	int create(Connexio con, Client client);
+	int update(Connexio con, Client client);
+	int delete(Connexio con, int id);
 }

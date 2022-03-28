@@ -5,7 +5,7 @@ import dam2.jaf.Connexio;
 
 public class SupervisorDAOImpl implements SupervisorDAO {
 	
-	static int Tots(List<Supervisor> supervisors) {
+	static int Tots(Connexio con, List<Supervisor> supervisors) {
 		return 0;	
 	}
 
@@ -16,15 +16,15 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 	}
 
 	@Override
-	public boolean update(Connexio con, Supervisor supervisor) {
+	public int update(Connexio con, Supervisor supervisor) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 	@Override
-	public boolean delete(Connexio con, int id) {
+	public int delete(Connexio con, int id) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 }
