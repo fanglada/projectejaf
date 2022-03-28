@@ -21,8 +21,8 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			while(rst.next())
 			{
-//				TipusVehicle tipusVehicle = new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio"));
-//				vehicles.add(new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"),tipusVehicle,rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), LocalDate.parse(rst.getString("dataMatriculacio")),rst.getInt("capacitat"));
+				TipusVehicle tipusVehicle = new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio"));
+				vehicles.add(new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"),tipusVehicle,rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), LocalDate.parse(rst.getString("dataMatriculacio")),rst.getInt("capacitat")));
 			}
 			
 		} catch (SQLException e) {
