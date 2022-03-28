@@ -12,8 +12,9 @@
         transparent
         derive(-fx-base, 80%) 
         transparent;
-
+	-fx-text-fill: white;
 }
+
 .date-picker .text-field {
     -fx-control-inner-background: #1d1d1d;
 }
