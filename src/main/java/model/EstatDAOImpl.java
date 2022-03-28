@@ -15,7 +15,7 @@ public class EstatDAOImpl implements EstatDAO {
 		int size=0;
 		try {
 
-			String sql = "Select * from estat;";
+			String sql = "SELECT * FROM estat;";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);
@@ -79,7 +79,7 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE from Carnet where idEstat = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Carnet WHERE idEstat = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();

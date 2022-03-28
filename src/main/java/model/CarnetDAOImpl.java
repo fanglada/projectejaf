@@ -15,7 +15,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 		int size=0;
 		try {
 
-			String sql = "Select * from carnet;";
+			String sql = "SELECT * FROM carnet;";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);
@@ -79,7 +79,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE from Carnet where idCarnet = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Carnet WHERE idCarnet = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();
