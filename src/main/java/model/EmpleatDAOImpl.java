@@ -34,13 +34,13 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 		}
 	}
 	
-	public static int select(Connexio con, Empleat empleat, String id) { //Empleat i supervisor o empleat nomes
+	public static int select(Connexio con, Empleat empleat, String id) {
 		try {
 			Connection conection = con.getConnexio();
 
 			Statement stm = conection.createStatement();
 
-			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NULL;";
+			String sql = "SELECT * FROM treballador WHERE DNI = "+id+";";
 
 			ResultSet rst = stm.executeQuery(sql);
 
@@ -64,7 +64,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 			Statement stm = conection.createStatement();
 
-			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NULL;";
+			String sql = "SELECT * FROM treballador WHERE DNI = "+id+";";
 
 			ResultSet rst = stm.executeQuery(sql);
 

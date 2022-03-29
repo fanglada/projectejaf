@@ -43,7 +43,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM conductor WHERE DNI="+id+" AND esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL;";
+				String sql = "SELECT * FROM conductor WHERE DNI="+id+";";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				
@@ -70,7 +70,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM conductor WHERE DNI="+id+" AND esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL;";
+				String sql = "SELECT * FROM conductor WHERE DNI="+id+";";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				
