@@ -9,11 +9,11 @@ public interface EmpleatDAO {
 		return 0;	
 	}
 	
-	static int select(Connexio con, Empleat empleat, int id) {
+	static int select(Connexio con, Empleat empleat, String id) {
 		return 0;	
 	}
 	
-	static Empleat select(Connexio con, int id) {
+	static Empleat select(Connexio con, String id) {
 		return null;	
 	}
 	

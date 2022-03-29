@@ -34,7 +34,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 		}
 	}
 	
-	static int select(Connexio con, Empleat empleat, int id) {
+	public static int select(Connexio con, Empleat empleat, String id) { //Empleat i supervisor o empleat nomes
 		try {
 			Connection conection = con.getConnexio();
 
@@ -57,7 +57,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 		}
 	}
 	
-	static Empleat select(Connexio con, int id) {
+	public static Empleat select(Connexio con, String id) {
 		Empleat empleat = null;
 		try {
 			Connection conection = con.getConnexio();
