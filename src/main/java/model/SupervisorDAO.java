@@ -11,5 +11,5 @@ public interface SupervisorDAO {
 	
 	int create(Connexio con, Supervisor supervisor);
 	int update(Connexio con, Supervisor supervisor);
-	int delete(Connexio con, int id);
+	int delete(Connexio con, String id);
 }

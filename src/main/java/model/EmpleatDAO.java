@@ -11,6 +11,6 @@ public interface EmpleatDAO {
 	
 	int create(Connexio con, Empleat empleat);
 	int update(Connexio con, Empleat empleat);
-	int delete(Connexio con, int id);
+	int delete(Connexio con, String id);
 
 }

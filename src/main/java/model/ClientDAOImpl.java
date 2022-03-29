@@ -1,18 +1,14 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import dam2.jaf.Connexio;
 
 public class ClientDAOImpl implements ClientDAO {
 	
-	static int Tots(Connexio con, List<Client> clients) {
+	public static int Tots(Connexio con, List<Client> clients) {
 		
 		try 
 		{
@@ -25,9 +21,9 @@ public class ClientDAOImpl implements ClientDAO {
 			ResultSet rst = stm.executeQuery(sql);		
 			
 			while(rst.next()){
-				clients.add(new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), LocalDate.parse(rst.getString("dataNaixement")), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail")));
+				clients.add(new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail")));
 			}
-			
+
 			return clients.size();
 		}catch (Exception e) 
 		{
@@ -47,7 +43,7 @@ public class ClientDAOImpl implements ClientDAO {
 			stm.setString(2, client.getNom());
 			stm.setString(3, client.getCognom1());
 			stm.setString(4, client.getCognom2());
-			stm.setDate(5, java.sql.Date.valueOf(client.getDataNaixament()));
+			stm.setDate(5, Date.valueOf(client.getDataNaixament()));
 			stm.setString(6, client.getTelefon());
 			stm.setString(7, client.getDireccio());
 			stm.setString(8, client.getMail());
@@ -66,15 +62,15 @@ public class ClientDAOImpl implements ClientDAO {
 		try 
 		{
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("UPDATE client SET DNI=?,nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=?");
-			stm.setString(1, client.getDni());
-			stm.setString(2, client.getNom());
-			stm.setString(3, client.getCognom1());
-			stm.setString(4, client.getCognom2());
-			stm.setDate(5, java.sql.Date.valueOf(client.getDataNaixament()));
-			stm.setString(6, client.getTelefon());
-			stm.setString(7, client.getDireccio());
-			stm.setString(8, client.getMail());
+			PreparedStatement stm = conection.prepareStatement("UPDATE client SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=? WHERE DNI=?");
+			stm.setString(1, client.getNom());
+			stm.setString(2, client.getCognom1());
+			stm.setString(3, client.getCognom2());
+			stm.setDate(4, Date.valueOf(client.getDataNaixament()));
+			stm.setString(5, client.getTelefon());
+			stm.setString(6, client.getDireccio());
+			stm.setString(7, client.getMail());
+			stm.setString(8, client.getDni());
 			return stm.executeUpdate();			
 
 		
@@ -86,14 +82,16 @@ public class ClientDAOImpl implements ClientDAO {
 	}
 
 	@Override
-	public int delete(Connexio con, int id) {
+	public int delete(Connexio con, String id) {
 		try 
 		{
 			Connection conection = con.getConnexio();
+						
+			PreparedStatement stm = conection.prepareStatement("DELETE FROM client WHERE DNI=?");	
 			
-			Statement stm = conection.createStatement();
+			stm.setString(1, id);
 			
-			return stm.executeUpdate("DELETE FROM client WHERE id="+id+"");						
+			return stm.executeUpdate();
 
 		}catch (Exception e) 
 		{

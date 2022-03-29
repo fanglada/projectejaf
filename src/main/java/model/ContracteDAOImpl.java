@@ -5,7 +5,7 @@ import dam2.jaf.Connexio;
 
 public class ContracteDAOImpl implements ContracteDAO {
 	
-	static int Tots(Connexio con, List<Contracte> contractes) {
+	public static int Tots(Connexio con, List<Contracte> contractes) {
 		return 0;	
 	}
 
