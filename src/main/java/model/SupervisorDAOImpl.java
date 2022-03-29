@@ -17,7 +17,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 			
 			Statement stm = conection.createStatement();
 			
-			String sql = "SELECT * FROM treballador;";
+			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NOT NULL;";
 			
 			ResultSet rst = stm.executeQuery(sql);		
 			

@@ -9,6 +9,8 @@ public interface SupervisorDAO {
 		return 0;	
 	}
 	
+	//SELECT?
+	
 	int create(Connexio con, Supervisor supervisor);
 	int update(Connexio con, Supervisor supervisor);
 	int delete(Connexio con, String id);

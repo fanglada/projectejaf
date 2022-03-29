@@ -10,34 +10,80 @@ import java.util.List;
 import dam2.jaf.Connexio;
 
 public class EmpleatDAOImpl implements EmpleatDAO {
-	
+
 	public static int Tots(Connexio con, List<Empleat> empleats) {
-		try 
-		{
+		try {
 			Connection conection = con.getConnexio();
-			
+
 			Statement stm = conection.createStatement();
-			
-			String sql = "SELECT * FROM treballador;";
-			
-			ResultSet rst = stm.executeQuery(sql);		
-			
-			while(rst.next()){
-				empleats.add(new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail")));
+
+			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NULL;";
+
+			ResultSet rst = stm.executeQuery(sql);
+
+			while (rst.next()) {
+				empleats.add(new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+						rst.getString("direccio"), rst.getString("mail")));
 			}
 
 			return empleats.size();
-		}catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
 	}
+	
+	static int select(Connexio con, Empleat empleat, int id) {
+		try {
+			Connection conection = con.getConnexio();
+
+			Statement stm = conection.createStatement();
+
+			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NULL;";
+
+			ResultSet rst = stm.executeQuery(sql);
+
+			if (rst.next()) {
+				empleat =new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+						rst.getString("direccio"), rst.getString("mail"));
+			}
+
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	static Empleat select(Connexio con, int id) {
+		Empleat empleat = null;
+		try {
+			Connection conection = con.getConnexio();
+
+			Statement stm = conection.createStatement();
+
+			String sql = "SELECT * FROM treballador WHERE esConductor IS FALSE AND idBotiga IS NOT NULL AND telefonEmpresa IS NULL;";
+
+			ResultSet rst = stm.executeQuery(sql);
+
+			while (rst.next()) {
+				empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+						rst.getString("direccio"), rst.getString("mail"));
+			}
+
+			return empleat;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
 
 	@Override
 	public int create(Connexio con, Empleat empleat) {
-		try 
-		{
+		try {
 			Connection conection = con.getConnexio();
 			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,NULL)");
 			stm.setString(1, empleat.getDni());
@@ -48,11 +94,9 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			stm.setString(6, empleat.getTelefon());
 			stm.setString(7, empleat.getDireccio());
 			stm.setString(8, empleat.getMail());
-			return stm.executeUpdate();			
+			return stm.executeUpdate();
 
-		
-		}catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
@@ -60,10 +104,10 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 	@Override
 	public int update(Connexio con, Empleat empleat) {
-		try 
-		{
+		try {
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=? WHERE DNI=?");
+			PreparedStatement stm = conection.prepareStatement(
+					"UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=? WHERE DNI=?");
 			stm.setString(1, empleat.getNom());
 			stm.setString(2, empleat.getCognom1());
 			stm.setString(3, empleat.getCognom2());
@@ -72,11 +116,9 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			stm.setString(6, empleat.getDireccio());
 			stm.setString(7, empleat.getMail());
 			stm.setString(8, empleat.getDni());
-			return stm.executeUpdate();			
+			return stm.executeUpdate();
 
-		
-		}catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
@@ -84,18 +126,16 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 	@Override
 	public int delete(Connexio con, String id) {
-		try 
-		{
+		try {
 			Connection conection = con.getConnexio();
-						
-			PreparedStatement stm = conection.prepareStatement("DELETE FROM treballador WHERE DNI=?");	
-			
+
+			PreparedStatement stm = conection.prepareStatement("DELETE FROM treballador WHERE DNI=?");
+
 			stm.setString(1, id);
-			
+
 			return stm.executeUpdate();
 
-		}catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
