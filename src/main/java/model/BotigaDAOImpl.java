@@ -33,6 +33,53 @@ public class BotigaDAOImpl implements BotigaDAO {
 			return 0;
 		}
 	}
+	
+	public static int select(Connexio con, Botiga botiga, int id) {
+		try {
+			
+			Statement stm = con.getConnexio().createStatement();
+			String sql = "SELECT * FROM botiga WHERE idBotiga = "+id+";";
+			
+			ResultSet rst = stm.executeQuery(sql);
+
+			while(rst.next())
+			{
+				botiga = new Botiga(rst.getInt("idBotiga"), rst.getString("telefon"), rst.getString("direccio"), rst.getString("descripcio"));
+			}
+			
+			return 1;
+			
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static Botiga select(Connexio con, int id) {
+		Botiga botiga = null;
+		try {
+			
+			Statement stm = con.getConnexio().createStatement();
+			String sql = "SELECT * FROM botiga WHERE idBotiga = "+id+";";
+			
+			ResultSet rst = stm.executeQuery(sql);
+
+			while(rst.next())
+			{
+				botiga = new Botiga(rst.getInt("idBotiga"), rst.getString("telefon"), rst.getString("direccio"), rst.getString("descripcio"));
+			}
+			
+			return botiga;
+			
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}	
+	}
 
 	@Override
 	public int create(Connexio con, Botiga botiga) {

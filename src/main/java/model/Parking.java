@@ -9,11 +9,11 @@ public class Parking {
 	private String direccio;
 	private String telefon;
 	private String descripcio;
-	private String capacitat;
+	private int capacitat;
 	private List<Vehicle> vehicles;
 	
 	public Parking(int idParking, Botiga botiga, String direccio, String telefon, String descripcio,
-			String capacitat) {
+			int capacitat) {
 		this.idParking = idParking;
 		this.botiga = botiga;
 		this.direccio = direccio;
@@ -24,7 +24,7 @@ public class Parking {
 	}
 	
 	public Parking(Botiga botiga, String direccio, String telefon, String descripcio,
-			String capacitat) {
+			int capacitat) {
 		this.botiga = botiga;
 		this.direccio = direccio;
 		this.telefon = telefon;
@@ -73,11 +73,11 @@ public class Parking {
 		this.descripcio = descripcio;
 	}
 
-	public String getCapacitat() {
+	public int getCapacitat() {
 		return capacitat;
 	}
 
-	public void setCapacitat(String capacitat) {
+	public void setCapacitat(int capacitat) {
 		this.capacitat = capacitat;
 	}
 

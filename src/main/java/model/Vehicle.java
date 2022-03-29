@@ -15,9 +15,10 @@ public class Vehicle {
 	private int numPortes;
 	private LocalDate dataMatriculacio;
 	private int capacitat;
+	private Carnet carnet;
 	
 	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, String canvi, int cv, int numRodes,
-			int numPortes, LocalDate dataMatriculacio, int capacitat) {
+			int numPortes, LocalDate dataMatriculacio, int capacitat, Carnet carnet) {
 		this.matricula = matricula;
 		this.marca = marca;
 		this.model = model;
@@ -28,6 +29,7 @@ public class Vehicle {
 		this.numPortes = numPortes;
 		this.dataMatriculacio = dataMatriculacio;
 		this.capacitat = capacitat;
+		this.carnet =carnet;
 	}
 	
 	public String getMatricula() {
@@ -110,8 +112,18 @@ public class Vehicle {
 		this.capacitat = capacitat;
 	}
 	
+	public Carnet getCarnet() {
+		return carnet;
+	}
+
+	public void setCarnet(Carnet carnet) {
+		this.carnet = carnet;
+	}
+	
 	@Override
 	public String toString() {
 		return matricula;
 	}
+
+
 }
