@@ -6,7 +6,7 @@ import dam2.jaf.Connexio;
 
 public class BotigaDAOImpl implements BotigaDAO {
 	
-	static int Tots(Connexio con, List<Botiga> botigues) {
+	public static int Tots(Connexio con, List<Botiga> botigues) {
 		return 0;
 	}
 

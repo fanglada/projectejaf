@@ -4,7 +4,7 @@ import java.util.List;
 
 import dam2.jaf.Connexio;
 
-public class ConductorDAOImpl implements ConductorDAO {
+	public class ConductorDAOImpl implements ConductorDAO {
 	
 	static int Tots(Connexio con, List<Conductor> conductors) {
 		return 0;
