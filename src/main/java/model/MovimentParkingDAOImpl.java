@@ -22,7 +22,7 @@ public class MovimentParkingDAOImpl implements MovimentParkingDAO {
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			while(resultSet.next()) {
-				//movimentParkings.add(new MovimentParking(resultSet.getInt("idMoviment"), resultSet.getInt("origen"), resultSet.getInt("desti"), resultSet.getString("matricula"), resultSet.getTimestamp("dataHora").toLocalDateTime()));
+				movimentParkings.add(new MovimentParking(resultSet.getInt("idMoviment"), ParkingDAOImpl.select(con, resultSet.getInt("origen")), ParkingDAOImpl.select(con, resultSet.getInt("desti")), VehicleDAOImpl.select(con, resultSet.getString("matricula")), resultSet.getTimestamp("dataHora").toLocalDateTime()));
 			}
 			size=movimentParkings.size();
 		}
