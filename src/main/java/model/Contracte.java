@@ -35,6 +35,27 @@ public class Contracte {
 		this.estat = estat;
 		this.vehicle = vehicle;
 	}
+	
+	public Contracte(int idContracte, Client client, Empleat empleat, LocalDate dataInici,
+			LocalDate dataFi, Estat estat, Vehicle vehicle) {
+		this.idContracte = idContracte;
+		this.client = client;
+		this.empleat = empleat;
+		this.dataInici = dataInici;
+		this.dataFi = dataFi;
+		this.estat = estat;
+		this.vehicle = vehicle;
+	}
+	
+	public Contracte(Client client, Empleat empleat, LocalDate dataInici,
+			LocalDate dataFi, Estat estat, Vehicle vehicle) {
+		this.client = client;
+		this.empleat = empleat;
+		this.dataInici = dataInici;
+		this.dataFi = dataFi;
+		this.estat = estat;
+		this.vehicle = vehicle;
+	}
 
 	public void setIdContracte(int idContracte) {
 		this.idContracte = idContracte;
@@ -103,17 +124,5 @@ public class Contracte {
 	@Override
 	public String toString() {
 		return client.toString() + " " + vehicle.toString();
-	}
-	
-	public boolean altaContracte() {
-		return false;
-	}
-	
-	public boolean baixaContracte() {
-		return false;
-	}
-	
-	public boolean modificarContracte() {
-		return false;
 	}
 }

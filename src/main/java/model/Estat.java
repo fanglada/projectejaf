@@ -34,16 +34,4 @@ public class Estat {
 	public String toString() {
 		return descripcio;
 	}
-	
-	public boolean altaEstat() {
-		return false;
-	}
-
-	public boolean baixaEstat() {
-		return false;
-	}
-	
-	public boolean modificarEstat() {
-		return false;
-	}
 }

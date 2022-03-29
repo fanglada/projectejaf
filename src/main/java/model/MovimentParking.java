@@ -70,16 +70,4 @@ public class MovimentParking {
 	public String toString() {
 		return "MovimentParking [origen=" + origen + ", desti=" + desti + ", vehicle=" + vehicle + "]";
 	}
-	
-	public boolean altaMovimentParking() {
-		return false;
-	}
-	
-	public boolean baixaMovimentParking() {
-		return false;
-	}
-
-	public boolean modificarMovimentParking() {
-		return false;
-	}
 }

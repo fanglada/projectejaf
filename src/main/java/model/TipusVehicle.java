@@ -34,16 +34,4 @@ public class TipusVehicle {
 	public String toString() {
 		return descripcio;
 	}
-	
-	public boolean altaTipusVehicle() {
-		return false;
-	}
-
-	public boolean baixaTipusVehicle() {
-		return false;
-	}
-
-	public boolean modificarTipusVehicle() {
-		return false;
-	}
 }

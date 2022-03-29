@@ -114,16 +114,4 @@ public class Vehicle {
 	public String toString() {
 		return matricula;
 	}
-	
-	public boolean altaVehicle() {
-		return false;
-	}
-
-	public boolean baixaVehicle() {
-		return false;
-	}
-	
-	public boolean modificarVehicle() {
-		return false;
-	}
 }

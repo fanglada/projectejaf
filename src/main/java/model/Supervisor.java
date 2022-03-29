@@ -24,19 +24,4 @@ public class Supervisor extends Empleat {
 	public String toString() {
 		return super.toString();
 	}
-	
-	@Override
-	public boolean altaEmplet() {
-		return false;
-	}
-	
-	@Override
-	public boolean baixaEmplet() {
-		return false;
-	}
-
-	@Override
-	public boolean modificarEmplet() {
-		return false;
-	}
 }

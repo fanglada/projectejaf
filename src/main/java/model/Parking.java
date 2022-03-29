@@ -101,16 +101,4 @@ public class Parking {
 	public String toString() {
 		return direccio;
 	}
-	
-	public boolean altaParking() {
-		return false;
-	}
-	
-	public boolean baixaParking() {
-		return false;
-	}
-	
-	public boolean modificarParking() {
-		return false;
-	}
 }

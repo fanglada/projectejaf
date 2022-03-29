@@ -14,16 +14,4 @@ public class Empleat extends Persona{
 	public String toString() {
 		return super.toString();
 	}
-	
-	public boolean altaEmplet() {
-		return false;
-	}
-	
-	public boolean baixaEmplet() {
-		return false;
-	}
-
-	public boolean modificarEmplet() {
-		return false;
-	}
 }
