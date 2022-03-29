@@ -11,6 +11,6 @@ public interface VehicleDAO {
 	
 	int create(Connexio con, Vehicle vehicle);
 	int update(Connexio con, Vehicle vehicle);
-	int delete(Connexio con, int id);
+	int delete(Connexio con, String id);
 
 }

@@ -10,6 +10,14 @@ public interface ClientDAO {
 		return 0;	
 	}
 	
+	static int select(Connexio con, Client client, String id) {
+		return 0;	
+	}
+	
+	static Client select(Connexio con, String id) {
+		return null;	
+	}
+	
 	int create(Connexio con, Client client);
 	int update(Connexio con, Client client);
 	int delete(Connexio con, String id);

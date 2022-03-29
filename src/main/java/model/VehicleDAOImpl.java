@@ -90,12 +90,12 @@ public class VehicleDAOImpl implements VehicleDAO {
 	}
 
 	@Override
-	public int delete(Connexio con, int id) {
+	public int delete(Connexio con, String id) {
 		// TODO Auto-generated method stub
 		try 
 		{
 			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM vehicle WHERE matricula = ? ");
-			stm.setInt(1, id);
+			stm.setString(1, id);
 
 			return stm.executeUpdate();
 		

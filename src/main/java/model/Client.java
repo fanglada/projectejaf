@@ -14,6 +14,12 @@ public class Client extends Persona{
 		this.carnets = new ArrayList<Carnet>();
 	}
 	
+	public Client(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
+			String direccio, String mail, List<Carnet> carnets) {
+		super(dni, nom, cognom1, cognom2, dataNaixament, telefon, direccio, mail);
+		this.carnets = carnets;
+	}
+	
 	public List<Carnet> getCarnet() {
 		return carnets;
 	}
@@ -35,15 +41,4 @@ public class Client extends Persona{
 		return super.toString();
 	}
 	
-	public boolean altaClient() {
-		return false;
-	}
-	
-	public boolean baixaClient() {
-		return false;
-	}
-	
-	public boolean modificarClient() {
-		return false;
-	}
 }

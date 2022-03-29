@@ -21,15 +21,67 @@ public class ClientDAOImpl implements ClientDAO {
 			ResultSet rst = stm.executeQuery(sql);		
 			
 			while(rst.next()){
-				clients.add(new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail")));
+				
+				clients.add(new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI"))));
 			}
 
 			return clients.size();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}	
+	}
+	
+	public static int select(Connexio con, Client client, String id) {
+		try 
+		{
+			Connection conection = con.getConnexio();
+			
+			Statement stm = conection.createStatement();
+			
+			String sql = "SELECT * FROM client WHERE="+id+";";
+			
+			ResultSet rst = stm.executeQuery(sql);		
+			
+			if(rst.next()){
+				
+				client = new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI")));
+			}
+
+			return 1;
 		}catch (Exception e) 
 		{
 			e.printStackTrace();
 			return 0;
 		}	
+	}	
+	
+	
+	public static Client select(Connexio con, String id) {
+		
+		Client client = null;
+		try 
+		{
+			Connection conection = con.getConnexio();
+			
+			Statement stm = conection.createStatement();
+			
+			String sql = "SELECT * FROM client WHERE="+id+";";
+			
+			ResultSet rst = stm.executeQuery(sql);		
+			
+			if(rst.next()){
+				
+				client = new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI")));
+			}
+
+			return client;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}		
 	}
 
 	@Override

@@ -13,6 +13,12 @@ public class Conductor extends Persona {
 		super(dni, nom, cognom1, cognom2, dataNaixament, telefon, direccio, mail);
 		this.carnets = new ArrayList<Carnet>();
 	}
+	
+	public Conductor(String dni, String nom, String cognom1, String cognom2, LocalDate dataNaixament, String telefon,
+			String direccio, String mail,List<Carnet> carnets) {
+		super(dni, nom, cognom1, cognom2, dataNaixament, telefon, direccio, mail);
+		this.carnets = carnets;
+	}
 
 	public List<Carnet> getCarnet() {
 		return carnets;

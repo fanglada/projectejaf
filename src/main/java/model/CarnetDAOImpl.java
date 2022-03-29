@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -25,6 +26,90 @@ public class CarnetDAOImpl implements CarnetDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		}
+	}
+	
+	public static int BuscarClient(Connexio con, List<Carnet> carnets, String id) {
+		
+		try {
+
+			String sql = "SELECT * FROM carnet NATURAL JOIN ClientCarnet WHERE DNI ="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
+			}
+			return carnets.size();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static List<Carnet> BuscarClient(Connexio con, String id) {
+		List<Carnet> carnets = new ArrayList<Carnet>();
+		try {
+
+			String sql = "SELECT * FROM carnet NATURAL JOIN ClientCarnet WHERE DNI ="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
+			}
+			return carnets;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static int BuscarConductor(Connexio con, List<Carnet> carnets, String id) {
+	
+		try {
+
+			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNI ="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
+			}
+			return carnets.size();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static List<Carnet> BuscarConductor(Connexio con, String id) {
+		List<Carnet> carnets = new ArrayList<Carnet>();
+		try {
+
+			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNI ="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				carnets.add(new Carnet(resultSet.getInt("idCarnet"), resultSet.getString("descripcio")));
+			}
+			return carnets;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 
