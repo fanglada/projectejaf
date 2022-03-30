@@ -45,9 +45,19 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			ResultSet rst = stm.executeQuery(sql);
 
 			if (rst.next()) {
-				empleat =new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
-						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-						rst.getString("direccio"), rst.getString("mail"));
+				
+				if(rst.getString("telefonEmpresa") == null || rst.getString("telefonEmpresa").isEmpty()) 
+				{
+					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+							rst.getString("direccio"), rst.getString("mail"));
+				}
+				else 
+				{
+					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"));
+				}
 			}
 
 			return 1;
@@ -68,10 +78,19 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 			ResultSet rst = stm.executeQuery(sql);
 
-			while (rst.next()) {
-				empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
-						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-						rst.getString("direccio"), rst.getString("mail"));
+			if (rst.next()) {
+				
+				if(rst.getString("telefonEmpresa") == null || rst.getString("telefonEmpresa").isEmpty()) 
+				{
+					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+							rst.getString("direccio"), rst.getString("mail"));
+				}else 
+				{
+					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
+							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"));
+				}
 			}
 
 			return empleat;
