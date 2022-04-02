@@ -9,7 +9,6 @@ import dam2.jaf.Connexio;
 public class ClientDAOImpl implements ClientDAO {
 	
 	public static int Tots(Connexio con, List<Client> clients) {
-		
 		try 
 		{
 			Connection conection = con.getConnexio();
@@ -22,7 +21,7 @@ public class ClientDAOImpl implements ClientDAO {
 			
 			while(rst.next()){
 				
-				clients.add(new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI"))));
+				clients.add(new Client(rst.getString("Dni"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI"))));
 			}
 
 			return clients.size();

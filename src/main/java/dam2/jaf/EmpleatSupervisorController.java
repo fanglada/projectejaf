@@ -14,10 +14,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.*;
 
 public class EmpleatSupervisorController implements Initializable{
 
-    @FXML
+	@FXML
     private AnchorPane anchor;
 
     @FXML
@@ -25,6 +26,9 @@ public class EmpleatSupervisorController implements Initializable{
 
     @FXML
     private Button botoBuidar;
+    
+	@FXML
+	private Button botoNetejar;
 
     @FXML
     private Button botoEliminar;
@@ -39,40 +43,37 @@ public class EmpleatSupervisorController implements Initializable{
     private CheckBox cboxSupervisor;
 
     @FXML
-    private TableColumn<?, ?> clmCarnet;
+    private TableColumn<Empleat, String> clmCognom1;
 
     @FXML
-    private TableColumn<?, ?> clmCognom1;
+    private TableColumn<Empleat, String> clmCognom2;
 
     @FXML
-    private TableColumn<?, ?> clmCognom2;
+    private TableColumn<Empleat, String> clmDataNaixament;
 
     @FXML
-    private TableColumn<?, ?> clmDataNaixament;
+    private TableColumn<Empleat, String> clmDireccio;
 
     @FXML
-    private TableColumn<?, ?> clmDireccio;
+    private TableColumn<Empleat, String> clmDni;
 
     @FXML
-    private TableColumn<?, ?> clmDni;
+    private TableColumn<Empleat, String> clmMail;
 
     @FXML
-    private TableColumn<?, ?> clmMail;
+    private TableColumn<Empleat, String> clmNom;
 
     @FXML
-    private TableColumn<?, ?> clmNom;
+    private TableColumn<Empleat, String> clmTelefon;
 
     @FXML
-    private TableColumn<?, ?> clmTelefon;
-
-    @FXML
-    private TableColumn<?, ?> clmTelefonEmpresa;
+    private TableColumn<Empleat, String> clmTelefonEmpresa;
 
     @FXML
     private DatePicker dateDataNaixament;
 
     @FXML
-    private TableView<?> tblViewEmpleatSupervior;
+    private TableView<Empleat> tblViewEmpleatSupervior;
 
     @FXML
     private TextField textCerca;
@@ -103,14 +104,8 @@ public class EmpleatSupervisorController implements Initializable{
 
     @FXML
     void activarSupervisor(ActionEvent event) {
-    	if(!cboxSupervisor.isSelected())
-    	{
-        	textTelefonEmpresa.setDisable(true);
-    	}
-    	else
-    	{
-        	textTelefonEmpresa.setDisable(false);
-    	}
+    	
+    	textTelefonEmpresa.setDisable(!cboxSupervisor.isSelected());
     }
 
     @FXML
@@ -120,8 +115,22 @@ public class EmpleatSupervisorController implements Initializable{
 
     @FXML
     void buidar(ActionEvent event) {
-
+    	textCerca.setText(null);
     }
+    
+	@FXML
+	void Netejar(ActionEvent event) {
+		textDni.setText(null);
+		textNom.setText(null);
+		textCognom1.setText(null);
+		textCognom2.setText(null);
+		textDireccio.setText(null);
+		textMail.setText(null);
+		textTelefon.setText(null);
+		dateDataNaixament.setValue(null);
+
+		textTelefonEmpresa.setText(null);
+	}
 
     @FXML
     void eliminarRegistre(ActionEvent event) {
@@ -135,7 +144,7 @@ public class EmpleatSupervisorController implements Initializable{
 
     @FXML
     void tornar(ActionEvent event) throws IOException {
-    	App.setRoot("menu");
+    	App.setRoot("usuaris");
 
     }
 
@@ -143,6 +152,12 @@ public class EmpleatSupervisorController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+   		gestionarEvents();
+
 	}
 
+	private void gestionarEvents() {
+		// TODO Auto-generated method stub
+		
+	}
 }

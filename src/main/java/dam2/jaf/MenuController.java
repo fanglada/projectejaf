@@ -16,24 +16,11 @@ public class MenuController {
     private Button botoProva;
 
     @FXML
-    void Client(ActionEvent event) throws IOException {
+    void Usuaris(ActionEvent event) throws IOException {
     	
-    	App.setRoot("client");
+    	App.setRoot("usuaris");
 
     }
 
-    @FXML
-    void Conductor(ActionEvent event) throws IOException {
-    	
-    	App.setRoot("conductor");
-
-    }
-
-    @FXML
-    void EmpleatSupervisor(ActionEvent event) throws IOException {
-    	
-    	App.setRoot("empleatSupervisor");
-
-    }
 
 }
