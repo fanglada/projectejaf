@@ -13,12 +13,23 @@ public class MenuController {
     private AnchorPane anchor;
 
     @FXML
-    private Button botoProva;
-
-    @FXML
     void Usuaris(ActionEvent event) throws IOException {
     	
     	App.setRoot("usuaris");
+
+    }
+    
+    @FXML
+    void Gestio(ActionEvent event) throws IOException {
+    	
+    	App.setRoot("gestio");
+
+    }
+    
+    @FXML
+    void Contacte(ActionEvent event) throws IOException {
+    	
+    	App.setRoot("contracte");
 
     }
 

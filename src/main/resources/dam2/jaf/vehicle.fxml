@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1010.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.jaf.vehicleController">
+	<children>
+		<ToolBar prefHeight="44.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<items>
+				<GridPane alignment="CENTER" prefHeight="34.0" prefWidth="993.0">
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="73.0" prefWidth="331.0" GridPane.columnIndex="1">
+							<children>
+								<Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle" textAlignment="CENTER">
+									<font>
+										<Font size="24.0" />
+									</font>
+								</Text>
+							</children>
+						</HBox>
+						<Button fx:id="botoTornar" mnemonicParsing="false" onAction="#tornar" text="Tornar" />
+					</children>
+				</GridPane>
+			</items>
+		</ToolBar>
+		<AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+			<children>
+				<GridPane layoutY="12.0" prefHeight="443.0" prefWidth="1010.0" AnchorPane.bottomAnchor="-91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0000305175781" />
+						<ColumnConstraints hgrow="SOMETIMES" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<GridPane prefHeight="402.0" prefWidth="527.0">
+							<columnConstraints>
+								<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="247.3333282470703" minWidth="10.0" prefWidth="213.33334350585938" />
+								<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="307.6666564941406" />
+							</columnConstraints>
+							<rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Label text="Matricula:">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<Label text="Tipus Vehicle:" GridPane.rowIndex="3">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<Label text="Capacitat:" GridPane.rowIndex="9">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<Label text="CV:" GridPane.rowIndex="5">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<TextField fx:id="textCodi" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" />
+								<TextField fx:id="textDescripcio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+								<TextField fx:id="textCapacitat" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+								<TextField fx:id="textTelefon" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Canvi:" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Model:" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Número Portes:" GridPane.rowIndex="7">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="cbxCarnet" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label text="Marca:" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="textMarca" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Carnet:" GridPane.rowIndex="10">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="textModel" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbxTipusVehicle" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cbxCanvi" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Número Rodes:" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Data Matriculació:" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="textDescripcio1" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <DatePicker prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+							</children>
+						</GridPane>
+						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+								<RowConstraints vgrow="SOMETIMES" />
+								<RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Button fx:id="botoActualizar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+								<Button fx:id="botoGuardar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#guardarRegistre" prefHeight="33.0" prefWidth="120.0" text="Guardar" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+								<Button fx:id="botoEliminar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#eliminarRegistre" prefHeight="33.0" prefWidth="120.0" text="Eliminar" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="botoNetejar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#Netejar" prefHeight="33.0" prefWidth="120.0" text="Netejar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+							</children>
+						</GridPane>
+					</children>
+				</GridPane>
+			</children>
+		</AnchorPane>
+		<HBox alignment="CENTER" layoutY="503.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+			<children>
+				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
+				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
+			</children>
+		</HBox>
+		<TableView fx:id="tblViewVehicle" layoutX="2.0" layoutY="542.0" prefHeight="249.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+			<columns>
+				<TableColumn fx:id="clmMatricula" prefWidth="136.66665649414062" text="Matricula" />
+            <TableColumn fx:id="clmMarca" prefWidth="136.66665649414062" text="Marca" />
+            <TableColumn fx:id="clmModel" prefWidth="136.66665649414062" text="Model" />
+				<TableColumn fx:id="clmTipusVehicle" prefWidth="114.33334350585938" text="Tipus Vehicle" />
+				<TableColumn fx:id="clmCanvi" prefWidth="192.0" text="Canvi" />
+            <TableColumn fx:id="clmCV" prefWidth="54.0" text="CV" />
+				<TableColumn fx:id="clmNumRodes" prefWidth="168.0" text="Nº Rodes" />
+            <TableColumn fx:id="clmNumPortes" prefWidth="68.0" text="Nº Portes" />
+            <TableColumn fx:id="clmDataMatriculacio" prefWidth="68.0" text="Data Matriculació" />
+            <TableColumn fx:id="clmCapacitat" prefWidth="68.0" text="Capacitat" />
+            <TableColumn fx:id="clmCarnet" prefWidth="68.0" text="Carnet" />
+			</columns>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+		</TableView>
+	</children>
+</AnchorPane>
