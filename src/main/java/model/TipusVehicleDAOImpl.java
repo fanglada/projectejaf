@@ -20,7 +20,7 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			while(resultSet.next()) {
-				tipusVehicles.add(new TipusVehicle(resultSet.getInt("idTipusVehicle"), resultSet.getString("descripcio")));
+				tipusVehicles.add(new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("descripcio")));
 			}
 			return tipusVehicles.size();
 		}
@@ -37,7 +37,7 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO TipusVehicle VALUES (NULL,?)");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO tipusVehicle VALUES (NULL,?)");				
 			stm.setString(1, tipusVehicle.getDescripcio());
 
 			resultat = stm.executeUpdate();
@@ -63,7 +63,7 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE TipusVehicle SET descripcio = ? WHERE idTipusVehicle = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE tipusVehicle SET descripcio = ? WHERE idTipus = ?");				
 			stm.setString(1, tipusVehicle.getDescripcio());
 			stm.setInt(2, tipusVehicle.getIdTipusVehicle());
 
@@ -85,7 +85,7 @@ public class TipusVehicleDAOImpl implements TipusVehicleDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM TipusVehicle WHERE idTipusVehicle = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM tipusVehicle WHERE idTipus = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();

@@ -107,7 +107,7 @@ public class EstatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("L'Estat no s'ha pogut actualitzat");
+    		missatge.setContentText("L'Estat no s'ha pogut actualitzar");
     		missatge.setHeaderText("Resultat:");
     		missatge.show(); 		
     	}  	
@@ -128,7 +128,7 @@ public class EstatController implements Initializable{
     		llistaEstats.remove(tblViewEstat.getSelectionModel().getSelectedItem());
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El resgistre s'ha eliminat");
+    		missatge.setTitle("El registre s'ha eliminat");
     		missatge.setContentText("L'Estat s'ha eliminat correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
