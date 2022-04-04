@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 
@@ -35,7 +38,7 @@ public class ClientController implements Initializable {
 	private AnchorPane anchor;
 
 	@FXML
-	private Button botoActualizar;
+	private Button botoActualitzar;
 
 	@FXML
 	private Button botoBuidar;
@@ -127,11 +130,10 @@ public class ClientController implements Initializable {
 		textCognom2.setText(null);
 		textDireccio.setText(null);
 		textMail.setText(null);
-		textTelefon.setText(null);
+		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
-		
-//		chcbxCarnet
-		}
+		chcbxCarnet.getCheckModel().getCheckedItems().stream().forEach((carnet) -> {chcbxCarnet.getCheckModel().clearCheck(carnet);});
+	}
 
 	@FXML
 	void eliminarRegistre(ActionEvent event) {
@@ -181,9 +183,49 @@ public class ClientController implements Initializable {
     	gestionarEvents();
 
 	}
+	
+    @FXML
+    void seleccionarClient(MouseEvent event) {
+		Client aux = tblViewClient.getSelectionModel().getSelectedItem();
+		carregarClient(aux); 
+
+    }
+    
+    private void carregarClient(Client client) 
+    {
+    	textDni.setText(client.getDni());
+    	textNom.setText(client.getNom());
+    	textCognom1.setText(client.getCognom1());
+    	textCognom2.setText(client.getCognom2());
+    	dateDataNaixament.setValue(client.getDataNaixament());
+    	textTelefon.setText(client.getTelefon());
+    	textMail.setText(client.getMail());
+    	textDireccio.setText(client.getDireccio());
+    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
+    	
+    }
+    
+    private Carnet trobarCarnet(Carnet carnet) 
+    {
+    	int i = 0;
+    	while(llistaCarnets.get(i).getIdCarnet() != carnet.getIdCarnet())
+    	{
+    		i++;
+    	}
+    	return llistaCarnets.get(i);
+    }
 
 	private void gestionarEvents() {
-		// TODO Auto-generated method stub
+		
+		textTelefon.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textTelefon.setText(oldValue);
+		        }
+			}});;
 		
 	}
 
