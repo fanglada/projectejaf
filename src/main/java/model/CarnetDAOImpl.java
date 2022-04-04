@@ -120,7 +120,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO Carnet VALUES (NULL,?)");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO carnet VALUES (NULL,?)");				
 			stm.setString(1, carnet.getDescripcio());
 
 			resultat = stm.executeUpdate();
@@ -132,6 +132,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 				carnet.setIdCarnet(rst.getInt("id"));
 			}
 
+			System.out.println(stm);
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -147,13 +148,13 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Carnet SET descripcio = ? WHERE idCarnet = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE carnet SET descripcio = ? WHERE idCarnet = ?");				
 			
 			stm.setString(1, carnet.getDescripcio());
 			stm.setInt(2, carnet.getIdCarnet());
 
 			resultat = stm.executeUpdate();
-
+			System.out.println(resultat);
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -170,7 +171,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Carnet WHERE idCarnet = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM carnet WHERE idCarnet = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();
