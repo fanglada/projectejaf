@@ -36,7 +36,7 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO Estat VALUES (NULL,?)");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO estat VALUES (NULL,?)");				
 			stm.setString(1, estat.getDescripcio());
 
 			resultat = stm.executeUpdate();
@@ -63,12 +63,13 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE Estat SET descripcio = ? WHERE idEstat = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE estat SET descripcio = ? WHERE idEstat = ?");				
 			stm.setString(1, estat.getDescripcio());
 			stm.setInt(2, estat.getIdEstat());
 
 
 			resultat = stm.executeUpdate();
+			System.out.print(stm);
 
 		} 
 		catch (SQLException e) {
@@ -85,7 +86,7 @@ public class EstatDAOImpl implements EstatDAO {
 
 		try {
 
-			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM Estat WHERE idEstat = ?");				
+			PreparedStatement stm = con.getConnexio().prepareStatement("DELETE FROM estat WHERE idEstat = ?");				
 			stm.setInt(1, id);
 
 			resultat = stm.executeUpdate();
