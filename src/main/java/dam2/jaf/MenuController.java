@@ -27,7 +27,7 @@ public class MenuController {
     }
     
     @FXML
-    void Contacte(ActionEvent event) throws IOException {
+    void Contracte(ActionEvent event) throws IOException {
     	
     	App.setRoot("contracte");
 
