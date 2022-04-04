@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1010.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.jaf.CarnetController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1010.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.jaf.CarnetController">
 	<children>
 		<ToolBar prefHeight="44.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<items>
@@ -97,7 +97,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Button fx:id="botoActualizar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+								<Button fx:id="botoActualitzar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
 								<Button fx:id="botoGuardar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#guardarRegistre" prefHeight="33.0" prefWidth="120.0" text="Guardar" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
 								<Button fx:id="botoEliminar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#eliminarRegistre" prefHeight="33.0" prefWidth="120.0" text="Eliminar" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <Button fx:id="botoNetejar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#Netejar" prefHeight="33.0" prefWidth="120.0" text="Netejar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
