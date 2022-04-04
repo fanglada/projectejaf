@@ -16,38 +16,38 @@ public class gestioController {
     private Button botoTornar;
 
     @FXML
-    void Botiga(ActionEvent event) {
-
+    void Botiga(ActionEvent event) throws IOException {
+    	App.setRoot("botiga");
     }
 
     @FXML
-    void Carnet(ActionEvent event) {
-
+    void Carnet(ActionEvent event) throws IOException {
+    	App.setRoot("carnet");
     }
 
     @FXML
-    void Estat(ActionEvent event) {
-
+    void Estat(ActionEvent event) throws IOException {
+    	App.setRoot("estat");
     }
 
     @FXML
-    void Parking(ActionEvent event) {
-
+    void Parking(ActionEvent event) throws IOException {
+    	App.setRoot("parking");
     }
 
     @FXML
-    void TipusVehicle(ActionEvent event) {
-
+    void TipusVehicle(ActionEvent event) throws IOException {
+    	App.setRoot("tipusVehicle");
     }
 
     @FXML
-    void Vehicle(ActionEvent event) {
-
+    void Vehicle(ActionEvent event) throws IOException {
+    	App.setRoot("vehicle");
     }
 
     @FXML
     void tornar(ActionEvent event) throws IOException {
-    	App.setRoot("gestio");
+    	App.setRoot("menu");
     }
 
 }
