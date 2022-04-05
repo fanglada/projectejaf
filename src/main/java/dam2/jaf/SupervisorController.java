@@ -28,6 +28,8 @@ import model.*;
 public class SupervisorController implements Initializable{
 
 	private ObservableList<Supervisor> llistaSupervisors;
+	private ObservableList<Botiga> llistaBotiga;
+
 	private FilteredList<Supervisor> llistaFiltrada;
 
 	@FXML
@@ -52,7 +54,7 @@ public class SupervisorController implements Initializable{
 	private Button botoTornar;
 
 	@FXML
-	private ComboBox cbxBotiga;
+	private ComboBox<Botiga> cbxBotiga;
 
 	@FXML
 	private TableColumn<Supervisor, String> clmCognom1;
@@ -79,13 +81,16 @@ public class SupervisorController implements Initializable{
 	private TableColumn<Supervisor, String> clmTelefon;
 	
 	@FXML
+	private TableColumn<Supervisor, Botiga> clmBotiga;
+	
+	@FXML
 	private TableColumn<Supervisor, String> clmTelefonEmpresa;
 
 	@FXML
 	private DatePicker dateDataNaixament;
 
 	@FXML
-	private TableView<Supervisor> tblViewSupervior;
+	private TableView<Supervisor> tblViewSupervisor;
 
 	@FXML
 	private TextField textCerca;
@@ -124,8 +129,8 @@ public class SupervisorController implements Initializable{
     	
     	if(res>0) {
     		
-    		if(tblViewSupervior.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaSupervisors.set(tblViewSupervior.getSelectionModel().getSelectedIndex(),supervisor);
+    		if(tblViewSupervisor.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaSupervisors.set(tblViewSupervisor.getSelectionModel().getSelectedIndex(),supervisor);
     		}
     		else {
     			llistaSupervisors.set(llistaSupervisors.size(), supervisor);
@@ -171,10 +176,10 @@ public class SupervisorController implements Initializable{
 	void eliminarRegistre(ActionEvent event) {
 
 		SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
-    	int res = supervisorDAO.delete(App.con, tblViewSupervior.getSelectionModel().getSelectedItem().getDni());
+    	int res = supervisorDAO.delete(App.con, tblViewSupervisor.getSelectionModel().getSelectedItem().getDni());
     	
     	if(res>0) {
-    		llistaSupervisors.remove(tblViewSupervior.getSelectionModel().getSelectedItem());
+    		llistaSupervisors.remove(tblViewSupervisor.getSelectionModel().getSelectedItem());
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("El registre s'ha eliminat");
@@ -232,9 +237,11 @@ public class SupervisorController implements Initializable{
 		App.setTitol("Supervisor");
 		
 		llistaSupervisors=FXCollections.observableArrayList();
+		llistaBotiga=FXCollections.observableArrayList();
 		llistaFiltrada=new FilteredList<>(llistaSupervisors, p -> true);
 
-		tblViewSupervior.setItems(llistaFiltrada);
+		tblViewSupervisor.setItems(llistaFiltrada);
+		cbxBotiga.setItems(llistaBotiga);
 
 		clmCognom1.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("cognom1"));
 		clmCognom2.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("cognom2"));
@@ -244,16 +251,19 @@ public class SupervisorController implements Initializable{
 		clmMail.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("mail"));
 		clmNom.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("nom"));
 		clmTelefon.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefon"));
+		clmBotiga.setCellValueFactory(new PropertyValueFactory<Supervisor, Botiga>("botiga"));
 		clmTelefonEmpresa.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefonEmpresa"));
 
 		SupervisorDAOImpl.Tots(App.con, llistaSupervisors);
+		
+		BotigaDAOImpl.Tots(App.con, llistaBotiga);
 
 		gestionarEvents();
 	}
 
 	private void gestionarEvents() {
 
-		tblViewSupervior.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Supervisor>() {
+		tblViewSupervisor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Supervisor>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Supervisor> observable, Supervisor oldValue, Supervisor newValue) {
@@ -268,8 +278,9 @@ public class SupervisorController implements Initializable{
 					textDni.setText(newValue.getDni());
 					textMail.setText(newValue.getMail());
 					textTelefon.setText(newValue.getTelefon());
+					cbxBotiga.setValue(newValue.getBotiga());
+					textTelefonEmpresa.setText(newValue.getTelefonEmpresa());
 					
-					// falta telefon empresa 
 					
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);

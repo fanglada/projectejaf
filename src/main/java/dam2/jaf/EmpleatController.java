@@ -52,7 +52,7 @@ public class EmpleatController implements Initializable{
 	private Button botoTornar;
 
 	@FXML
-	private ComboBox cbxBotiga;
+	private ComboBox<Botiga> cbxBotiga;
 
 	@FXML
 	private TableColumn<Empleat, String> clmCognom1;
@@ -77,6 +77,9 @@ public class EmpleatController implements Initializable{
 
 	@FXML
 	private TableColumn<Empleat, String> clmTelefon;
+	
+	@FXML
+	private TableColumn<Botiga, String> clmBotiga;
 
 	@FXML
 	private DatePicker dateDataNaixament;
@@ -130,7 +133,7 @@ public class EmpleatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Estat s'ha actualitzat correctament");
+    		missatge.setContentText("L'Empleat s'ha actualitzat correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     		
@@ -139,7 +142,7 @@ public class EmpleatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("L'Estat no s'ha pogut actualitzar");
+    		missatge.setContentText("L'Empleat no s'ha pogut actualitzar");
     		missatge.setHeaderText("Resultat:");
     		missatge.show(); 		
     	}  	
@@ -160,8 +163,7 @@ public class EmpleatController implements Initializable{
 		textMail.setText(null);
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
-
-		textTelefonEmpresa.setText("");
+		cbxBotiga.setValue(null);
 	}
 
 	@FXML
@@ -226,7 +228,7 @@ public class EmpleatController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		App.setTitol("Empleat Supervisor");
+		App.setTitol("Empleat");
 		
 		llistaEmpleats=FXCollections.observableArrayList();
 		llistaFiltrada=new FilteredList<>(llistaEmpleats, p -> true);
@@ -241,7 +243,7 @@ public class EmpleatController implements Initializable{
 		clmMail.setCellValueFactory(new PropertyValueFactory<Empleat, String>("mail"));
 		clmNom.setCellValueFactory(new PropertyValueFactory<Empleat, String>("nom"));
 		clmTelefon.setCellValueFactory(new PropertyValueFactory<Empleat, String>("telefon"));
-		//clmTelefonEmpresa.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefonEmpresa"));
+		clmBotiga.setCellValueFactory(new PropertyValueFactory<Botiga,String>("botiga"));
 
 		EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
 
@@ -265,8 +267,7 @@ public class EmpleatController implements Initializable{
 					textDni.setText(newValue.getDni());
 					textMail.setText(newValue.getMail());
 					textTelefon.setText(newValue.getTelefon());
-					
-					// falta telefon empresa 
+					cbxBotiga.setValue(newValue.getBotiga()); 
 					
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);

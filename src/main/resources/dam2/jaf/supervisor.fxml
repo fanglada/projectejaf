@@ -112,7 +112,7 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <ComboBox fx:id="cboxBotiga" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <ComboBox fx:id="cbxBotiga" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                   <GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
