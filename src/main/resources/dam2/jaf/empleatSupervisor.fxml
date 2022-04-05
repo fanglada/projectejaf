@@ -148,7 +148,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="botoActualizar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="botoActualitzar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualitzarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Button fx:id="botoGuardar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#guardarRegistre" prefHeight="33.0" prefWidth="120.0" text="Guardar" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="botoEliminar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#eliminarRegistre" prefHeight="33.0" prefWidth="120.0" text="Eliminar" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <Button fx:id="botoNetejar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#Netejar" prefHeight="33.0" prefWidth="120.0" text="Netejar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
