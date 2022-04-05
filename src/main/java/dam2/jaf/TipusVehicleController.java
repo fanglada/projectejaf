@@ -179,7 +179,7 @@ public class TipusVehicleController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		//App.setTitol("Tipus de Vehicle");
+		App.setTitol("Tipus de Vehicle");
 		
 
 		llistaTipusVehicles=FXCollections.observableArrayList();
