@@ -22,7 +22,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 			ResultSet rst = stm.executeQuery(sql);		
 			
 			while(rst.next()){
-				supervisors.add(new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"), rst.getString("telefonEmpresa")));
+				supervisors.add(new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"), rst.getString("telefonEmpresa"), null));
 			}
 
 			return supervisors.size();
