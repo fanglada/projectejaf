@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 
-public class EmpleatSupervisorController implements Initializable{
+public class EmpleatController implements Initializable{
 
 	private ObservableList<Empleat> llistaEmpleats;
 	private FilteredList<Empleat> llistaFiltrada;
@@ -78,9 +78,6 @@ public class EmpleatSupervisorController implements Initializable{
 	private TableColumn<Empleat, String> clmTelefon;
 
 	@FXML
-	private TableColumn<Supervisor, String> clmTelefonEmpresa;
-
-	@FXML
 	private DatePicker dateDataNaixament;
 
 	@FXML
@@ -112,12 +109,6 @@ public class EmpleatSupervisorController implements Initializable{
 
 	@FXML
 	private TextField textTelefonEmpresa;
-
-	@FXML
-	void activarSupervisor(ActionEvent event) {
-
-		textTelefonEmpresa.setDisable(!cboxSupervisor.isSelected());
-	}
 
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {

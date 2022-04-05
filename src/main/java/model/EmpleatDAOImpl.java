@@ -24,7 +24,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			while (rst.next()) {
 				empleats.add(new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-						rst.getString("direccio"), rst.getString("mail"), null));
+						rst.getString("direccio"), rst.getString("mail"), BotigaDAOImpl.select(con, rst.getInt("idBotiga"))));
 			}
 
 			return empleats.size();
@@ -50,13 +50,13 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 				{
 					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"), null);
+							rst.getString("direccio"), rst.getString("mail"), BotigaDAOImpl.select(con, rst.getInt("idBotiga")));
 				}
 				else 
 				{
 					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), null);
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), BotigaDAOImpl.select(con, rst.getInt("idBotiga")));
 				}
 			}
 
@@ -84,12 +84,12 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 				{
 					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"), null);
+							rst.getString("direccio"), rst.getString("mail"), BotigaDAOImpl.select(con, rst.getInt("idBotiga")));
 				}else 
 				{
 					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), null);
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), BotigaDAOImpl.select(con, rst.getInt("idBotiga")));
 				}
 			}
 
