@@ -143,7 +143,7 @@
             <Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
          </children>
       </HBox>
-      <TableView fx:id="tblViewEmpleat" layoutX="2.0" layoutY="518.0" prefHeight="273.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="tblViewSupervisor" layoutX="2.0" layoutY="518.0" prefHeight="273.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
           <TableColumn fx:id="clmDni" text="Dni" />
           <TableColumn fx:id="clmNom" prefWidth="91.66665649414062" text="Nom" />
