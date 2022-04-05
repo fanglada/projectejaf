@@ -178,6 +178,8 @@ public class TipusVehicleController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		App.setTitol("Tipus de Vehicle");
+		
 		llistaTipusVehicles=FXCollections.observableArrayList();
 		llistaFiltrada=new FilteredList<>(llistaTipusVehicles, p -> true);
 

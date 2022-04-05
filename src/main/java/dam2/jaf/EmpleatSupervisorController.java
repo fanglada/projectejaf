@@ -122,7 +122,7 @@ public class EmpleatSupervisorController implements Initializable{
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText());
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
     	
     	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
     	int res = empleatDAO.update(App.con, empleat);
@@ -201,7 +201,7 @@ public class EmpleatSupervisorController implements Initializable{
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText());
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
     	
     	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
     	int res = empleatDAO.create(App.con, empleat);
@@ -234,6 +234,8 @@ public class EmpleatSupervisorController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		App.setTitol("Empleat Supervisor");
+		
 		llistaEmpleats=FXCollections.observableArrayList();
 		llistaFiltrada=new FilteredList<>(llistaEmpleats, p -> true);
 

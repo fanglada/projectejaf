@@ -181,6 +181,8 @@ public class EstatController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		App.setTitol("Estat");
+		
 		llistaEstats=FXCollections.observableArrayList();
 		llistaFiltrada=new FilteredList<>(llistaEstats, p -> true);
 		
