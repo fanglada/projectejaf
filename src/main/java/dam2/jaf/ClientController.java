@@ -16,15 +16,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import model.*;
 
 public class ClientController implements Initializable {
@@ -81,6 +85,9 @@ public class ClientController implements Initializable {
 
 	@FXML
 	private TableColumn<Client, String> clmTelefon;
+	
+    @FXML
+    private TableColumn<Client, Void> clmCarnets;
 
 	@FXML
 	private DatePicker dateDataNaixament;
@@ -124,6 +131,11 @@ public class ClientController implements Initializable {
 	
 	@FXML
 	void Netejar(ActionEvent event) {
+		
+		botoGuardar.setDisable(false);
+    	botoActualitzar.setDisable(true);
+    	botoEliminar.setDisable(true);
+    	
 		textDni.setText(null);
 		textNom.setText(null);
 		textCognom1.setText(null);
@@ -132,7 +144,8 @@ public class ClientController implements Initializable {
 		textMail.setText(null);
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
-		chcbxCarnet.getCheckModel().getCheckedItems().stream().forEach((carnet) -> {chcbxCarnet.getCheckModel().clearCheck(carnet);});
+		chcbxCarnet.getCheckModel().clearChecks();
+
 	}
 
 	@FXML
@@ -151,6 +164,7 @@ public class ClientController implements Initializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -169,7 +183,36 @@ public class ClientController implements Initializable {
     	clmTelefon.setCellValueFactory(new PropertyValueFactory<Client,String>("telefon"));
     	clmDireccio.setCellValueFactory(new PropertyValueFactory<Client,String>("direccio"));
     	clmMail.setCellValueFactory(new PropertyValueFactory<Client,String>("mail"));
-    	
+    	clmCarnets.setCellFactory(new Callback<TableColumn<Client, Void>, TableCell<Client, Void>>() {
+            @Override
+            public TableCell<Client, Void> call(final TableColumn<Client, Void> param) {
+                final TableCell<Client, Void> cell = new TableCell<Client, Void>() {
+
+                    private final Button btn = new Button("Carnets");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Client data = getTableView().getItems().get(getIndex());
+                        	System.out.println(data.getNom());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        }
+);
+
+    	    	
     	//Mostar multiple
 
     	
@@ -186,6 +229,10 @@ public class ClientController implements Initializable {
 	
     @FXML
     void seleccionarClient(MouseEvent event) {
+    	
+    	botoGuardar.setDisable(true);
+    	botoActualitzar.setDisable(false);
+    	botoEliminar.setDisable(false);
 		Client aux = tblViewClient.getSelectionModel().getSelectedItem();
 		carregarClient(aux); 
 
