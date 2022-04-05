@@ -25,10 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 
-public class EmpleatController implements Initializable{
+public class SupervisorController implements Initializable{
 
-	private ObservableList<Empleat> llistaEmpleats;
-	private FilteredList<Empleat> llistaFiltrada;
+	private ObservableList<Supervisor> llistaSupervisors;
+	private FilteredList<Supervisor> llistaFiltrada;
 
 	@FXML
 	private AnchorPane anchor;
@@ -55,34 +55,37 @@ public class EmpleatController implements Initializable{
 	private ComboBox cbxBotiga;
 
 	@FXML
-	private TableColumn<Empleat, String> clmCognom1;
+	private TableColumn<Supervisor, String> clmCognom1;
 
 	@FXML
-	private TableColumn<Empleat, String> clmCognom2;
+	private TableColumn<Supervisor, String> clmCognom2;
 
 	@FXML
-	private TableColumn<Empleat, String> clmDataNaixament;
+	private TableColumn<Supervisor, String> clmDataNaixament;
 
 	@FXML
-	private TableColumn<Empleat, String> clmDireccio;
+	private TableColumn<Supervisor, String> clmDireccio;
 
 	@FXML
-	private TableColumn<Empleat, String> clmDni;
+	private TableColumn<Supervisor, String> clmDni;
 
 	@FXML
-	private TableColumn<Empleat, String> clmMail;
+	private TableColumn<Supervisor, String> clmMail;
 
 	@FXML
-	private TableColumn<Empleat, String> clmNom;
+	private TableColumn<Supervisor, String> clmNom;
 
 	@FXML
-	private TableColumn<Empleat, String> clmTelefon;
+	private TableColumn<Supervisor, String> clmTelefon;
+	
+	@FXML
+	private TableColumn<Supervisor, String> clmTelefonEmpresa;
 
 	@FXML
 	private DatePicker dateDataNaixament;
 
 	@FXML
-	private TableView<Empleat> tblViewEmpleatSupervior;
+	private TableView<Supervisor> tblViewSupervior;
 
 	@FXML
 	private TextField textCerca;
@@ -114,23 +117,23 @@ public class EmpleatController implements Initializable{
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null, null);
     	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.update(App.con, empleat);
+    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.update(App.con, supervisor);
     	
     	if(res>0) {
     		
-    		if(tblViewEmpleatSupervior.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaEmpleats.set(tblViewEmpleatSupervior.getSelectionModel().getSelectedIndex(),empleat);
+    		if(tblViewSupervior.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaSupervisors.set(tblViewSupervior.getSelectionModel().getSelectedIndex(),supervisor);
     		}
     		else {
-    			llistaEmpleats.set(llistaEmpleats.size(), empleat);
+    			llistaSupervisors.set(llistaSupervisors.size(), supervisor);
     		}
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Estat s'ha actualitzat correctament");
+    		missatge.setContentText("El Supervisor s'ha actualitzat correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     		
@@ -139,7 +142,7 @@ public class EmpleatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("L'Estat no s'ha pogut actualitzar");
+    		missatge.setContentText("El Supervisor no s'ha pogut actualitzar");
     		missatge.setHeaderText("Resultat:");
     		missatge.show(); 		
     	}  	
@@ -167,15 +170,15 @@ public class EmpleatController implements Initializable{
 	@FXML
 	void eliminarRegistre(ActionEvent event) {
 
-		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.delete(App.con, tblViewEmpleatSupervior.getSelectionModel().getSelectedItem().getDni());
+		SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.delete(App.con, tblViewSupervior.getSelectionModel().getSelectedItem().getDni());
     	
     	if(res>0) {
-    		llistaEmpleats.remove(tblViewEmpleatSupervior.getSelectionModel().getSelectedItem());
+    		llistaSupervisors.remove(tblViewSupervior.getSelectionModel().getSelectedItem());
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("L'Empleat s'ha eliminat correctament");
+    		missatge.setContentText("El Supervisor s'ha eliminat correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     		
@@ -184,7 +187,7 @@ public class EmpleatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en eliminar el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut eliminar");
+    		missatge.setContentText("El Supervisor no s'ha pogut eliminar");
     		missatge.setHeaderText("Resultat:");
     		missatge.show(); 		
     	}   	
@@ -193,17 +196,17 @@ public class EmpleatController implements Initializable{
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null, null);
     	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.create(App.con, empleat);
+    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.create(App.con, supervisor);
     	
     	if(res>0) {
-    		llistaEmpleats.add(empleat);
+    		llistaSupervisors.add(supervisor);
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Empleat s'ha afegit correctament");
+    		missatge.setContentText("El Supervisor s'ha afegit correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     		
@@ -212,7 +215,7 @@ public class EmpleatController implements Initializable{
     		
     		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut afegir");
+    		missatge.setContentText("El Supervisor no s'ha pogut afegir");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();   		
     	}
@@ -226,34 +229,34 @@ public class EmpleatController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		App.setTitol("Empleat Supervisor");
+		App.setTitol("Supervisor");
 		
-		llistaEmpleats=FXCollections.observableArrayList();
-		llistaFiltrada=new FilteredList<>(llistaEmpleats, p -> true);
+		llistaSupervisors=FXCollections.observableArrayList();
+		llistaFiltrada=new FilteredList<>(llistaSupervisors, p -> true);
 
-		tblViewEmpleatSupervior.setItems(llistaFiltrada);
+		tblViewSupervior.setItems(llistaFiltrada);
 
-		clmCognom1.setCellValueFactory(new PropertyValueFactory<Empleat, String>("cognom1"));
-		clmCognom2.setCellValueFactory(new PropertyValueFactory<Empleat, String>("cognom2"));
-		clmDataNaixament.setCellValueFactory(new PropertyValueFactory<Empleat, String>("dataNaixament"));
-		clmDireccio.setCellValueFactory(new PropertyValueFactory<Empleat, String>("direccio"));
-		clmDni.setCellValueFactory(new PropertyValueFactory<Empleat, String>("dni"));
-		clmMail.setCellValueFactory(new PropertyValueFactory<Empleat, String>("mail"));
-		clmNom.setCellValueFactory(new PropertyValueFactory<Empleat, String>("nom"));
-		clmTelefon.setCellValueFactory(new PropertyValueFactory<Empleat, String>("telefon"));
-		//clmTelefonEmpresa.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefonEmpresa"));
+		clmCognom1.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("cognom1"));
+		clmCognom2.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("cognom2"));
+		clmDataNaixament.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("dataNaixament"));
+		clmDireccio.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("direccio"));
+		clmDni.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("dni"));
+		clmMail.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("mail"));
+		clmNom.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("nom"));
+		clmTelefon.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefon"));
+		clmTelefonEmpresa.setCellValueFactory(new PropertyValueFactory<Supervisor, String>("telefonEmpresa"));
 
-		EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
+		SupervisorDAOImpl.Tots(App.con, llistaSupervisors);
 
 		gestionarEvents();
 	}
 
 	private void gestionarEvents() {
 
-		tblViewEmpleatSupervior.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Empleat>() {
+		tblViewSupervior.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Supervisor>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Empleat> observable, Empleat oldValue, Empleat newValue) {
+			public void changed(ObservableValue<? extends Supervisor> observable, Supervisor oldValue, Supervisor newValue) {
 
 				if(newValue!=null) {
 
