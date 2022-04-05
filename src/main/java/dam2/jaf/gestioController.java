@@ -59,5 +59,6 @@ public class gestioController implements Initializable{
 		App.setTitol("Gestió");
 
 	}
+	
 
 }
