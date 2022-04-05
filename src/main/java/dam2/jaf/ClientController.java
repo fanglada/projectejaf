@@ -15,8 +15,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -28,6 +32,8 @@ import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.*;
 
@@ -118,6 +124,21 @@ public class ClientController implements Initializable {
 
 	@FXML
 	private TextField textTelefon;
+	
+    @FXML
+    private Button botoTornarCarnets;
+
+    @FXML
+    private TableColumn<Carnet, String> clmTaulaCarnets;
+
+    @FXML
+    private TableView<Carnet> taulaCarnets;
+	
+	
+	
+	private Stage stageTaula;
+	
+	private boolean taula = false;
 
 	@FXML
 	void actualizarRegistre(ActionEvent event) {
@@ -164,66 +185,73 @@ public class ClientController implements Initializable {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
-		llistaClients=FXCollections.observableArrayList();
-    	llistaCarnets=FXCollections.observableArrayList();
-    	llistaFiltrada = new FilteredList<>(llistaClients, p -> true);
-
-    	tblViewClient.setItems(llistaFiltrada);
-    	
-    	clmDni.setCellValueFactory(new PropertyValueFactory<Client,String>("dni"));
-    	clmNom.setCellValueFactory(new PropertyValueFactory<Client,String>("nom"));
-    	clmCognom1.setCellValueFactory(new PropertyValueFactory<Client,String>("cognom1"));
-    	clmCognom2.setCellValueFactory(new PropertyValueFactory<Client,String>("cognom2"));
-    	clmDataNaixament.setCellValueFactory(new PropertyValueFactory<Client,LocalDate>("dataNaixament"));
-    	clmTelefon.setCellValueFactory(new PropertyValueFactory<Client,String>("telefon"));
-    	clmDireccio.setCellValueFactory(new PropertyValueFactory<Client,String>("direccio"));
-    	clmMail.setCellValueFactory(new PropertyValueFactory<Client,String>("mail"));
-    	clmCarnets.setCellFactory(new Callback<TableColumn<Client, Void>, TableCell<Client, Void>>() {
-            @Override
-            public TableCell<Client, Void> call(final TableColumn<Client, Void> param) {
-                final TableCell<Client, Void> cell = new TableCell<Client, Void>() {
-
-                    private final Button btn = new Button("Carnets");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            Client data = getTableView().getItems().get(getIndex());
-                        	System.out.println(data.getNom());
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        }
-);
-
-    	    	
-    	//Mostar multiple
-
-    	
-    	ClientDAOImpl.Tots(App.con, llistaClients);
-    	
-    	CarnetDAOImpl.Tots(App.con, llistaCarnets);
-    	
-    	chcbxCarnet.getItems().addAll(llistaCarnets);//
-
-
-    	gestionarEvents();
+		
+		if (!taula) {
+			llistaClients=FXCollections.observableArrayList();
+	    	llistaCarnets=FXCollections.observableArrayList();
+	    	llistaFiltrada = new FilteredList<>(llistaClients, p -> true);
+	
+	    	tblViewClient.setItems(llistaFiltrada);
+	    	
+	    	clmDni.setCellValueFactory(new PropertyValueFactory<Client,String>("dni"));
+	    	clmNom.setCellValueFactory(new PropertyValueFactory<Client,String>("nom"));
+	    	clmCognom1.setCellValueFactory(new PropertyValueFactory<Client,String>("cognom1"));
+	    	clmCognom2.setCellValueFactory(new PropertyValueFactory<Client,String>("cognom2"));
+	    	clmDataNaixament.setCellValueFactory(new PropertyValueFactory<Client,LocalDate>("dataNaixament"));
+	    	clmTelefon.setCellValueFactory(new PropertyValueFactory<Client,String>("telefon"));
+	    	clmDireccio.setCellValueFactory(new PropertyValueFactory<Client,String>("direccio"));
+	    	clmMail.setCellValueFactory(new PropertyValueFactory<Client,String>("mail"));
+	    	clmCarnets.setCellFactory(new Callback<TableColumn<Client, Void>, TableCell<Client, Void>>() {
+	            @Override
+	            public TableCell<Client, Void> call(final TableColumn<Client, Void> param) {
+	                final TableCell<Client, Void> cell = new TableCell<Client, Void>() {
+	
+	                    private final Button btn = new Button("Carnets");
+	
+	                    {
+	                        btn.setOnAction((ActionEvent event) -> {
+	                        	taula = true;
+	                            Client client = getTableView().getItems().get(getIndex());
+	                        	System.out.println(client.getNom());
+	                        	obrirTaula(client);
+	                        });
+	                    }
+	
+	                    @Override
+	                    public void updateItem(Void item, boolean empty) {
+	                        super.updateItem(item, empty);
+	                        if (empty) {
+	                            setGraphic(null);
+	                        } else {
+	                            setGraphic(btn);
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+	        });
+	
+	    	    	
+	    	//Mostar multiple
+	
+	    	
+	    	ClientDAOImpl.Tots(App.con, llistaClients);
+	    	
+	    	CarnetDAOImpl.Tots(App.con, llistaCarnets);
+	    	
+	    	chcbxCarnet.getItems().addAll(llistaCarnets);//
+	
+	
+	    	gestionarEvents();
+		}else if(taula) 
+		{
+			clmTaulaCarnets.setCellValueFactory(new PropertyValueFactory<Carnet,String>("descripcio"));
+		}
 
 	}
 	
@@ -275,5 +303,31 @@ public class ClientController implements Initializable {
 			}});;
 		
 	}
+	
+    void obrirTaula(Client client) 
+    {
+    	try {	    		
+    		FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula" + ".fxml"));
+    		loader.setController(this);
+    		Parent root = loader.load();
+    		stageTaula = new Stage();
+    		stageTaula.initModality(Modality.APPLICATION_MODAL);
+    		stageTaula.setTitle("Carents de: " + client.getNom() + " " + client.getCognom1() + " " + client.getCognom2());
+    		stageTaula.setScene(new Scene(root));
+    		stageTaula.show(); 
+  
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No s'ha pogit obrir la finestra de filtratge");
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    
+    @FXML
+    void tancarCarnets(MouseEvent event) {
+    	stageTaula.close();
+    }
 
 }

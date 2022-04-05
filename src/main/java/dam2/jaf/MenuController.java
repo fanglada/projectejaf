@@ -1,13 +1,15 @@
 package dam2.jaf;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-public class MenuController {
+public class MenuController implements Initializable{
 
     @FXML
     private AnchorPane anchor;
@@ -32,6 +34,13 @@ public class MenuController {
     	App.setRoot("contracte");
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		App.setTitol("Menu");
+
+	}
 
 
 }

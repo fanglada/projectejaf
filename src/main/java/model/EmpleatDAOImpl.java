@@ -24,7 +24,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			while (rst.next()) {
 				empleats.add(new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-						rst.getString("direccio"), rst.getString("mail")));
+						rst.getString("direccio"), rst.getString("mail"), null));
 			}
 
 			return empleats.size();
@@ -50,13 +50,13 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 				{
 					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"));
+							rst.getString("direccio"), rst.getString("mail"), null);
 				}
 				else 
 				{
 					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"));
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), null);
 				}
 			}
 
@@ -84,12 +84,12 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 				{
 					empleat = new Empleat(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"));
+							rst.getString("direccio"), rst.getString("mail"), null);
 				}else 
 				{
 					empleat = new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"),
 							rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
-							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"));
+							rst.getString("direccio"), rst.getString("mail"),rst.getString("telefonEmpresa"), null);
 				}
 			}
 
@@ -104,7 +104,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 	public int create(Connexio con, Empleat empleat) {
 		try {
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,NULL)");
+			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,NULL)");
 			stm.setString(1, empleat.getDni());
 			stm.setString(2, empleat.getNom());
 			stm.setString(3, empleat.getCognom1());
@@ -113,6 +113,9 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			stm.setString(6, empleat.getTelefon());
 			stm.setString(7, empleat.getDireccio());
 			stm.setString(8, empleat.getMail());
+			stm.setInt(9, empleat.getBotiga().getIdBotiga());
+		
+
 			return stm.executeUpdate();
 
 		} catch (Exception e) {
@@ -126,7 +129,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 		try {
 			Connection conection = con.getConnexio();
 			PreparedStatement stm = conection.prepareStatement(
-					"UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=? WHERE DNI=?");
+					"UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=?,idBotiga=? WHERE DNI=?");
 			stm.setString(1, empleat.getNom());
 			stm.setString(2, empleat.getCognom1());
 			stm.setString(3, empleat.getCognom2());
@@ -134,7 +137,8 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 			stm.setString(5, empleat.getTelefon());
 			stm.setString(6, empleat.getDireccio());
 			stm.setString(7, empleat.getMail());
-			stm.setString(8, empleat.getDni());
+			stm.setInt(8, empleat.getBotiga().getIdBotiga());
+			stm.setString(9, empleat.getDni());
 			return stm.executeUpdate();
 
 		} catch (Exception e) {

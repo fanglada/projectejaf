@@ -189,6 +189,8 @@ public class CarnetController  implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		App.setTitol("Gestió");
+		
     	llistaCarnets=FXCollections.observableArrayList();
     	llistaFiltrada = new FilteredList<>(llistaCarnets, p -> true);
 
