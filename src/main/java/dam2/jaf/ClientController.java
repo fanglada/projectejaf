@@ -307,7 +307,9 @@ public class ClientController implements Initializable {
     void obrirTaula(Client client) 
     {
     	try {	    		
-    		FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula" + ".fxml"));
+    		//FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula" + ".fxml"));
+    		
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("C:/Users/franc/git/projectejaf/src/main/resources/dam2/jaf/carnetsTaula.fxml"));
     		loader.setController(this);
     		Parent root = loader.load();
     		stageTaula = new Stage();
