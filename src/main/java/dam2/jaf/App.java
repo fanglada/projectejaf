@@ -20,13 +20,17 @@ public class App extends Application {
 	public static Connexio con = new Connexio("config.xml");
 
     private static Scene scene;
+    private static Stage stage;
+
 
     @Override
     public void start(Stage stage) throws IOException {
+    	this.stage = stage;
         scene = new Scene(loadFXML("Menu"),1010,700);
         stage.setScene(scene);
-        stage.setMinHeight(700);
-        stage.setMinWidth(1010);
+        stage.setMaximized(true);
+//        stage.setMinHeight(700);
+//        stage.setMinWidth(1010);
         stage.show();
     }
 
@@ -42,6 +46,10 @@ public class App extends Application {
     public static void main(String[] args) {
 
         launch();
+    }
+    
+    static void setTitol(String titol){
+        stage.setTitle(titol+" - JAFM");
     }
 
 }

@@ -132,7 +132,6 @@ public class CarnetDAOImpl implements CarnetDAO {
 				carnet.setIdCarnet(rst.getInt("id"));
 			}
 
-			System.out.println(stm);
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

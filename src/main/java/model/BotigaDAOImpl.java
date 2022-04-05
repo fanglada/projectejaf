@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,15 +83,23 @@ public class BotigaDAOImpl implements BotigaDAO {
 	@Override
 	public int create(Connexio con, Botiga botiga) {
 		// TODO Auto-generated method stub
+		int resultat = 0;
 		try 
 		{
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO botiga VALUES (?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO botiga VALUES (?,?,?,?)");
 			stm.setInt(1, botiga.getIdBotiga());
 			stm.setString(2, botiga.getTelefon());
 			stm.setString(3, botiga.getDireccio());
 			stm.setString(4, botiga.getDescripcio());
+			
+			resultat = stm.executeUpdate();
 
-			return stm.executeUpdate();
+			ResultSet rst = stm.executeQuery("SELECT @@Identity AS id");
+			
+			if(rst.next())
+			{
+				botiga.setIdBotiga(rst.getInt("id"));
+			}
 		
 		}
 		catch (SQLException e) {
@@ -100,6 +107,8 @@ public class BotigaDAOImpl implements BotigaDAO {
 			e.printStackTrace();
 			return 0;
 		}
+		return resultat;
+
 	}
 
 	@Override
