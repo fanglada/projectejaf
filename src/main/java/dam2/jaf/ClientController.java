@@ -137,61 +137,10 @@ public class ClientController implements Initializable {
     @FXML
     private TableView<Carnet> taulaCarnets;
 	
-	
-	
 	private Stage stageTaula;
 	
 	private boolean taula = false;
-
-	@FXML
-	void actualizarRegistre(ActionEvent event) {
-
-	}
-
-	@FXML
-	void buidar(ActionEvent event) {
-    	textCerca.setText(null);
-	}
 	
-	@FXML
-	void Netejar(ActionEvent event) {
-		
-		botoGuardar.setDisable(false);
-    	botoActualitzar.setDisable(true);
-    	botoEliminar.setDisable(true);
-    	
-		textDni.setText(null);
-		textNom.setText(null);
-		textCognom1.setText(null);
-		textCognom2.setText(null);
-		textDireccio.setText(null);
-		textMail.setText(null);
-		textTelefon.setText("");
-		dateDataNaixament.setValue(null);
-		chcbxCarnet.getCheckModel().clearChecks();
-		
-    	textDni.setDisable(false);
-
-
-	}
-
-	@FXML
-	void eliminarRegistre(ActionEvent event) {
-
-	}
-
-	@FXML
-	void guardarRegistre(ActionEvent event) {
-
-	}
-
-	@FXML
-	void tornar(ActionEvent event) throws IOException {
-		App.setRoot("usuaris");
-
-	}
-
-	//@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -266,42 +215,6 @@ public class ClientController implements Initializable {
 
 	}
 	
-    @FXML
-    void seleccionarClient(MouseEvent event) {
-    	
-    	botoGuardar.setDisable(true);
-    	botoActualitzar.setDisable(false);
-    	botoEliminar.setDisable(false);
-		Client aux = tblViewClient.getSelectionModel().getSelectedItem();
-		carregarClient(aux); 
-
-    }
-    
-    private void carregarClient(Client client) 
-    {
-    	textDni.setText(client.getDni());
-    	textNom.setText(client.getNom());
-    	textCognom1.setText(client.getCognom1());
-    	textCognom2.setText(client.getCognom2());
-    	dateDataNaixament.setValue(client.getDataNaixament());
-    	textTelefon.setText(client.getTelefon());
-    	textMail.setText(client.getMail());
-    	textDireccio.setText(client.getDireccio());
-    	chcbxCarnet.getCheckModel().clearChecks();
-    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
-    	textDni.setDisable(true);
-    }
-    
-    private Carnet trobarCarnet(Carnet carnet) 
-    {
-    	int i = 0;
-    	while(llistaCarnets.get(i).getIdCarnet() != carnet.getIdCarnet())
-    	{
-    		i++;
-    	}
-    	return llistaCarnets.get(i);
-    }
-
 	private void gestionarEvents() {
 		
 		textTelefon.textProperty().addListener(new ChangeListener<>() {
@@ -315,6 +228,57 @@ public class ClientController implements Initializable {
 			}});;
 		
 	}
+	
+	 @FXML
+	    void seleccionarClient(MouseEvent event) {
+	    	
+	    	botoGuardar.setDisable(true);
+	    	botoActualitzar.setDisable(false);
+	    	botoEliminar.setDisable(false);
+			Client aux = tblViewClient.getSelectionModel().getSelectedItem();
+			carregarClient(aux); 
+
+	    }
+	    
+	    private void carregarClient(Client client) 
+	    {
+	    	textDni.setText(client.getDni());
+	    	textNom.setText(client.getNom());
+	    	textCognom1.setText(client.getCognom1());
+	    	textCognom2.setText(client.getCognom2());
+	    	dateDataNaixament.setValue(client.getDataNaixament());
+	    	textTelefon.setText(client.getTelefon());
+	    	textMail.setText(client.getMail());
+	    	textDireccio.setText(client.getDireccio());
+	    	chcbxCarnet.getCheckModel().clearChecks();
+	    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
+	    	textDni.setDisable(true);
+	    }
+
+	@FXML
+	void guardarRegistre(ActionEvent event) {
+
+	}
+	
+	@FXML
+	void actualizarRegistre(ActionEvent event) {
+
+	}
+
+	@FXML
+	void eliminarRegistre(ActionEvent event) {
+
+	}
+    
+    private Carnet trobarCarnet(Carnet carnet) 
+    {
+    	int i = 0;
+    	while(llistaCarnets.get(i).getIdCarnet() != carnet.getIdCarnet())
+    	{
+    		i++;
+    	}
+    	return llistaCarnets.get(i);
+    }
 	
     void obrirTaula(Client client) 
     {
@@ -344,5 +308,38 @@ public class ClientController implements Initializable {
     void tancarCarnets(ActionEvent event) {
     	stageTaula.close();
     }
+    
+    @FXML
+	void tornar(ActionEvent event) throws IOException {
+		App.setRoot("usuaris");
+
+	}
+	
+
+	@FXML
+	void buidar(ActionEvent event) {
+    	textCerca.setText(null);
+	}
+	
+	@FXML
+	void Netejar(ActionEvent event) {
+		
+		botoGuardar.setDisable(false);
+    	botoActualitzar.setDisable(true);
+    	botoEliminar.setDisable(true);
+    	
+		textDni.setText(null);
+		textNom.setText(null);
+		textCognom1.setText(null);
+		textCognom2.setText(null);
+		textDireccio.setText(null);
+		textMail.setText(null);
+		textTelefon.setText("");
+		dateDataNaixament.setValue(null);
+		chcbxCarnet.getCheckModel().clearChecks();
+		
+    	textDni.setDisable(false);
+
+	}
 
 }

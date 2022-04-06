@@ -116,123 +116,6 @@ public class EmpleatController implements Initializable{
 	@FXML
 	private TextField textTelefonEmpresa;
 
-	@FXML
-	void actualitzarRegistre(ActionEvent event) {
-
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
-    	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.update(App.con, empleat);
-    	
-    	if(res>0) {
-    		
-    		if(tblViewEmpleat.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaEmpleats.set(tblViewEmpleat.getSelectionModel().getSelectedIndex(),empleat);
-    		}
-    		else {
-    			llistaEmpleats.set(llistaEmpleats.size(), empleat);
-    		}
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Empleat s'ha actualitzat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut actualitzar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}  	
-    }
-
-	@FXML
-	void buidar(ActionEvent event) {
-		textCerca.setText(null);
-	}
-
-	@FXML
-	void Netejar(ActionEvent event) {
-		textDni.setText(null);
-		textNom.setText(null);
-		textCognom1.setText(null);
-		textCognom2.setText(null);
-		textDireccio.setText(null);
-		textMail.setText(null);
-		textTelefon.setText("");
-		dateDataNaixament.setValue(null);
-		cbxBotiga.setValue(null);
-		
-		textDni.setEditable(true);
-
-		botoActualitzar.setDisable(true);
-		botoEliminar.setDisable(true);
-		botoGuardar.setDisable(false);
-	}
-
-	@FXML
-	void eliminarRegistre(ActionEvent event) {
-
-		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.delete(App.con, tblViewEmpleat.getSelectionModel().getSelectedItem().getDni());
-    	
-    	if(res>0) {
-    		llistaEmpleats.remove(tblViewEmpleat.getSelectionModel().getSelectedItem());
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("L'Empleat s'ha eliminat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en eliminar el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut eliminar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}   	
-    }
-
-	@FXML
-	void guardarRegistre(ActionEvent event) {
-
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
-    	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.create(App.con, empleat);
-    	
-    	if(res>0) {
-    		llistaEmpleats.add(empleat);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Empleat s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();   		
-    	}
-    }
-
-	@FXML
-	void tornar(ActionEvent event) throws IOException {
-		App.setRoot("usuaris");
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -317,5 +200,124 @@ public class EmpleatController implements Initializable{
 				});										
 			}			
 		});		
+	}
+	
+
+	@FXML
+	void guardarRegistre(ActionEvent event) {
+
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
+    	
+    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
+    	int res = empleatDAO.create(App.con, empleat);
+    	
+    	if(res>0) {
+    		llistaEmpleats.add(empleat);
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("L'Empleat s'ha afegit correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en afegir el registre");
+    		missatge.setContentText("L'Empleat no s'ha pogut afegir");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();   		
+    	}
+    }
+	
+	@FXML
+	void actualitzarRegistre(ActionEvent event) {
+
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
+    	
+    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
+    	int res = empleatDAO.update(App.con, empleat);
+    	
+    	if(res>0) {
+    		
+    		if(tblViewEmpleat.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaEmpleats.set(tblViewEmpleat.getSelectionModel().getSelectedIndex(),empleat);
+    		}
+    		else {
+    			llistaEmpleats.set(llistaEmpleats.size(), empleat);
+    		}
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("L'Empleat s'ha actualitzat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en actualitzar el registre");
+    		missatge.setContentText("L'Empleat no s'ha pogut actualitzar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}  	
+    }
+
+	
+	@FXML
+	void eliminarRegistre(ActionEvent event) {
+
+		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
+    	int res = empleatDAO.delete(App.con, tblViewEmpleat.getSelectionModel().getSelectedItem().getDni());
+    	
+    	if(res>0) {
+    		llistaEmpleats.remove(tblViewEmpleat.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("L'Empleat s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre");
+    		missatge.setContentText("L'Empleat no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}   	
+    }
+
+	@FXML
+	void tornar(ActionEvent event) throws IOException {
+		App.setRoot("usuaris");
+	}
+
+	@FXML
+	void buidar(ActionEvent event) {
+		textCerca.setText(null);
+	}
+
+	@FXML
+	void Netejar(ActionEvent event) {
+		textDni.setText(null);
+		textNom.setText(null);
+		textCognom1.setText(null);
+		textCognom2.setText(null);
+		textDireccio.setText(null);
+		textMail.setText(null);
+		textTelefon.setText("");
+		dateDataNaixament.setValue(null);
+		cbxBotiga.setValue(null);
+		
+		textDni.setEditable(true);
+
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
 	}
 }

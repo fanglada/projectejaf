@@ -67,129 +67,10 @@ public class CarnetController  implements Initializable{
     @FXML
     private TextField textDescripcio;
 
-    @FXML
-    void Netejar(ActionEvent event) {
-    	textCodi.setText(null);
-    	textDescripcio.setText(null);
-    	
-		botoActualitzar.setDisable(true);
-		botoEliminar.setDisable(true);
-		botoGuardar.setDisable(false);
-    }
-
-    @FXML
-    void actualizarRegistre(ActionEvent event) {
-    	Carnet carnet = new Carnet(Integer.valueOf(textCodi.getText()),textDescripcio.getText());
-    	
-    	CarnetDAO carnetDAO = new CarnetDAOImpl();
-    	int res = carnetDAO.Update(App.con, carnet);
-    	
-    	if(res>0)
-    	{
-    		if(tblViewCarnet.getSelectionModel().getSelectedIndex()!=-1)
-    		{
-    			llistaCarnets.set(tblViewCarnet.getSelectionModel().getSelectedIndex(), carnet);
-    		}
-    		else
-    		{
-    			llistaCarnets.set(llistaCarnets.size(),carnet);
-    		}
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha actualitzat");
-    		missatge.setContentText("El carnet s'ha actualitzat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-      		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en actualitzar un registre");
-    		missatge.setContentText("El carnet no s'ha pogut actualitzat");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-    	
-    }
-
-    @FXML
-    void buidar(ActionEvent event) {
-    	textCerca.setText(null);
-    }
-
-    @FXML
-    void eliminarRegistre(ActionEvent event) {
-
-    	
-    	CarnetDAO carnetDAO = new CarnetDAOImpl();
-    	int res = carnetDAO.Delete(App.con, tblViewCarnet.getSelectionModel().getSelectedItem().getIdCarnet());
-    	
-    	if(res>0)
-    	{
-    		llistaCarnets.remove(tblViewCarnet.getSelectionModel().getSelectedItem());
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("El carnet s'ha eliminat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en eliminar el registre ");
-    		missatge.setContentText("El carnet no s'ha pogut eliminar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-    	
-    }
-
-    @FXML
-    void guardarRegistre(ActionEvent event) {
-    	
-    	Carnet carnet = new Carnet(textDescripcio.getText());
-    	
-    	CarnetDAO carnetDAO = new CarnetDAOImpl();
-    	int res = carnetDAO.Create(App.con, carnet);
-    	
-    	if(res>0)
-    	{
-    		llistaCarnets.add(carnet);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Registre afegit");
-    		missatge.setContentText("El carnet s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Registre afegit");
-    		missatge.setContentText("El carnet no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-    }
-
-    @FXML
-    void tornar(ActionEvent event) throws IOException {
-    	App.setRoot("gestio");
-    }
-
-	@Override
+    @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		App.setTitol("Gestió");
+		App.setTitol("Carnet");
 		
     	llistaCarnets=FXCollections.observableArrayList();
     	llistaFiltrada = new FilteredList<>(llistaCarnets, p -> true);
@@ -240,5 +121,123 @@ public class CarnetController  implements Initializable{
 			}
 		});
 	}
+   
+	 @FXML
+	    void guardarRegistre(ActionEvent event) {
+	    	
+	    	Carnet carnet = new Carnet(textDescripcio.getText());
+	    	
+	    	CarnetDAO carnetDAO = new CarnetDAOImpl();
+	    	int res = carnetDAO.Create(App.con, carnet);
+	    	
+	    	if(res>0)
+	    	{
+	    		llistaCarnets.add(carnet);
+	    		
+	    		Alert missatge = new Alert(AlertType.INFORMATION);
+	    		missatge.setTitle("Registre afegit");
+	    		missatge.setContentText("El carnet s'ha afegit correctament");
+	    		missatge.setHeaderText("Resultat:");
+	    		missatge.show();
+	    		
+	    		Netejar(event);
+	    	}
+	    	else
+	    	{
+	    		
+	       		Alert missatge = new Alert(AlertType.ERROR);
+	    		missatge.setTitle("Registre afegit");
+	    		missatge.setContentText("El carnet no s'ha pogut afegir");
+	    		missatge.setHeaderText("Resultat:");
+	    		missatge.show();
+	    	}
+	    }
 
+    @FXML
+    void actualizarRegistre(ActionEvent event) {
+    	Carnet carnet = new Carnet(Integer.valueOf(textCodi.getText()),textDescripcio.getText());
+    	
+    	CarnetDAO carnetDAO = new CarnetDAOImpl();
+    	int res = carnetDAO.Update(App.con, carnet);
+    	
+    	if(res>0)
+    	{
+    		if(tblViewCarnet.getSelectionModel().getSelectedIndex()!=-1)
+    		{
+    			llistaCarnets.set(tblViewCarnet.getSelectionModel().getSelectedIndex(), carnet);
+    		}
+    		else
+    		{
+    			llistaCarnets.set(llistaCarnets.size(),carnet);
+    		}
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha actualitzat");
+    		missatge.setContentText("El carnet s'ha actualitzat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+      		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en actualitzar un registre");
+    		missatge.setContentText("El carnet no s'ha pogut actualitzat");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+    	
+    }
+
+    @FXML
+    void eliminarRegistre(ActionEvent event) {
+
+    	
+    	CarnetDAO carnetDAO = new CarnetDAOImpl();
+    	int res = carnetDAO.Delete(App.con, tblViewCarnet.getSelectionModel().getSelectedItem().getIdCarnet());
+    	
+    	if(res>0)
+    	{
+    		llistaCarnets.remove(tblViewCarnet.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("El carnet s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+    		
+       		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre ");
+    		missatge.setContentText("El carnet no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+    	
+    }
+
+    @FXML
+    void tornar(ActionEvent event) throws IOException {
+    	App.setRoot("gestio");
+    }
+    
+    @FXML
+    void Netejar(ActionEvent event) {
+    	textCodi.setText(null);
+    	textDescripcio.setText(null);
+    	
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
+    }
+    
+    @FXML
+    void buidar(ActionEvent event) {
+    	textCerca.setText(null);
+    }
 }

@@ -98,12 +98,43 @@ public class ConductorController implements Initializable{
 
 	    @FXML
 	    private TextField textTelefon;
+	    
+		@Override
+		public void initialize(URL location, ResourceBundle resources) {
+			// TODO Auto-generated method stub
+			App.setTitol("Conductor");
+
+			
+	   		gestionarEvents();
+
+		}
+
+		private void gestionarEvents() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	    @FXML
+	    void guardarRegistre(ActionEvent event) {
+
+	    }
 
 	    @FXML
 	    void actualizarRegistre(ActionEvent event) {
 
 	    }
 
+	    @FXML
+	    void eliminarRegistre(ActionEvent event) {
+
+	    }
+	    
+	    @FXML
+	    void tornar(ActionEvent event) throws IOException {
+	    	App.setRoot("usuaris");
+	
+	    }
+	    
 	    @FXML
 	    void buidar(ActionEvent event) {
 	    	textCerca.setText(null);
@@ -123,34 +154,5 @@ public class ConductorController implements Initializable{
 			
 //			chcbxCarnet
 		}
-
-	    @FXML
-	    void eliminarRegistre(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void guardarRegistre(ActionEvent event) {
-
-	    }
-    @FXML
-    void tornar(ActionEvent event) throws IOException {
-    	App.setRoot("usuaris");
-
-    }
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
-		
-   		gestionarEvents();
-
-	}
-
-	private void gestionarEvents() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

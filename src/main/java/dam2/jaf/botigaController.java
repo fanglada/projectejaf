@@ -77,131 +77,7 @@ public class botigaController implements Initializable {
 
     @FXML
     private TextField textTelefon;
-
-    @FXML
-    void Netejar(ActionEvent event) {
-    	textCodi.setText(null);
-    	textDescripcio.setText(null);
-    	textDireccio.setText(null);
-    	textTelefon.setText("");
-    	
-		botoActualitzar.setDisable(true);
-		botoEliminar.setDisable(true);
-		botoGuardar.setDisable(false);
-    }
-
-    @FXML
-    void actualizarRegistre(ActionEvent event) {
-    	
-    	Botiga botiga = new Botiga(Integer.parseInt(textCodi.getText()),textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
-
-    	BotigaDAO botigaDAO = new BotigaDAOImpl();
-    	int res = botigaDAO.update(App.con, botiga);
-    	
-    	if(res>0)
-    	{
-    		if(tblViewBotiga.getSelectionModel().getSelectedIndex()!=-1)
-    		{
-    			llistaBotigues.set(tblViewBotiga.getSelectionModel().getSelectedIndex(), botiga);
-    		}
-    		else
-    		{
-    			llistaBotigues.set(llistaBotigues.size(),botiga);
-    		}    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Registre afegit");
-    		missatge.setContentText("La Botiga s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error al afegir registre");
-    		missatge.setContentText("La Botiga no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-    }
-
-    @FXML
-    void buidar(ActionEvent event) {
-
-    	textCerca.setText(null);
-    	
-    }
-
-    @FXML
-    void eliminarRegistre(ActionEvent event) {
-    	
-    	BotigaDAO botigaDAO = new BotigaDAOImpl();
-    	int res = botigaDAO.delete(App.con, tblViewBotiga.getSelectionModel().getSelectedItem().getIdBotiga());
-    	
-    	if(res>0)
-    	{
-    		llistaBotigues.remove(tblViewBotiga.getSelectionModel().getSelectedItem());
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("El carnet s'ha eliminat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en eliminar el registre ");
-    		missatge.setContentText("El carnet no s'ha pogut eliminar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-
-    }
-
-    @FXML
-    void guardarRegistre(ActionEvent event) {
-
-    	Botiga botiga = new Botiga(textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
-    	
-    	BotigaDAO botigaDAO = new BotigaDAOImpl();
-    	int res = botigaDAO.create(App.con, botiga);
-    	
-    	if(res>0)
-    	{
-    		llistaBotigues.add(botiga);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Registre afegit");
-    		missatge.setContentText("La Botiga s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error al afegir registre");
-    		missatge.setContentText("La Botiga no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
-    }
-
-    @FXML
-    void tornar(ActionEvent event) throws IOException {
-		App.setRoot("gestio");
-	}
     
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -271,5 +147,128 @@ public class botigaController implements Initializable {
 			}});
 		
 	}
+
+    @FXML
+    void guardarRegistre(ActionEvent event) {
+
+    	Botiga botiga = new Botiga(textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
+    	
+    	BotigaDAO botigaDAO = new BotigaDAOImpl();
+    	int res = botigaDAO.create(App.con, botiga);
+    	
+    	if(res>0)
+    	{
+    		llistaBotigues.add(botiga);
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Registre afegit");
+    		missatge.setContentText("La Botiga s'ha afegit correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+    		
+       		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error al afegir registre");
+    		missatge.setContentText("La Botiga no s'ha pogut afegir");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+    }
+
+    @FXML
+    void actualizarRegistre(ActionEvent event) {
+    	
+    	Botiga botiga = new Botiga(Integer.parseInt(textCodi.getText()),textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
+
+    	BotigaDAO botigaDAO = new BotigaDAOImpl();
+    	int res = botigaDAO.update(App.con, botiga);
+    	
+    	if(res>0)
+    	{
+    		if(tblViewBotiga.getSelectionModel().getSelectedIndex()!=-1)
+    		{
+    			llistaBotigues.set(tblViewBotiga.getSelectionModel().getSelectedIndex(), botiga);
+    		}
+    		else
+    		{
+    			llistaBotigues.set(llistaBotigues.size(),botiga);
+    		}    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Registre afegit");
+    		missatge.setContentText("La Botiga s'ha afegit correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+    		
+       		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error al afegir registre");
+    		missatge.setContentText("La Botiga no s'ha pogut afegir");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+    }
+
+
+    @FXML
+    void eliminarRegistre(ActionEvent event) {
+    	
+    	BotigaDAO botigaDAO = new BotigaDAOImpl();
+    	int res = botigaDAO.delete(App.con, tblViewBotiga.getSelectionModel().getSelectedItem().getIdBotiga());
+    	
+    	if(res>0)
+    	{
+    		llistaBotigues.remove(tblViewBotiga.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("El carnet s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+    		
+       		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre ");
+    		missatge.setContentText("El carnet no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+
+    }
+
+    @FXML
+    void tornar(ActionEvent event) throws IOException {
+		App.setRoot("gestio");
+	}
+    
+    @FXML
+    void Netejar(ActionEvent event) {
+    	textCodi.setText(null);
+    	textDescripcio.setText(null);
+    	textDireccio.setText(null);
+    	textTelefon.setText("");
+    	
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
+    }
+
+    @FXML
+    void buidar(ActionEvent event) {
+
+    	textCerca.setText(null);
+    	
+    }
 
 }

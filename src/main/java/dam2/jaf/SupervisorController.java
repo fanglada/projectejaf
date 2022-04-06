@@ -119,123 +119,6 @@ public class SupervisorController implements Initializable{
 	@FXML
 	private TextField textTelefonEmpresa;
 
-	@FXML
-	void actualitzarRegistre(ActionEvent event) {
-
-		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
-    	
-    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
-    	int res = supervisorDAO.update(App.con, supervisor);
-    	
-    	if(res>0) {
-    		
-    		if(tblViewSupervisor.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaSupervisors.set(tblViewSupervisor.getSelectionModel().getSelectedIndex(),supervisor);
-    		}
-    		else {
-    			llistaSupervisors.set(llistaSupervisors.size(), supervisor);
-    		}
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("El Supervisor s'ha actualitzat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("El Supervisor no s'ha pogut actualitzar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}  	
-    }
-
-	@FXML
-	void buidar(ActionEvent event) {
-		textCerca.setText(null);
-	}
-
-	@FXML
-	void Netejar(ActionEvent event) {
-		textDni.setText(null);
-		textNom.setText(null);
-		textCognom1.setText(null);
-		textCognom2.setText(null);
-		textDireccio.setText(null);
-		textMail.setText(null);
-		textTelefon.setText("");
-		dateDataNaixament.setValue(null);
-		cbxBotiga.setValue(null);
-		textTelefonEmpresa.setText("");
-		
-		textDni.setEditable(true);
-		botoActualitzar.setDisable(true);
-		botoEliminar.setDisable(true);
-		botoGuardar.setDisable(false);
-	}
-
-	@FXML
-	void eliminarRegistre(ActionEvent event) {
-
-		SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
-    	int res = supervisorDAO.delete(App.con, tblViewSupervisor.getSelectionModel().getSelectedItem().getDni());
-    	
-    	if(res>0) {
-    		llistaSupervisors.remove(tblViewSupervisor.getSelectionModel().getSelectedItem());
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("El Supervisor s'ha eliminat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en eliminar el registre");
-    		missatge.setContentText("El Supervisor no s'ha pogut eliminar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}   	
-    }
-
-	@FXML
-	void guardarRegistre(ActionEvent event) {
-
-		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
-    	
-    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
-    	int res = supervisorDAO.create(App.con, supervisor);
-    	
-    	if(res>0) {
-    		llistaSupervisors.add(supervisor);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("El Supervisor s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("El Supervisor no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();   		
-    	}
-    }
-
-	@FXML
-	void tornar(ActionEvent event) throws IOException {
-		App.setRoot("usuaris");
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -331,5 +214,123 @@ public class SupervisorController implements Initializable{
 				});										
 			}			
 		});		
+	}
+	
+
+	@FXML
+	void guardarRegistre(ActionEvent event) {
+
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
+    	
+    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.create(App.con, supervisor);
+    	
+    	if(res>0) {
+    		llistaSupervisors.add(supervisor);
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("El Supervisor s'ha afegit correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en afegir el registre");
+    		missatge.setContentText("El Supervisor no s'ha pogut afegir");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();   		
+    	}
+    }
+	
+	@FXML
+	void actualitzarRegistre(ActionEvent event) {
+
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
+    	
+    	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.update(App.con, supervisor);
+    	
+    	if(res>0) {
+    		
+    		if(tblViewSupervisor.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaSupervisors.set(tblViewSupervisor.getSelectionModel().getSelectedIndex(),supervisor);
+    		}
+    		else {
+    			llistaSupervisors.set(llistaSupervisors.size(), supervisor);
+    		}
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("El Supervisor s'ha actualitzat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en actualitzar el registre");
+    		missatge.setContentText("El Supervisor no s'ha pogut actualitzar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}  	
+    }
+
+	@FXML
+	void eliminarRegistre(ActionEvent event) {
+
+		SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
+    	int res = supervisorDAO.delete(App.con, tblViewSupervisor.getSelectionModel().getSelectedItem().getDni());
+    	
+    	if(res>0) {
+    		llistaSupervisors.remove(tblViewSupervisor.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("El Supervisor s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre");
+    		missatge.setContentText("El Supervisor no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}   	
+    }
+	
+	@FXML
+	void tornar(ActionEvent event) throws IOException {
+		App.setRoot("usuaris");
+	}
+	
+	@FXML
+	void buidar(ActionEvent event) {
+		textCerca.setText(null);
+	}
+
+	@FXML
+	void Netejar(ActionEvent event) {
+		textDni.setText(null);
+		textNom.setText(null);
+		textCognom1.setText(null);
+		textCognom2.setText(null);
+		textDireccio.setText(null);
+		textMail.setText(null);
+		textTelefon.setText("");
+		dateDataNaixament.setValue(null);
+		cbxBotiga.setValue(null);
+		textTelefonEmpresa.setText("");
+		
+		textDni.setEditable(true);
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
 	}
 }
