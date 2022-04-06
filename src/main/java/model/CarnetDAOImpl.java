@@ -33,7 +33,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 		
 		try {
 
-			String sql = "SELECT * FROM carnet NATURAL JOIN ClientCarnet WHERE DNI ="+id+";";
+			String sql = "SELECT * FROM carnet NATURAL JOIN ClientCarnet WHERE DNIClient ='"+id+"';";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);
@@ -75,7 +75,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 	
 		try {
 
-			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNI ="+id+";";
+			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNIConductor ='"+id+"';";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);
@@ -96,7 +96,7 @@ public class CarnetDAOImpl implements CarnetDAO {
 		List<Carnet> carnets = new ArrayList<Carnet>();
 		try {
 
-			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNI ="+id+";";
+			String sql = "SELECT * FROM carnet NATURAL JOIN conductorCarnet WHERE DNIConductor ='"+id+"';";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);

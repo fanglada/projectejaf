@@ -192,15 +192,12 @@ public class ClientController implements Initializable {
 	            }
 	        });
 	
-	    	    	
-	    	//Mostar multiple
-	
 	    	
 	    	ClientDAOImpl.Tots(App.con, llistaClients);
 	    	
 	    	CarnetDAOImpl.Tots(App.con, llistaCarnets);
 	    	
-	    	chcbxCarnet.getItems().addAll(llistaCarnets);//
+	    	chcbxCarnet.getItems().addAll(llistaCarnets);
 	
 	
 	    	gestionarEvents();
@@ -225,7 +222,23 @@ public class ClientController implements Initializable {
 		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
 		    		textTelefon.setText(oldValue);
 		        }
-			}});;
+			}});
+			
+			textCerca.textProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					// TODO Auto-generated method stub
+					llistaFiltrada.setPredicate(stringCerca -> {
+						if(newValue == null || newValue.isEmpty()) return true;
+						
+						if(stringCerca.getNom().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getCognom1().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getCognom2().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getDireccio().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getDni().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getMail().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getTelefon().toLowerCase().contains(newValue.toLowerCase()))
+							return true;
+						
+						return false;
+					});
+				}
+			});
 		
 	}
 	
@@ -252,7 +265,7 @@ public class ClientController implements Initializable {
 	    	textDireccio.setText(client.getDireccio());
 	    	chcbxCarnet.getCheckModel().clearChecks();
 	    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
-	    	textDni.setDisable(true);
+	    	textDni.setEditable(false);
 	    }
 
 	@FXML
@@ -291,7 +304,7 @@ public class ClientController implements Initializable {
     		Parent root = loader.load();
     		stageTaula = new Stage();
     		stageTaula.initModality(Modality.APPLICATION_MODAL);
-    		stageTaula.setTitle("Carents de: " + client.getNom() + " " + client.getCognom1() + " " + client.getCognom2());
+    		stageTaula.setTitle("Carnets de: " + client.getNom() + " " + client.getCognom1() + " " + client.getCognom2());
     		stageTaula.setScene(new Scene(root));
     		stageTaula.show(); 
   
@@ -338,7 +351,7 @@ public class ClientController implements Initializable {
 		dateDataNaixament.setValue(null);
 		chcbxCarnet.getCheckModel().clearChecks();
 		
-    	textDni.setDisable(false);
+    	textDni.setEditable(true);
 
 	}
 

@@ -19,13 +19,13 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM conductor WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL;";
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL;";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				
 				while(rst.next()){
 					
-					conductors.add(new Conductor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI"))));
+					conductors.add(new Conductor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarConductor(con, rst.getString("DNI"))));
 				}
 
 				return conductors.size();
@@ -43,7 +43,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM conductor WHERE DNI="+id+";";
+				String sql = "SELECT * FROM treballador WHERE DNI='"+id+"';";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				
@@ -70,7 +70,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM conductor WHERE DNI="+id+";";
+				String sql = "SELECT * FROM treballador WHERE DNI='"+id+"';";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				

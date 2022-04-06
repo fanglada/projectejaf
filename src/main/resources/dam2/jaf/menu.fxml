@@ -26,6 +26,6 @@
             <Button mnemonicParsing="false" onAction="#Gestio" prefHeight="105.0" prefWidth="215.0" text="Gestió" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <ToolBar prefHeight="46.0" prefWidth="800.0" />
+      <ToolBar prefHeight="46.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

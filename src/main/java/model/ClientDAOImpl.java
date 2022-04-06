@@ -39,7 +39,7 @@ public class ClientDAOImpl implements ClientDAO {
 			
 			Statement stm = conection.createStatement();
 			
-			String sql = "SELECT * FROM client WHERE="+id+";";
+			String sql = "SELECT * FROM client WHERE DNI='"+id+"';";
 			
 			ResultSet rst = stm.executeQuery(sql);		
 			
@@ -66,7 +66,7 @@ public class ClientDAOImpl implements ClientDAO {
 			
 			Statement stm = conection.createStatement();
 			
-			String sql = "SELECT * FROM client WHERE="+id+";";
+			String sql = "SELECT * FROM client WHERE DNI='"+id+"';";
 			
 			ResultSet rst = stm.executeQuery(sql);		
 			

@@ -42,7 +42,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 			Statement stm = conection.createStatement();
 
-			String sql = "SELECT * FROM treballador WHERE DNI = "+id+";";
+			String sql = "SELECT * FROM treballador WHERE DNI = '"+id+"';";
 
 			ResultSet rst = stm.executeQuery(sql);
 
@@ -76,7 +76,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 
 			Statement stm = conection.createStatement();
 
-			String sql = "SELECT * FROM treballador WHERE DNI = "+id+";";
+			String sql = "SELECT * FROM treballador WHERE DNI = '"+id+"';";
 
 			ResultSet rst = stm.executeQuery(sql);
 

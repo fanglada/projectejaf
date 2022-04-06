@@ -7,152 +7,347 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.*;
 
 public class ConductorController implements Initializable{
 
-	   @FXML
-	    private AnchorPane anchor;
+	private ObservableList<Conductor> llistaConductor;
+	private ObservableList<Carnet> llistaCarnets;
 
-	    @FXML
-	    private Button botoActualizar;
-
-	    @FXML
-	    private Button botoBuidar;
-	    
-		@FXML
-		private Button botoNetejar;
-
-	    @FXML
-	    private Button botoEliminar;
-
-	    @FXML
-	    private Button botoGuardar;
-
-	    @FXML
-	    private Button botoTornar;
-
-	    @FXML
-	    private CheckComboBox<Carnet> chcbxCarnet;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmCognom1;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmCognom2;
-
-	    @FXML
-	    private TableColumn<Conductor, LocalDate> clmDataNaixament;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmDireccio;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmDni;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmMail;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmNom;
-
-	    @FXML
-	    private TableColumn<Conductor, String> clmTelefon;
-
-	    @FXML
-	    private DatePicker dateDataNaixament;
-
-	    @FXML
-	    private TableView<Conductor> tblViewConductor;
-
-	    @FXML
-	    private TextField textCerca;
-
-	    @FXML
-	    private TextField textCognom1;
-
-	    @FXML
-	    private TextField textCognom2;
-
-	    @FXML
-	    private TextField textDireccio;
-
-	    @FXML
-	    private TextField textDni;
-
-	    @FXML
-	    private TextField textMail;
-
-	    @FXML
-	    private TextField textNom;
-
-	    @FXML
-	    private TextField textTelefon;
-	    
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			// TODO Auto-generated method stub
-			App.setTitol("Conductor");
-
-			
-	   		gestionarEvents();
-
-		}
-
-		private void gestionarEvents() {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	    @FXML
-	    void guardarRegistre(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void actualizarRegistre(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void eliminarRegistre(ActionEvent event) {
-
-	    }
-	    
-	    @FXML
-	    void tornar(ActionEvent event) throws IOException {
-	    	App.setRoot("usuaris");
+	private FilteredList<Conductor> llistaFiltrada;
 	
-	    }
-	    
-	    @FXML
-	    void buidar(ActionEvent event) {
-	    	textCerca.setText(null);
+	private ObservableList<Carnet> llistaCarnetsTaula;
+	
+	@FXML
+	private AnchorPane anchor;
 
-	    }
-	    
-		@FXML
-		void Netejar(ActionEvent event) {
-			textDni.setText(null);
-			textNom.setText(null);
-			textCognom1.setText(null);
-			textCognom2.setText(null);
-			textDireccio.setText(null);
-			textMail.setText(null);
-			textTelefon.setText(null);
-			dateDataNaixament.setValue(null);
-			
-//			chcbxCarnet
+    @FXML
+    private Button botoActualitzar;
+
+    @FXML
+    private Button botoBuidar;
+    
+	@FXML
+	private Button botoNetejar;
+
+    @FXML
+    private Button botoEliminar;
+
+    @FXML
+    private Button botoGuardar;
+
+    @FXML
+    private Button botoTornar;
+
+    @FXML
+    private CheckComboBox<Carnet> chcbxCarnet;
+
+    @FXML
+    private TableColumn<Conductor, String> clmCognom1;
+
+    @FXML
+    private TableColumn<Conductor, String> clmCognom2;
+
+    @FXML
+    private TableColumn<Conductor, LocalDate> clmDataNaixament;
+
+    @FXML
+    private TableColumn<Conductor, String> clmDireccio;
+
+    @FXML
+    private TableColumn<Conductor, String> clmDni;
+
+    @FXML
+    private TableColumn<Conductor, String> clmMail;
+
+    @FXML
+    private TableColumn<Conductor, String> clmNom;
+
+    @FXML
+    private TableColumn<Conductor, String> clmTelefon;
+    
+    @FXML
+    private TableColumn<Conductor, Void> clmCarnets;
+
+    @FXML
+    private DatePicker dateDataNaixament;
+
+    @FXML
+    private TableView<Conductor> tblViewConductor;
+
+    @FXML
+    private TextField textCerca;
+
+    @FXML
+    private TextField textCognom1;
+
+    @FXML
+    private TextField textCognom2;
+
+    @FXML
+    private TextField textDireccio;
+
+    @FXML
+    private TextField textDni;
+
+    @FXML
+    private TextField textMail;
+
+    @FXML
+    private TextField textNom;
+
+    @FXML
+    private TextField textTelefon;
+    
+    @FXML
+    private Button botoTornarCarnets;
+
+    @FXML
+    private TableColumn<Carnet, String> clmTaulaCarnets;
+
+    @FXML
+    private TableView<Carnet> taulaCarnets;
+	
+	private Stage stageTaula;
+	
+	private boolean taula = false;
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		App.setTitol("Conductor");
+
+		if (!taula) {
+			App.setTitol("Client");
+
+			llistaConductor=FXCollections.observableArrayList();
+	    	llistaCarnets=FXCollections.observableArrayList();
+	    	llistaFiltrada = new FilteredList<>(llistaConductor, p -> true);
+	
+	    	tblViewConductor.setItems(llistaFiltrada);
+	    	
+	    	clmDni.setCellValueFactory(new PropertyValueFactory<Conductor,String>("dni"));
+	    	clmNom.setCellValueFactory(new PropertyValueFactory<Conductor,String>("nom"));
+	    	clmCognom1.setCellValueFactory(new PropertyValueFactory<Conductor,String>("cognom1"));
+	    	clmCognom2.setCellValueFactory(new PropertyValueFactory<Conductor,String>("cognom2"));
+	    	clmDataNaixament.setCellValueFactory(new PropertyValueFactory<Conductor,LocalDate>("dataNaixament"));
+	    	clmTelefon.setCellValueFactory(new PropertyValueFactory<Conductor,String>("telefon"));
+	    	clmDireccio.setCellValueFactory(new PropertyValueFactory<Conductor,String>("direccio"));
+	    	clmMail.setCellValueFactory(new PropertyValueFactory<Conductor,String>("mail"));
+	    	clmCarnets.setCellFactory(new Callback<TableColumn<Conductor, Void>, TableCell<Conductor, Void>>() {
+	            @Override
+	            public TableCell<Conductor, Void> call(final TableColumn<Conductor, Void> param) {
+	                final TableCell<Conductor, Void> cell = new TableCell<Conductor, Void>() {
+	
+	                    private final Button btn = new Button("Carnets");
+	
+	                    {
+	                        btn.setOnAction((ActionEvent event) -> {
+	                        	taula = true;
+	                        	Conductor conductor = getTableView().getItems().get(getIndex());
+	                        	obrirTaula(conductor);
+	                        });
+	                    }
+	
+	                    @Override
+	                    public void updateItem(Void item, boolean empty) {
+	                        super.updateItem(item, empty);
+	                        if (empty) {
+	                            setGraphic(null);
+	                        } else {
+	                            setGraphic(btn);
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+	        });
+	
+	    	ConductorDAOImpl.Tots(App.con, llistaConductor);
+	    	
+	    	CarnetDAOImpl.Tots(App.con, llistaCarnets);
+	    	
+	    	chcbxCarnet.getItems().addAll(llistaCarnets);
+	
+	
+	    	gestionarEvents();
+	    	
 		}
+		else if(taula) 
+		{
+
+			taulaCarnets.setItems(llistaCarnetsTaula);
+
+			clmTaulaCarnets.setCellValueFactory(new PropertyValueFactory<Carnet,String>("descripcio"));
+
+		}
+
+	}
+
+	private void gestionarEvents() {
+		
+		textTelefon.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textTelefon.setText(oldValue);
+		        }
+			}});
+		
+		tblViewConductor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Conductor>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Conductor> observable, Conductor oldValue, Conductor newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+					textDni.setText(newValue.getDni());
+			    	textNom.setText(newValue.getNom());
+			    	textCognom1.setText(newValue.getCognom1());
+			    	textCognom2.setText(newValue.getCognom2());
+			    	dateDataNaixament.setValue(newValue.getDataNaixament());
+			    	textTelefon.setText(newValue.getTelefon());
+			    	textMail.setText(newValue.getMail());
+			    	textDireccio.setText(newValue.getDireccio());
+			    	chcbxCarnet.getCheckModel().clearChecks();
+			    	newValue.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
+			    	textDni.setEditable(false);
+					
+					botoActualitzar.setDisable(false);
+					botoEliminar.setDisable(false);
+					botoGuardar.setDisable(true);
+				}
+			}
+			
+		});
+		textCerca.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				llistaFiltrada.setPredicate(stringCerca -> {
+					if(newValue == null || newValue.isEmpty()) return true;
+					
+					if(stringCerca.getNom().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getCognom1().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getCognom2().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getDireccio().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getDni().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getMail().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getTelefon().toLowerCase().contains(newValue.toLowerCase()))
+						return true;
+					
+					return false;
+				});
+			}
+		});
+		
+	}
+	
+    @FXML
+    void guardarRegistre(ActionEvent event) {
+
+    }
+
+    @FXML
+    void actualizarRegistre(ActionEvent event) {
+
+    }
+
+    @FXML
+    void eliminarRegistre(ActionEvent event) {
+
+    }
+    
+	void obrirTaula(Conductor conductor) 
+    {
+    	llistaCarnetsTaula=FXCollections.observableArrayList();
+
+    	llistaCarnetsTaula.addAll(conductor.getCarnet());
+    	try {	    		
+    		FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula.fxml"));
+       		loader.setController(this);
+    		Parent root = loader.load();
+    		stageTaula = new Stage();
+    		stageTaula.initModality(Modality.APPLICATION_MODAL);
+    		stageTaula.setTitle("Carnets de: " + conductor.getNom() + " " + conductor.getCognom1() + " " + conductor.getCognom2());
+    		stageTaula.setScene(new Scene(root));
+    		stageTaula.show(); 
+  
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No s'ha pogit obrir la finestra de filtratge");
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+	
+    @FXML
+    void tancarCarnets(ActionEvent event) {
+    	stageTaula.close();
+    }
+    
+    private Carnet trobarCarnet(Carnet carnet) 
+    {
+    	int i = 0;
+    	while(llistaCarnets.get(i).getIdCarnet() != carnet.getIdCarnet())
+    	{
+    		i++;
+    	}
+    	return llistaCarnets.get(i);
+    }
+    
+    @FXML
+    void tornar(ActionEvent event) throws IOException {
+    	App.setRoot("usuaris");
+
+    }
+    
+    @FXML
+    void buidar(ActionEvent event) {
+    	textCerca.setText(null);
+
+    }
+    
+	@FXML
+	void Netejar(ActionEvent event) {
+		
+		botoGuardar.setDisable(false);
+    	botoActualitzar.setDisable(true);
+    	botoEliminar.setDisable(true);
+    	
+		textDni.setText(null);
+		textNom.setText(null);
+		textCognom1.setText(null);
+		textCognom2.setText(null);
+		textDireccio.setText(null);
+		textMail.setText(null);
+		textTelefon.setText("");
+		dateDataNaixament.setValue(null);
+		chcbxCarnet.getCheckModel().clearChecks();
+		
+    	textDni.setEditable(true);
+	}
 
 }

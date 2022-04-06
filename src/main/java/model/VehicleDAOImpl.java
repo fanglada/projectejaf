@@ -36,7 +36,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 		try {
 			
 			Statement stm = con.getConnexio().createStatement();
-			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula="+id+";";
+			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula='"+id+"';";
 			
 			ResultSet rst = stm.executeQuery(sql);
 
@@ -60,7 +60,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 		try {
 			
 			Statement stm = con.getConnexio().createStatement();
-			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula="+id+";";
+			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula='"+id+"';";
 			
 			ResultSet rst = stm.executeQuery(sql);
 
