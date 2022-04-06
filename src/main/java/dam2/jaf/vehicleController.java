@@ -8,9 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.controlsfx.control.CheckComboBox;
 
-public class parkingController {
+public class vehicleController {
 
     @FXML
     private AnchorPane anchor;
@@ -34,31 +33,49 @@ public class parkingController {
     private Button botoTornar;
 
     @FXML
-    private ComboBox<?> cbxBotiga;
+    private ComboBox<?> cbxCanvi;
 
     @FXML
-    private CheckComboBox<?> chcbxVehicles;
+    private ComboBox<?> cbxCarnet;
 
     @FXML
-    private TableColumn<?, ?> clmBotiga;
+    private ComboBox<?> cbxTipusVehicle;
+
+    @FXML
+    private TableColumn<?, ?> clmCV;
+
+    @FXML
+    private TableColumn<?, ?> clmCanvi;
 
     @FXML
     private TableColumn<?, ?> clmCapacitat;
 
     @FXML
-    private TableColumn<?, ?> clmCodi;
+    private TableColumn<?, ?> clmCarnet;
 
     @FXML
-    private TableColumn<?, ?> clmDescripcio;
+    private TableColumn<?, ?> clmDataMatriculacio;
 
     @FXML
-    private TableColumn<?, ?> clmDireccio;
+    private TableColumn<?, ?> clmMarca;
 
     @FXML
-    private TableColumn<?, ?> clmTelefon;
+    private TableColumn<?, ?> clmMatricula;
 
     @FXML
-    private TableView<?> tblViewParking;
+    private TableColumn<?, ?> clmModel;
+
+    @FXML
+    private TableColumn<?, ?> clmNumPortes;
+
+    @FXML
+    private TableColumn<?, ?> clmNumRodes;
+
+    @FXML
+    private TableColumn<?, ?> clmTipusVehicle;
+
+    @FXML
+    private TableView<?> tblViewVehicle;
 
     @FXML
     private TextField textCapacitat;
@@ -73,7 +90,13 @@ public class parkingController {
     private TextField textDescripcio;
 
     @FXML
-    private TextField textDireccio1;
+    private TextField textDescripcio1;
+
+    @FXML
+    private TextField textMarca;
+
+    @FXML
+    private TextField textModel;
 
     @FXML
     private TextField textTelefon;
