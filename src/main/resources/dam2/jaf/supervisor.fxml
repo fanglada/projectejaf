@@ -101,7 +101,7 @@
                            </padding>
                         </Label>
                         <DatePicker fx:id="dateDataNaixament" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="textTelefonEmpresa" disable="true" prefHeight="25.0" prefWidth="210.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <TextField fx:id="textTelefonEmpresa" prefHeight="37.0" prefWidth="204.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                         <Label text="Telèfon Empresa:" GridPane.rowIndex="10">
                            <padding>
                               <Insets right="5.0" />
@@ -112,7 +112,7 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <ComboBox fx:id="cbxBotiga" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <ComboBox fx:id="cbxBotiga" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                   <GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">

@@ -122,7 +122,7 @@ public class SupervisorController implements Initializable{
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {
 
-		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null, null);
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
     	
     	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
     	int res = supervisorDAO.update(App.con, supervisor);
@@ -168,10 +168,10 @@ public class SupervisorController implements Initializable{
 		textMail.setText(null);
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
-
+		cbxBotiga.setValue(null);
 		textTelefonEmpresa.setText("");
 		
-		textDni.setDisable(false);
+		textDni.setEditable(true);
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);
 		botoGuardar.setDisable(false);
@@ -206,7 +206,7 @@ public class SupervisorController implements Initializable{
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 
-		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null, null);
+		Supervisor supervisor = new Supervisor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), textTelefonEmpresa.getText(), cbxBotiga.getValue());
     	
     	SupervisorDAO supervisorDAO = new SupervisorDAOImpl();    	
     	int res = supervisorDAO.create(App.con, supervisor);
@@ -286,7 +286,7 @@ public class SupervisorController implements Initializable{
 					cbxBotiga.setValue(newValue.getBotiga());
 					textTelefonEmpresa.setText(newValue.getTelefonEmpresa());
 					
-					textDni.setDisable(true);
+					textDni.setEditable(false);
 
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);
@@ -294,6 +294,26 @@ public class SupervisorController implements Initializable{
 				}
 			}
 		});
+		
+		textTelefon.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textTelefon.setText(oldValue);
+		        }
+			}});;
+			
+			textTelefonEmpresa.textProperty().addListener(new ChangeListener<>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					// TODO Auto-generated method stub
+			    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+			    		textTelefonEmpresa.setText(oldValue);
+			        }
+				}});;
 
 		textCerca.textProperty().addListener(new ChangeListener<String>() {
 

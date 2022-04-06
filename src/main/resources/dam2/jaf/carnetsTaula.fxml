@@ -8,12 +8,12 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="500.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="57.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button fx:id="botoTornarCarnets" mnemonicParsing="false" onAction="#tancarCarnets"  prefWidth="100.0" text="Tornar" />
+            <Button fx:id="botoTornarCarnets" mnemonicParsing="false" onAction="#tancarCarnets" prefWidth="100.0" text="Tornar" />
          </items>
       </ToolBar>
-      <TableView fx:id="taulaCarnets" layoutY="57.0" prefHeight="244.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
+      <TableView fx:id="taulaCarnets" layoutY="46.0" prefHeight="254.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
         <columns>
           <TableColumn fx:id="clmTaulaCarnets" text="Carnets" />
         </columns>

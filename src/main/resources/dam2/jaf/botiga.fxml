@@ -70,7 +70,7 @@
 										<Insets right="5.0" />
 									</padding>
 								</Label>
-								<TextField fx:id="textCodi" disable="true" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+								<TextField fx:id="textCodi" editable="false" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 								<TextField fx:id="textDescripcio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 								<TextField fx:id="textDireccio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 								<TextField fx:id="textTelefon" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />

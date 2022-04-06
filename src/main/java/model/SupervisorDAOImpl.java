@@ -38,7 +38,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 		try 
 		{
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,?)");
 			stm.setString(1, supervisor.getDni());
 			stm.setString(2, supervisor.getNom());
 			stm.setString(3, supervisor.getCognom1());

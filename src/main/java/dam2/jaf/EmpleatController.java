@@ -119,7 +119,7 @@ public class EmpleatController implements Initializable{
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
     	
     	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
     	int res = empleatDAO.update(App.con, empleat);
@@ -167,7 +167,7 @@ public class EmpleatController implements Initializable{
 		dateDataNaixament.setValue(null);
 		cbxBotiga.setValue(null);
 		
-		textDni.setDisable(false);
+		textDni.setEditable(true);
 
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);
@@ -203,7 +203,7 @@ public class EmpleatController implements Initializable{
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), null);
+		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
     	
     	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
     	int res = empleatDAO.create(App.con, empleat);
@@ -282,8 +282,7 @@ public class EmpleatController implements Initializable{
 					textMail.setText(newValue.getMail());
 					textTelefon.setText(newValue.getTelefon());
 					cbxBotiga.setValue(newValue.getBotiga()); 
-					
-					textDni.setDisable(true);
+					textDni.setEditable(false);
 					
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);
@@ -291,6 +290,16 @@ public class EmpleatController implements Initializable{
 				}
 			}
 		});
+		
+		textTelefon.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textTelefon.setText(oldValue);
+		        }
+			}});;
 
 		textCerca.textProperty().addListener(new ChangeListener<String>() {
 
