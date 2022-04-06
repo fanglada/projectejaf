@@ -22,7 +22,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 			ResultSet rst = stm.executeQuery(sql);		
 			
 			while(rst.next()){
-				supervisors.add(new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"), rst.getString("telefonEmpresa"), null));
+				supervisors.add(new Supervisor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"), rst.getString("telefonEmpresa"), BotigaDAOImpl.select(con, rst.getInt("idBotiga"))));
 			}
 
 			return supervisors.size();
@@ -38,7 +38,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 		try 
 		{
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,?)");
+			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,?,?)");
 			stm.setString(1, supervisor.getDni());
 			stm.setString(2, supervisor.getNom());
 			stm.setString(3, supervisor.getCognom1());
@@ -47,7 +47,8 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 			stm.setString(6, supervisor.getTelefon());
 			stm.setString(7, supervisor.getDireccio());
 			stm.setString(8, supervisor.getMail());
-			stm.setString(9, supervisor.getTelefonEmpresa());
+			stm.setInt(9, supervisor.getBotiga().getIdBotiga());
+			stm.setString(10, supervisor.getTelefonEmpresa());
 			return stm.executeUpdate();			
 
 		
@@ -63,7 +64,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 		try 
 		{
 			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=?,telefonEmpresa=? WHERE DNI=?");
+			PreparedStatement stm = conection.prepareStatement("UPDATE treballador SET nom=?,cognom1=?,cognom2=?,dataNaixement=?,telefon=?,direccio=?,mail=?,telefonEmpresa=?,idBotiga=? WHERE DNI=?");
 			stm.setString(1, supervisor.getNom());
 			stm.setString(2, supervisor.getCognom1());
 			stm.setString(3, supervisor.getCognom2());
@@ -72,7 +73,8 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 			stm.setString(6, supervisor.getDireccio());
 			stm.setString(7, supervisor.getMail());
 			stm.setString(8, supervisor.getTelefonEmpresa());
-			stm.setString(9, supervisor.getDni());
+			stm.setInt(9, supervisor.getBotiga().getIdBotiga());
+			stm.setString(10, supervisor.getDni());
 			return stm.executeUpdate();			
 
 		

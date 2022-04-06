@@ -117,10 +117,10 @@ public class BotigaDAOImpl implements BotigaDAO {
 		try 
 		{
 			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE botiga SET telefon = ?, direccio = ?, descripcio = ? WHERE idBotiga = ? ");
-			stm.setInt(1, botiga.getIdBotiga());
-			stm.setString(2, botiga.getTelefon());
-			stm.setString(3, botiga.getDireccio());
-			stm.setString(4, botiga.getDescripcio());
+			stm.setInt(4, botiga.getIdBotiga());
+			stm.setString(1, botiga.getTelefon());
+			stm.setString(2, botiga.getDireccio());
+			stm.setString(3, botiga.getDescripcio());
 			return stm.executeUpdate();
 		
 		}

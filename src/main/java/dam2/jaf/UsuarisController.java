@@ -30,9 +30,15 @@ public class UsuarisController implements Initializable{
     }
 
     @FXML
-    void EmpleatSupervisor(ActionEvent event) throws IOException {
+    void Supervisor(ActionEvent event) throws IOException {
     	
     	App.setRoot("supervisor");
+
+    }
+    @FXML
+    void Empleat(ActionEvent event) throws IOException {
+    	
+    	App.setRoot("empleat");
 
     }
     

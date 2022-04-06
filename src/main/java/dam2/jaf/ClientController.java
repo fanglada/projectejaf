@@ -44,6 +44,9 @@ public class ClientController implements Initializable {
 
 	private FilteredList<Client> llistaFiltrada;
 	
+	private ObservableList<Carnet> llistaCarnetsTaula;
+
+	
 	@FXML
 	private AnchorPane anchor;
 
@@ -166,6 +169,9 @@ public class ClientController implements Initializable {
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
 		chcbxCarnet.getCheckModel().clearChecks();
+		
+    	textDni.setDisable(false);
+
 
 	}
 
@@ -192,6 +198,8 @@ public class ClientController implements Initializable {
 		
 		
 		if (!taula) {
+			App.setTitol("Client");
+
 			llistaClients=FXCollections.observableArrayList();
 	    	llistaCarnets=FXCollections.observableArrayList();
 	    	llistaFiltrada = new FilteredList<>(llistaClients, p -> true);
@@ -217,7 +225,6 @@ public class ClientController implements Initializable {
 	                        btn.setOnAction((ActionEvent event) -> {
 	                        	taula = true;
 	                            Client client = getTableView().getItems().get(getIndex());
-	                        	System.out.println(client.getNom());
 	                        	obrirTaula(client);
 	                        });
 	                    }
@@ -250,7 +257,11 @@ public class ClientController implements Initializable {
 	    	gestionarEvents();
 		}else if(taula) 
 		{
+
+			taulaCarnets.setItems(llistaCarnetsTaula);
+
 			clmTaulaCarnets.setCellValueFactory(new PropertyValueFactory<Carnet,String>("descripcio"));
+
 		}
 
 	}
@@ -276,8 +287,9 @@ public class ClientController implements Initializable {
     	textTelefon.setText(client.getTelefon());
     	textMail.setText(client.getMail());
     	textDireccio.setText(client.getDireccio());
+    	chcbxCarnet.getCheckModel().clearChecks();
     	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
-    	
+    	textDni.setDisable(true);
     }
     
     private Carnet trobarCarnet(Carnet carnet) 
@@ -306,11 +318,12 @@ public class ClientController implements Initializable {
 	
     void obrirTaula(Client client) 
     {
+    	llistaCarnetsTaula=FXCollections.observableArrayList();
+
+    	llistaCarnetsTaula.addAll(client.getCarnet());
     	try {	    		
-    		//FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula" + ".fxml"));
-    		
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("C:/Users/franc/git/projectejaf/src/main/resources/dam2/jaf/carnetsTaula.fxml"));
-    		loader.setController(this);
+    		FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula.fxml"));
+       		loader.setController(this);
     		Parent root = loader.load();
     		stageTaula = new Stage();
     		stageTaula.initModality(Modality.APPLICATION_MODAL);
@@ -328,7 +341,7 @@ public class ClientController implements Initializable {
     }
     
     @FXML
-    void tancarCarnets(MouseEvent event) {
+    void tancarCarnets(ActionEvent event) {
     	stageTaula.close();
     }
 

@@ -170,6 +170,11 @@ public class SupervisorController implements Initializable{
 		dateDataNaixament.setValue(null);
 
 		textTelefonEmpresa.setText("");
+		
+		textDni.setDisable(false);
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
 	}
 
 	@FXML
@@ -281,7 +286,8 @@ public class SupervisorController implements Initializable{
 					cbxBotiga.setValue(newValue.getBotiga());
 					textTelefonEmpresa.setText(newValue.getTelefonEmpresa());
 					
-					
+					textDni.setDisable(true);
+
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);
 					botoGuardar.setDisable(true);

@@ -100,7 +100,7 @@
                            </padding>
                         </Label>
                         <DatePicker fx:id="dateDataNaixament" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <ComboBox fx:id="cboxBotiga" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="cbxBotiga" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label text="Botiga:" GridPane.rowIndex="8">
                            <padding>
                               <Insets right="5.0" />

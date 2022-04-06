@@ -28,6 +28,8 @@ import model.*;
 public class EmpleatController implements Initializable{
 
 	private ObservableList<Empleat> llistaEmpleats;
+	private ObservableList<Botiga> llistaBotiga;
+	
 	private FilteredList<Empleat> llistaFiltrada;
 
 	@FXML
@@ -79,13 +81,13 @@ public class EmpleatController implements Initializable{
 	private TableColumn<Empleat, String> clmTelefon;
 	
 	@FXML
-	private TableColumn<Botiga, String> clmBotiga;
+	private TableColumn<Empleat, Botiga> clmBotiga;
 
 	@FXML
 	private DatePicker dateDataNaixament;
 
 	@FXML
-	private TableView<Empleat> tblViewEmpleatSupervior;
+	private TableView<Empleat> tblViewEmpleat;
 
 	@FXML
 	private TextField textCerca;
@@ -124,8 +126,8 @@ public class EmpleatController implements Initializable{
     	
     	if(res>0) {
     		
-    		if(tblViewEmpleatSupervior.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaEmpleats.set(tblViewEmpleatSupervior.getSelectionModel().getSelectedIndex(),empleat);
+    		if(tblViewEmpleat.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaEmpleats.set(tblViewEmpleat.getSelectionModel().getSelectedIndex(),empleat);
     		}
     		else {
     			llistaEmpleats.set(llistaEmpleats.size(), empleat);
@@ -164,16 +166,22 @@ public class EmpleatController implements Initializable{
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
 		cbxBotiga.setValue(null);
+		
+		textDni.setDisable(false);
+
+		botoActualitzar.setDisable(true);
+		botoEliminar.setDisable(true);
+		botoGuardar.setDisable(false);
 	}
 
 	@FXML
 	void eliminarRegistre(ActionEvent event) {
 
 		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.delete(App.con, tblViewEmpleatSupervior.getSelectionModel().getSelectedItem().getDni());
+    	int res = empleatDAO.delete(App.con, tblViewEmpleat.getSelectionModel().getSelectedItem().getDni());
     	
     	if(res>0) {
-    		llistaEmpleats.remove(tblViewEmpleatSupervior.getSelectionModel().getSelectedItem());
+    		llistaEmpleats.remove(tblViewEmpleat.getSelectionModel().getSelectedItem());
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("El registre s'ha eliminat");
@@ -231,9 +239,13 @@ public class EmpleatController implements Initializable{
 		App.setTitol("Empleat");
 		
 		llistaEmpleats=FXCollections.observableArrayList();
+		llistaBotiga=FXCollections.observableArrayList();
+
 		llistaFiltrada=new FilteredList<>(llistaEmpleats, p -> true);
 
-		tblViewEmpleatSupervior.setItems(llistaFiltrada);
+		tblViewEmpleat.setItems(llistaFiltrada);
+		cbxBotiga.setItems(llistaBotiga);
+
 
 		clmCognom1.setCellValueFactory(new PropertyValueFactory<Empleat, String>("cognom1"));
 		clmCognom2.setCellValueFactory(new PropertyValueFactory<Empleat, String>("cognom2"));
@@ -243,16 +255,18 @@ public class EmpleatController implements Initializable{
 		clmMail.setCellValueFactory(new PropertyValueFactory<Empleat, String>("mail"));
 		clmNom.setCellValueFactory(new PropertyValueFactory<Empleat, String>("nom"));
 		clmTelefon.setCellValueFactory(new PropertyValueFactory<Empleat, String>("telefon"));
-		clmBotiga.setCellValueFactory(new PropertyValueFactory<Botiga,String>("botiga"));
+		clmBotiga.setCellValueFactory(new PropertyValueFactory<Empleat,Botiga>("botiga"));
 
 		EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
+		
+		BotigaDAOImpl.Tots(App.con, llistaBotiga);
 
 		gestionarEvents();
 	}
 
 	private void gestionarEvents() {
 
-		tblViewEmpleatSupervior.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Empleat>() {
+		tblViewEmpleat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Empleat>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Empleat> observable, Empleat oldValue, Empleat newValue) {
@@ -268,6 +282,8 @@ public class EmpleatController implements Initializable{
 					textMail.setText(newValue.getMail());
 					textTelefon.setText(newValue.getTelefon());
 					cbxBotiga.setValue(newValue.getBotiga()); 
+					
+					textDni.setDisable(true);
 					
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);

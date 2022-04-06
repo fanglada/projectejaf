@@ -26,6 +26,8 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 						rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"),
 						rst.getString("direccio"), rst.getString("mail"), BotigaDAOImpl.select(con, rst.getInt("idBotiga"))));
 			}
+			
+			
 
 			return empleats.size();
 		} catch (Exception e) {

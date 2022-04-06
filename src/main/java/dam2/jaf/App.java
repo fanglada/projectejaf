@@ -29,8 +29,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("Menu"),1010,700);
         stage.setScene(scene);
         stage.setMaximized(true);
-//        stage.setMinHeight(700);
-//        stage.setMinWidth(1010);
+        stage.setMinHeight(700);
+        stage.setMinWidth(1010);
         stage.show();
     }
 

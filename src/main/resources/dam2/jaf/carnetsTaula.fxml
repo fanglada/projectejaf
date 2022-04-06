@@ -10,13 +10,16 @@
    <children>
       <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="57.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button fx:id="botoTornarCarnets" mnemonicParsing="false" onAction="#tornar" onMouseClicked="#tancarCarnets" prefWidth="100.0" text="Tornar" />
+            <Button fx:id="botoTornarCarnets" mnemonicParsing="false" onAction="#tancarCarnets"  prefWidth="100.0" text="Tornar" />
          </items>
       </ToolBar>
       <TableView fx:id="taulaCarnets" layoutY="57.0" prefHeight="244.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
         <columns>
-          <TableColumn fx:id="clmCarnets" maxWidth="219.0" minWidth="100.0" prefWidth="219.0" text="Carnets" />
+          <TableColumn fx:id="clmTaulaCarnets" text="Carnets" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>
