@@ -121,13 +121,22 @@ public class ParkingDAOImpl implements ParkingDAO {
 		// TODO Auto-generated method stub
 		try 
 		{
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO parking VALUES (?,?,?,?,?,?,?,?,?,?)");
-			stm.setInt(1, parking.getIdParking());
+			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO parking VALUES (NULL,?,?,?,?,?)");
+			stm.setInt(1, parking.getBotiga().getIdBotiga());
 			stm.setString(2, parking.getTelefon());
 			stm.setString(3, parking.getDireccio());
 			stm.setString(4, parking.getDescripcio());
-
-			return stm.executeUpdate();
+			stm.setInt(5, parking.getCapacitat());
+			
+			stm.executeUpdate();
+			
+			ResultSet rst = stm.executeQuery("SELECT @@Identity AS id");
+			
+			if(rst.next())
+			{
+				parking.setIdParking(rst.getInt("id"));
+			}
+			return 1;
 		
 		}
 		catch (SQLException e) {
@@ -142,11 +151,15 @@ public class ParkingDAOImpl implements ParkingDAO {
 		// TODO Auto-generated method stub
 		try 
 		{
-			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE parking SET telefon = ?, direccio = ?, descripcio = ? WHERE idParking = ? ");
-			stm.setInt(1, parking.getIdParking());
+			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE parking SET idBotiga=?, telefon = ?, direccio = ?, descripcio = ?, capacitat=? WHERE idParking = ? ");
+			stm.setInt(1, parking.getBotiga().getIdBotiga());
 			stm.setString(2, parking.getTelefon());
 			stm.setString(3, parking.getDireccio());
 			stm.setString(4, parking.getDescripcio());
+			stm.setInt(5, parking.getCapacitat());
+			stm.setInt(6, parking.getIdParking());
+
+			
 			return stm.executeUpdate();
 		
 		}

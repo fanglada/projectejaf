@@ -18,6 +18,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -274,8 +275,6 @@ public class parkingController implements Initializable {
 				    	textDireccio.setText(newValue.getDireccio());
 				    	textTelefon.setText(newValue.getTelefon());
 				    	textCapacitat.setText(String.valueOf(newValue.getCapacitat()));
-
-				    	textCodi.setEditable(false);
 						
 						botoActualitzar.setDisable(false);
 						botoEliminar.setDisable(false);
@@ -320,17 +319,96 @@ public class parkingController implements Initializable {
 
     @FXML
     void guardarRegistre(ActionEvent event) {
-
+    	
+    	Parking parking = new Parking(cbxBotiga.getValue(), textDireccio.getText(), textTelefon.getText(), textDescripcio.getText(), Integer.parseInt(textCapacitat.getText()));
+    	
+    	ParkingDAO ParkingDAO = new ParkingDAOImpl();
+    	int resultat = ParkingDAO.create(App.con, parking);
+    	
+    	if (resultat>0)
+    	{
+			llistaParkings.add(parking);
+    		Alert missatge=new Alert(AlertType.INFORMATION);
+			missatge.setTitle("Parking donat d'alta");
+			missatge.setContentText("S'ha pujat correctament, però sempre va bé comprovar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+			Netejar(null);
+			
+    	}else 
+    	{
+    		Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, parking no s'ha pogut donar d'alta");
+			missatge.setContentText("Hi ha un problema, parking no s'ha pogut donar d'alta");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    		
+    	}
     }
 
     @FXML
     void actualizarRegistre(ActionEvent event) {
-
+    	Parking parking = new Parking(Integer.valueOf(textCodi.getText()),cbxBotiga.getValue(), textDireccio.getText(), textTelefon.getText(), textDescripcio.getText(), Integer.parseInt(textCapacitat.getText()));
+    	
+    	ParkingDAO ParkingDAO = new ParkingDAOImpl();
+    	int resultat = ParkingDAO.update(App.con, parking);
+    	
+    	if (resultat>0)
+    	{
+    		if(tblViewParking.getSelectionModel().getSelectedIndex()!=-1)
+    		{
+    			llistaParkings.set(tblViewParking.getSelectionModel().getSelectedIndex(), parking);
+    		}
+    		else
+    		{
+    			llistaParkings.set(llistaParkings.size(),parking);
+    		}    		
+    		
+    		Alert missatge=new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha actualitzat");
+    		missatge.setContentText("El parking s'ha actualitzat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+      		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en actualitzar un registre");
+    		missatge.setContentText("El parking no s'ha pogut actualitzat");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
     }
 
     @FXML
     void eliminarRegistre(ActionEvent event) {
-
+    	ParkingDAO ParkingDAO = new ParkingDAOImpl();
+    	int resultat = ParkingDAO.delete(App.con, tblViewParking.getSelectionModel().getSelectedItem().getIdParking());
+    	
+    	if(resultat>0)
+    	{
+    		llistaParkings.remove(tblViewParking.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("El carnet s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}
+    	else
+    	{
+    		
+       		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre ");
+    		missatge.setContentText("El carnet no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    	}
+    	
     }
 
     @FXML
@@ -353,7 +431,6 @@ public class parkingController implements Initializable {
     	textDireccio.setText(null);
     	textTelefon.setText("");
     	textCapacitat.setText(null);
-    	textCodi.setEditable(true);
 		
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);
