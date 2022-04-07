@@ -3,6 +3,7 @@ package dam2.jaf;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
@@ -267,8 +268,14 @@ public class ConductorController implements Initializable{
 	
     @FXML
     void guardarRegistre(ActionEvent event) {
+    	
+    	ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		{
+			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+		}
 
-    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), chcbxCarnet.getCheckModel().getCheckedItems());
+    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
     	
     	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
     	int res = conductorDAO.create(App.con, conductor);
@@ -295,15 +302,14 @@ public class ConductorController implements Initializable{
 
     @FXML
     void actualizarRegistre(ActionEvent event) {
-
-    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), chcbxCarnet.getCheckModel().getCheckedItems());
-    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().size());
-    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(0));
-    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(1));
-
-    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(chcbxCarnet.getCheckModel().getCheckedItems().size()-1));
-
-    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(1));
+    	
+    	ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		{
+			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+		}
+		
+    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
 
     	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
     	int res = conductorDAO.update(App.con, conductor);
@@ -342,7 +348,6 @@ public class ConductorController implements Initializable{
     	
     	if(res>0) {
     		llistaConductor.remove(tblViewConductor.getSelectionModel().getSelectedItem());
-    		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("El registre s'ha eliminat");
     		missatge.setContentText("El conductor s'ha eliminat correctament");

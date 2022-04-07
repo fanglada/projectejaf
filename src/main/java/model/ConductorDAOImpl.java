@@ -103,7 +103,27 @@ import dam2.jaf.Connexio;
 				stm.setString(7, conductor.getDireccio());
 				stm.setString(8, conductor.getMail());
 
-				return stm.executeUpdate();			
+				int aux = stm.executeUpdate();
+				int aux2 = 1;
+				
+				for(int i = 0; i < conductor.getCarnet().size(); i++) 
+				{
+					stm = conection.prepareStatement("INSERT INTO conductorCarnet VALUES (?,?)");
+					stm.setInt(1, conductor.getCarnet().get(i).getIdCarnet());
+					stm.setString(2, conductor.getDni());
+					if (stm.executeUpdate() <= 0) 
+					{
+						aux2 = 0;
+					}
+				}	
+
+				if (aux > 0 && aux2 > 0) 
+				{
+					return 1;
+				}else 
+				{
+					return 0;
+				}			
 
 			
 			}catch (Exception e) 
@@ -127,7 +147,31 @@ import dam2.jaf.Connexio;
 				stm.setString(6, conductor.getDireccio());
 				stm.setString(7, conductor.getMail());
 				stm.setString(8, conductor.getDni());
-				return stm.executeUpdate();			
+				int aux = stm.executeUpdate();
+				int aux2 = 1, aux3 = 1;
+				
+				stm = conection.prepareStatement("DELETE FROM conductorCarnet WHERE DNIConductor=?");
+				stm.setString(1, conductor.getDni());
+				aux2 = stm.executeUpdate();
+				
+				for(int i = 0; i < conductor.getCarnet().size(); i++) 
+				{
+					stm = conection.prepareStatement("INSERT INTO conductorCarnet VALUES (?,?)");
+					stm.setInt(1, conductor.getCarnet().get(i).getIdCarnet());
+					stm.setString(2, conductor.getDni());
+					if (stm.executeUpdate() <= 0) 
+					{
+						aux3 = 0;
+					}
+				}	
+
+				if (aux > 0 && aux2 > 0 && aux3 > 0) 
+				{
+					return 1;
+				}else 
+				{
+					return 0;
+				}			
 
 			
 			}catch (Exception e) 
@@ -143,11 +187,23 @@ import dam2.jaf.Connexio;
 			{
 				Connection conection = con.getConnexio();
 							
-				PreparedStatement stm = conection.prepareStatement("DELETE FROM treballador WHERE DNI=?;");	
+				PreparedStatement stm = conection.prepareStatement("DELETE FROM conductorCarnet WHERE DNIConductor=?");
+				stm.setString(1, id);
+				int aux = stm.executeUpdate(), aux2 = 1;
+							
+				stm = conection.prepareStatement("DELETE FROM treballador WHERE DNI=?");	
 				
 				stm.setString(1, id);
 				
-				return stm.executeUpdate();
+				aux2 = stm.executeUpdate();
+				
+				if (aux > 0 && aux2 > 0) 
+				{
+					return 1;
+				}else 
+				{
+					return 0;
+				}
 
 			}catch (Exception e) 
 			{
