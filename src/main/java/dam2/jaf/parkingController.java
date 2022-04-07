@@ -28,6 +28,7 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
@@ -111,6 +112,45 @@ public class parkingController implements Initializable {
 	private Stage stageTaula;
 	
 	private boolean taula = false;  
+	
+    @FXML
+    private Button botoTornarVehicles;
+
+    @FXML
+    private TableColumn<Vehicle, Integer> clmCV;
+
+    @FXML
+    private TableColumn<Vehicle, String> clmCanvi;
+
+    @FXML
+    private TableColumn<Vehicle, Integer> clmCapacitatV;
+
+    @FXML
+    private TableColumn<Vehicle, Carnet> clmCarnet;
+
+    @FXML
+    private TableColumn<Vehicle, LocalDateTime> clmDataMatriculacio;
+
+    @FXML
+    private TableColumn<Vehicle, String> clmMarca;
+
+    @FXML
+    private TableColumn<Vehicle, String> clmMatricula;
+
+    @FXML
+    private TableColumn<Vehicle, String> clmModel;
+
+    @FXML
+    private TableColumn<Vehicle, Integer> clmNumPortes;
+
+    @FXML
+    private TableColumn<Vehicle, Integer> clmNumRodes;
+
+    @FXML
+    private TableColumn<Vehicle, TipusVehicle> clmTipusVehicle;
+
+    @FXML
+    private TableView<Vehicle> taulaVehicles;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -174,9 +214,20 @@ public class parkingController implements Initializable {
 		else if(taula) 
 		{
 
-//			taulaCarnets.setItems(llistaCarnetsTaula);
-//
-//			clmTaulaCarnets.setCellValueFactory(new PropertyValueFactory<Carnet,String>("descripcio"));
+			taulaVehicles.setItems(llistaVehiclesTaula);
+
+			clmCV.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("CV"));
+			clmCanvi.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("canvi"));
+			clmCapacitatV.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("capacitat"));
+			clmCarnet.setCellValueFactory(new PropertyValueFactory<Vehicle,Carnet>("carnet"));
+			clmDataMatriculacio.setCellValueFactory(new PropertyValueFactory<Vehicle,LocalDateTime>("dataMatriculacio"));
+			clmMarca.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("marca"));
+			clmModel.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("model"));
+			clmMatricula.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("matricula"));
+			clmNumPortes.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("numPortes"));
+			clmNumRodes.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("numRodes"));
+			clmTipusVehicle.setCellValueFactory(new PropertyValueFactory<Vehicle,TipusVehicle>("tipusVehicle"));
+
 
 		}
 	}
@@ -262,7 +313,7 @@ public class parkingController implements Initializable {
     }
 	
     @FXML
-    void tancarCarnets(ActionEvent event) {
+    void tancarVehicles(ActionEvent event) {
     	stageTaula.close();
     }
 

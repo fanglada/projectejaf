@@ -32,6 +32,27 @@ public class Parking {
 		this.capacitat = capacitat;
 		this.vehicles = new ArrayList<Vehicle>();
 	}
+	
+	public Parking(int idParking, Botiga botiga, String direccio, String telefon, String descripcio,
+			int capacitat, List<Vehicle> vehicle) {
+		this.idParking = idParking;
+		this.botiga = botiga;
+		this.direccio = direccio;
+		this.telefon = telefon;
+		this.descripcio = descripcio;
+		this.capacitat = capacitat;
+		this.vehicles = vehicle;
+	}
+	
+	public Parking(Botiga botiga, String direccio, String telefon, String descripcio,
+			int capacitat, List<Vehicle> vehicle) {
+		this.botiga = botiga;
+		this.direccio = direccio;
+		this.telefon = telefon;
+		this.descripcio = descripcio;
+		this.capacitat = capacitat;
+		this.vehicles = vehicle;
+	}
 
 	public int getIdParking() {
 		return idParking;

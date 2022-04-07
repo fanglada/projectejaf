@@ -10,7 +10,7 @@
    <children>
       <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button fx:id="botoTornarCarnets" mnemonicParsing="false" onAction="#tancarCarnets" prefWidth="100.0" text="Tornar" />
+            <Button fx:id="botoTornarVehicles" mnemonicParsing="false" onAction="#tancarVehicles" prefWidth="100.0" text="Tornar" />
          </items>
       </ToolBar>
       <TableView fx:id="taulaVehicles" layoutY="46.0" prefHeight="254.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
@@ -27,7 +27,7 @@
             <TableColumn fx:id="clmNumRodes" prefWidth="168.0" text="Nº Rodes" />
             <TableColumn fx:id="clmNumPortes" prefWidth="68.0" text="Nº Portes" />
             <TableColumn fx:id="clmDataMatriculacio" prefWidth="68.0" text="Data Matriculació" />
-            <TableColumn fx:id="clmCapacitat" prefWidth="68.0" text="Capacitat" />
+            <TableColumn fx:id="clmCapacitatV" prefWidth="68.0" text="Capacitat" />
             <TableColumn fx:id="clmCarnet" prefWidth="68.0" text="Carnet" />
          </columns>
       </TableView>

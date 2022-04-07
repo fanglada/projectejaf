@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -78,6 +79,48 @@ public class VehicleDAOImpl implements VehicleDAO {
 			return null;
 		}	
 	}
+	
+	public static int BuscarParking(Connexio con, List<Vehicle> vehicles, String id) {
+		
+		try {
+
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle NATURAL JOIN tipusVehicle NATURAL JOIN carnet WHERE matricula='"+id+"' ORDER BY dataHora DESC LIMIT;";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("decripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numRodes"), resultSet.getInt("numPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio"))));
+			}
+			return vehicles.size();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static List<Vehicle> BuscarParking(Connexio con, String id) {
+		List<Vehicle> vehicles = new ArrayList<Vehicle>();
+		try {
+
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle NATURAL JOIN tipusVehicle NATURAL JOIN carnet WHERE matricula='"+id+"' ORDER BY dataHora DESC LIMIT;";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			while(resultSet.next()) {
+				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("decripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numRodes"), resultSet.getInt("numPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio"))));
+			}
+			return vehicles;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
 	public int create(Connexio con, Vehicle vehicle) {
@@ -115,17 +158,18 @@ public class VehicleDAOImpl implements VehicleDAO {
 		try 
 		{
 			PreparedStatement stm = con.getConnexio().prepareStatement("UPDATE vehicle SET idTipus = ?, marca = ?, model = ?, cv = ?, canvi = ?, numeroRodes = ?, numeroPortes = ?, dataMatriculacio = ?, capacitat = ? , idCarnet = ? WHERE matricula = ? ");
-			stm.setString(1, vehicle.getMatricula());
-			stm.setInt(2, vehicle.getTipus().getIdTipusVehicle());
-			stm.setString(3, vehicle.getMarca());
-			stm.setString(4, vehicle.getModel());
-			stm.setInt(5, vehicle.getCv());
-			stm.setString(6, vehicle.getCanvi());
-			stm.setInt(7, vehicle.getNumRodes());
-			stm.setInt(8, vehicle.getNumPortes());
-			stm.setDate(9, Date.valueOf(vehicle.getDataMatriculacio()));
-			stm.setInt(10, vehicle.getCapacitat());
-			stm.setInt(11, vehicle.getCarnet().getIdCarnet());
+			stm.setInt(1, vehicle.getTipus().getIdTipusVehicle());
+			stm.setString(2, vehicle.getMarca());
+			stm.setString(3, vehicle.getModel());
+			stm.setInt(4, vehicle.getCv());
+			stm.setString(5, vehicle.getCanvi());
+			stm.setInt(6, vehicle.getNumRodes());
+			stm.setInt(7, vehicle.getNumPortes());
+			stm.setDate(8, Date.valueOf(vehicle.getDataMatriculacio()));
+			stm.setInt(9, vehicle.getCapacitat());
+			stm.setInt(10, vehicle.getCarnet().getIdCarnet());
+			stm.setString(11, vehicle.getMatricula());
+
 
 		
 			return stm.executeUpdate();
