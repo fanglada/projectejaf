@@ -100,12 +100,12 @@ public class ParkingDAOImpl implements ParkingDAO {
 		Parking parking = null;
 		try {
 
-			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE desti="+id+";";
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet INNER JOIN parking p ON p.idParking=desti WHERE matricula='"+id+"';";
 			Statement stm = con.getConnexio().createStatement();
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			if(resultSet.next()) {
-				parking = new Parking(resultSet.getInt("idParking"), BotigaDAOImpl.select(con, resultSet.getInt("idBotiga")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
+				parking = new Parking(resultSet.getInt("desti"), BotigaDAOImpl.select(con, resultSet.getInt("desti")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
 			}
 			return parking;
 		}
