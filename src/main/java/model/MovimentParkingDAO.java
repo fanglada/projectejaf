@@ -10,7 +10,7 @@ public interface MovimentParkingDAO {
 		return 0;
 	}
 	
-	int Create(Connexio con,MovimentParking movimentParking);
-	int Update(Connexio con,MovimentParking movimentParking);
-	int Delete(Connexio con, int id);
+//	int Create(Connexio con,MovimentParking movimentParking);
+//	int Update(Connexio con,MovimentParking movimentParking);
+//	int Delete(Connexio con, int id);
 }

@@ -67,7 +67,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			if(rst.next())
 			{
-				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.select(con, rst.getInt("desti")));
+				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.BuscarVehicle(con, rst.getString("matricula")));
 			}
 			
 			return vehicle;
@@ -140,8 +140,15 @@ public class VehicleDAOImpl implements VehicleDAO {
 			stm.setInt(11, vehicle.getCarnet().getIdCarnet());
 
 		
-			return stm.executeUpdate();
-		
+			stm.executeUpdate();
+			
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO MovimentParking VALUES (NULL,NULL,?,?)");				
+			stm2.setInt(1, vehicle.getParking().getIdParking());
+			stm2.setString(2, vehicle.getMatricula());
+
+			return stm2.executeUpdate();
+			
+	
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

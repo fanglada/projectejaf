@@ -53,6 +53,11 @@ public class gestioController implements Initializable{
     	App.setRoot("menu");
     }
     
+    @FXML
+    void Moviments(ActionEvent event) throws IOException {
+    	App.setRoot("moviments");
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub

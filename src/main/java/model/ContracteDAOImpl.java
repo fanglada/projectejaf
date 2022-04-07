@@ -60,7 +60,14 @@ public class ContracteDAOImpl implements ContracteDAO {
 				stm.setNull(7, Types.VARCHAR);
 			}
 			
-			return stm.executeUpdate();			
+			stm.executeUpdate();
+			
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO MovimentParking VALUES (NULL,?,?,?)");				
+			stm2.setInt(1, contracte.getVehicle().getParking().getIdParking());
+			stm2.setInt(2, 0);
+			stm2.setString(3, contracte.getVehicle().getMatricula());
+
+			return stm2.executeUpdate();		
 
 		
 		}catch (Exception e) 

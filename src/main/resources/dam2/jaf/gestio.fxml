@@ -26,6 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" onAction="#Carnet" prefHeight="105.0" prefWidth="210.0" text="Carnets" GridPane.columnIndex="3" />
@@ -34,6 +35,7 @@
             <Button mnemonicParsing="false" onAction="#Vehicle" prefHeight="105.0" prefWidth="210.0" text="Vehicles" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onAction="#Botiga" prefHeight="105.0" prefWidth="215.0" text="Botigues" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#Parking" prefHeight="105.0" prefWidth="215.0" text="Parkings" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#Moviments" prefHeight="105.0" prefWidth="215.0" text="Moviments" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
