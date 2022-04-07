@@ -19,7 +19,7 @@ public class Vehicle {
 	private Parking parking;
 	
 	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, String canvi, int cv, int numRodes,
-			int numPortes, LocalDate dataMatriculacio, int capacitat, Carnet carnet) {
+			int numPortes, LocalDate dataMatriculacio, int capacitat, Carnet carnet, Parking parking) {
 		this.matricula = matricula;
 		this.marca = marca;
 		this.model = model;
@@ -31,6 +31,7 @@ public class Vehicle {
 		this.dataMatriculacio = dataMatriculacio;
 		this.capacitat = capacitat;
 		this.carnet =carnet;
+		this.parking=parking;
 	}
 	
 	public String getMatricula() {

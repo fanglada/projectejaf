@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -51,6 +52,7 @@
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
@@ -75,9 +77,9 @@
 									</padding>
 								</Label>
 								<TextField fx:id="textCodi" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" />
-								<TextField fx:id="textDescripcio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+								<TextField fx:id="textNumPortes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 								<TextField fx:id="textCapacitat" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-								<TextField fx:id="textTelefon" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+								<TextField fx:id="textCv" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Canvi:" GridPane.rowIndex="4">
                            <padding>
                               <Insets right="5.0" />
@@ -107,7 +109,6 @@
                         </Label>
                         <TextField fx:id="textModel" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="cbxTipusVehicle" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="cbxCanvi" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Número Rodes:" GridPane.rowIndex="6">
                            <padding>
                               <Insets right="5.0" />
@@ -118,8 +119,15 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="textDescripcio1" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <DatePicker prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="textNumRodes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <DatePicker fx:id="textDataMatriculacio" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="cbxParking" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label text="Parking:" GridPane.rowIndex="11">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <ChoiceBox fx:id="cbxCanvi" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 							</children>
 						</GridPane>
 						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
@@ -133,7 +141,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Button fx:id="botoActualizar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+								<Button fx:id="botoActualitzar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#actualizarRegistre" prefHeight="33.0" prefWidth="120.0" text="Actualitzar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
 								<Button fx:id="botoGuardar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#guardarRegistre" prefHeight="33.0" prefWidth="120.0" text="Guardar" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
 								<Button fx:id="botoEliminar" alignment="TOP_CENTER" disable="true" mnemonicParsing="false" onAction="#eliminarRegistre" prefHeight="33.0" prefWidth="120.0" text="Eliminar" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <Button fx:id="botoNetejar" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#Netejar" prefHeight="33.0" prefWidth="120.0" text="Netejar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
@@ -143,14 +151,14 @@
 				</GridPane>
 			</children>
 		</AnchorPane>
-		<HBox alignment="CENTER" layoutY="503.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<HBox alignment="CENTER" layoutX="-14.0" layoutY="543.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0">
 			<children>
 				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
 				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewVehicle" layoutX="2.0" layoutY="542.0" prefHeight="249.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewVehicle" layoutX="2.0" layoutY="583.0" prefHeight="209.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<columns>
 				<TableColumn fx:id="clmMatricula" prefWidth="136.66665649414062" text="Matricula" />
             <TableColumn fx:id="clmMarca" prefWidth="136.66665649414062" text="Marca" />
