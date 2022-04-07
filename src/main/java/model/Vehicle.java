@@ -16,6 +16,7 @@ public class Vehicle {
 	private LocalDate dataMatriculacio;
 	private int capacitat;
 	private Carnet carnet;
+	private Parking parking;
 	
 	public Vehicle(String matricula, String marca, String model, TipusVehicle tipus, String canvi, int cv, int numRodes,
 			int numPortes, LocalDate dataMatriculacio, int capacitat, Carnet carnet) {
@@ -118,6 +119,14 @@ public class Vehicle {
 
 	public void setCarnet(Carnet carnet) {
 		this.carnet = carnet;
+	}
+	
+	public Parking getParking() {
+		return parking;
+	}
+
+	public void setParking(Parking parking) {
+		this.parking = parking;
 	}
 	
 	@Override
