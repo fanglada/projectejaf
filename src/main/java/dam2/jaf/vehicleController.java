@@ -138,7 +138,7 @@ public class vehicleController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-		App.setTitol("Vehicle");
+		App.setTitol("Vehicles");
 		
 		llistaVehicles=FXCollections.observableArrayList();
 		llistaTipusVehicles=FXCollections.observableArrayList();
@@ -198,7 +198,8 @@ public class vehicleController implements Initializable{
 					cbxCarnet.setValue(newValue.getCarnet());
 					cbxTipusVehicle.setValue(newValue.getTipus());
 					cbxParking.setValue(newValue.getParking());
-					System.out.println(newValue.getParking());
+
+					textCodi.setEditable(false);
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);
 					botoGuardar.setDisable(true);
@@ -337,7 +338,8 @@ public class vehicleController implements Initializable{
 		cbxCarnet.setValue(null);		
 		cbxTipusVehicle.setValue(null);		
 		cbxParking.setValue(null);		
-
+		
+		textCodi.setEditable(true);
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);
 		botoGuardar.setDisable(false);
