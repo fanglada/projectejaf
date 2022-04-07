@@ -101,6 +101,9 @@ public class vehicleController implements Initializable{
 
     @FXML
     private TableColumn<Vehicle, TipusVehicle> clmTipusVehicle;
+    
+    @FXML
+    private TableColumn<Vehicle, Parking> clmParking;
 
     @FXML
     private TableView<Vehicle> tblViewVehicle;
@@ -163,6 +166,7 @@ public class vehicleController implements Initializable{
 		clmNumPortes.setCellValueFactory(new PropertyValueFactory<Vehicle, Integer>("numPortes"));
 		clmNumRodes.setCellValueFactory(new PropertyValueFactory<Vehicle, Integer>("numRodes"));
 		clmTipusVehicle.setCellValueFactory(new PropertyValueFactory<Vehicle, TipusVehicle>("tipus"));
+		clmParking.setCellValueFactory(new PropertyValueFactory<Vehicle, Parking>("parking"));
 		
 		VehicleDAOImpl.Tots(App.con, llistaVehicles);
 		TipusVehicleDAOImpl.Tots(App.con, llistaTipusVehicles);
