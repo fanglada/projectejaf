@@ -10,7 +10,7 @@ import dam2.jaf.Connexio;
 
 public class ParkingDAOImpl implements ParkingDAO {
 
-	static int Tots(Connexio con, List<Parking> parkings) {
+	public static int Tots(Connexio con, List<Parking> parkings) {
 		try {
 
 			Statement stm = con.getConnexio().createStatement();
@@ -19,7 +19,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 			ResultSet rst = stm.executeQuery(sql);
 
 			while (rst.next()) {
-				parkings.add(new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("telefon"), rst.getString("direccio"), rst.getString("descripcio"), rst.getInt("capacitat")));
+				parkings.add(new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("direccio"), rst.getString("telefon"), rst.getString("descripcio"), rst.getInt("capacitat")));
 			}
 
 			return parkings.size();
@@ -40,7 +40,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 			ResultSet rst = stm.executeQuery(sql);
 
 			while (rst.next()) {
-				parking = new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("telefon"), rst.getString("direccio"), rst.getString("descripcio"), rst.getInt("capacitat"));
+				parking = new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("direccio"), rst.getString("telefon"), rst.getString("descripcio"), rst.getInt("capacitat"));
 			}
 
 			return 1;
@@ -62,7 +62,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 			ResultSet rst = stm.executeQuery(sql);
 
 			while (rst.next()) {
-				parking = new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("telefon"), rst.getString("direccio"), rst.getString("descripcio"), rst.getInt("capacitat"));
+				parking = new Parking(rst.getInt("idParking"),BotigaDAOImpl.select(con,rst.getInt("idParking")), rst.getString("direccio"), rst.getString("telefon"),rst.getString("descripcio"), rst.getInt("capacitat"));
 			}
 
 			return parking;
