@@ -171,6 +171,7 @@
             <TableColumn fx:id="clmDataMatriculacio" prefWidth="68.0" text="Data Matriculació" />
             <TableColumn fx:id="clmCapacitat" prefWidth="68.0" text="Capacitat" />
             <TableColumn fx:id="clmCarnet" prefWidth="68.0" text="Carnet" />
+            <TableColumn fx:id="clmParking" prefWidth="68.0" text="Parking" />
 			</columns>
 			<columnResizePolicy>
 				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

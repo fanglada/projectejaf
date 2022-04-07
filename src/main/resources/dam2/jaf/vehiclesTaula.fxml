@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="461.0" prefWidth="805.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="461.0" prefWidth="1095.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -29,6 +29,7 @@
             <TableColumn fx:id="clmDataMatriculacio" prefWidth="68.0" text="Data Matriculació" />
             <TableColumn fx:id="clmCapacitatV" prefWidth="68.0" text="Capacitat" />
             <TableColumn fx:id="clmCarnet" prefWidth="68.0" text="Carnet" />
+            <TableColumn fx:id="clmParking" prefWidth="68.0" text="Parking" />
          </columns>
       </TableView>
    </children>
