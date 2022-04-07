@@ -3,7 +3,9 @@ package dam2.jaf;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
@@ -22,12 +24,14 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -242,46 +246,151 @@ public class ClientController implements Initializable {
 		
 	}
 	
-	 @FXML
-	    void seleccionarClient(MouseEvent event) {
-	    	
-	    	botoGuardar.setDisable(true);
-	    	botoActualitzar.setDisable(false);
-	    	botoEliminar.setDisable(false);
-			Client aux = tblViewClient.getSelectionModel().getSelectedItem();
-			carregarClient(aux); 
-
-	    }
-	    
-	    private void carregarClient(Client client) 
-	    {
-	    	textDni.setText(client.getDni());
-	    	textNom.setText(client.getNom());
-	    	textCognom1.setText(client.getCognom1());
-	    	textCognom2.setText(client.getCognom2());
-	    	dateDataNaixament.setValue(client.getDataNaixament());
-	    	textTelefon.setText(client.getTelefon());
-	    	textMail.setText(client.getMail());
-	    	textDireccio.setText(client.getDireccio());
-	    	chcbxCarnet.getCheckModel().clearChecks();
-	    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
-	    	textDni.setEditable(false);
-	    }
-
+	
 	@FXML
 	void guardarRegistre(ActionEvent event) {
+		
+		ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		{
+			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+		}
+    	Client client =  new Client(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
+    	ClientDAO ClientDAO = new ClientDAOImpl();
+    	int resultat = ClientDAO.create(App.con, client);
+    	
+    	if (resultat>0)
+    	{
+			llistaClients.add(client);
+    		Alert missatge=new Alert(AlertType.INFORMATION);
+			missatge.setTitle("Bicicleta donada d'alta");
+			missatge.setContentText("S'ha pujat correctament, però sempre va bé comprovar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+			Netejar(null);
+			
+    	}else 
+    	{
+    		Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, bicicleta no s'ha pogut donar d'alta");
+			missatge.setContentText("Hi ha un problema, bicicleta no s'ha pogut donar d'alta");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    		
+    	}
 
 	}
 	
 	@FXML
 	void actualizarRegistre(ActionEvent event) {
+		
+		
+		Client client = tblViewClient.getSelectionModel().getSelectedItem();
+		client.setNom(textNom.getText());
+		client.setCognom1(textCognom1.getText());
+		client.setCognom2(textCognom2.getText());
+		client.setfNacimiento(dateDataNaixament.getValue());
+		client.setTelefon(textTelefon.getText());
+		client.setMail(textMail.getText());
+		client.setDireccio(textDireccio.getText());
+		ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		{
+			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+		}
+		client.setCarnet(carnets);
+		tblViewClient.refresh();
+		
+		
+		ClientDAO ClientDAO = new ClientDAOImpl();
+    	int resultat = ClientDAO.update(App.con, client);
+    	if (resultat > 0)
+    	{
+    		Alert missatge=new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Client actuaizat");
+			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+			System.out.println("Abans "  + tblViewClient.getSelectionModel().getSelectedItem().getCarnet().size());
+			Netejar(null);
+			System.out.println("Abans "  + tblViewClient.getSelectionModel().getSelectedItem().getCarnet().size());
+			
+    	}else 
+    	{
+    		Alert missatge=new Alert(AlertType.ERROR);
+    		missatge.setTitle("Hi ha un problema, el clinet no s'ha pogut actualitzar");
+			missatge.setContentText("Hi ha un problema, el clinet no s'ha pogut actialitzar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
 
 	}
 
 	@FXML
 	void eliminarRegistre(ActionEvent event) {
+		
+    	Alert confirmacio=new Alert(AlertType.CONFIRMATION);
+    	confirmacio.initModality(Modality.WINDOW_MODAL);
+    	confirmacio.setTitle("Estas segur que vols esborrar la bicicleta?");
+    	confirmacio.setContentText("Un cop fet no es pot desfer");
+    	
+        	
+    	Optional<ButtonType> result = confirmacio.showAndWait();
+    	if(result.isPresent() && result.get() == ButtonType.OK) {
+        	ClientDAO ClientDAO = new ClientDAOImpl();
+        	int resultat = ClientDAO.delete(App.con, tblViewClient.getSelectionModel().getSelectedItem().getDni());
+        	if (resultat>0)
+        	{
+        		llistaClients.remove(tblViewClient.getSelectionModel().getSelectedItem());
+        		tblViewClient.refresh();
+        		Alert missatge=new Alert(AlertType.INFORMATION);
+    			missatge.setTitle("Bicicleta donada de baixa");
+    			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
+    			missatge.setHeaderText("Alerta:");
+    			missatge.show();
+    			Netejar(null);
+        	}else 
+        	{
+        		Alert missatge=new Alert(AlertType.ERROR);
+    			missatge.setTitle("Hi ha un problema, bicicleta no s'ha pogut donar de baixa");
+    			missatge.setContentText("Hi ha un problema, bicicleta no s'ha pogut donar de baixa");
+    			missatge.setHeaderText("Alerta:");
+    			missatge.show();
+        		
+        	}
+    	}
 
 	}
+	
+	@FXML
+    void seleccionarClient(MouseEvent event) {
+    	
+    	botoGuardar.setDisable(true);
+    	textDni.setEditable(false);
+    	botoActualitzar.setDisable(false);
+    	botoEliminar.setDisable(false);
+		Client aux = tblViewClient.getSelectionModel().getSelectedItem();
+		if(aux != null) 
+		{
+			carregarClient(aux); 
+		}
+		
+
+    }
+    
+    private void carregarClient(Client client) 
+    {
+    	textDni.setText(client.getDni());
+    	textNom.setText(client.getNom());
+    	textCognom1.setText(client.getCognom1());
+    	textCognom2.setText(client.getCognom2());
+    	dateDataNaixament.setValue(client.getDataNaixament());
+    	textTelefon.setText(client.getTelefon());
+    	textMail.setText(client.getMail());
+    	textDireccio.setText(client.getDireccio());
+    	chcbxCarnet.getCheckModel().clearChecks();
+    	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
+	    }
     
     private Carnet trobarCarnet(Carnet carnet) 
     {
@@ -306,11 +415,11 @@ public class ClientController implements Initializable {
     		stageTaula.initModality(Modality.APPLICATION_MODAL);
     		stageTaula.setTitle("Carnets de: " + client.getNom() + " " + client.getCognom1() + " " + client.getCognom2());
     		stageTaula.setScene(new Scene(root));
-    		stageTaula.show(); 
+    		stageTaula.show();
   
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("No s'ha pogit obrir la finestra de filtratge");
+            alert.setHeaderText("No s'ha pogit obrir la finestra amb els carnets");
             alert.setTitle("Error");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
