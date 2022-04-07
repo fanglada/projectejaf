@@ -98,8 +98,27 @@ public class ClientDAOImpl implements ClientDAO {
 			stm.setString(6, client.getTelefon());
 			stm.setString(7, client.getDireccio());
 			stm.setString(8, client.getMail());
-			return stm.executeUpdate();			
+			int aux = stm.executeUpdate();
+			int aux2 = 1;
+			
+			for(int i = 0; i < client.getCarnet().size(); i++) 
+			{
+				stm = conection.prepareStatement("INSERT INTO ClientCarnet VALUES (?,?)");
+				stm.setInt(1, client.getCarnet().get(i).getIdCarnet());
+				stm.setString(2, client.getDni());
+				if (stm.executeUpdate() <= 0) 
+				{
+					aux2 = 0;
+				}
+			}	
 
+			if (aux > 0 && aux2 > 0) 
+			{
+				return 1;
+			}else 
+			{
+				return 0;
+			}
 		
 		}catch (Exception e) 
 		{
@@ -122,7 +141,31 @@ public class ClientDAOImpl implements ClientDAO {
 			stm.setString(6, client.getDireccio());
 			stm.setString(7, client.getMail());
 			stm.setString(8, client.getDni());
-			return stm.executeUpdate();			
+			int aux = stm.executeUpdate();
+			int aux2 = 1, aux3 = 1;
+			
+			stm = conection.prepareStatement("DELETE FROM ClientCarnet WHERE DNIClient=?");
+			stm.setString(1, client.getDni());
+			aux2 = stm.executeUpdate();
+			
+			for(int i = 0; i < client.getCarnet().size(); i++) 
+			{
+				stm = conection.prepareStatement("INSERT INTO ClientCarnet VALUES (?,?)");
+				stm.setInt(1, client.getCarnet().get(i).getIdCarnet());
+				stm.setString(2, client.getDni());
+				if (stm.executeUpdate() <= 0) 
+				{
+					aux3 = 0;
+				}
+			}	
+
+			if (aux > 0 && aux2 > 0 && aux3 > 0) 
+			{
+				return 1;
+			}else 
+			{
+				return 0;
+			}			
 
 		
 		}catch (Exception e) 
@@ -137,12 +180,24 @@ public class ClientDAOImpl implements ClientDAO {
 		try 
 		{
 			Connection conection = con.getConnexio();
+			
+			PreparedStatement stm = conection.prepareStatement("DELETE FROM ClientCarnet WHERE DNIClient=?");
+			stm.setString(1, id);
+			int aux = stm.executeUpdate(), aux2 = 1;
 						
-			PreparedStatement stm = conection.prepareStatement("DELETE FROM client WHERE DNI=?");	
+			stm = conection.prepareStatement("DELETE FROM client WHERE DNI=?");	
 			
 			stm.setString(1, id);
 			
-			return stm.executeUpdate();
+			aux2 = stm.executeUpdate();
+			
+			if (aux > 0 && aux2 > 0) 
+			{
+				return 1;
+			}else 
+			{
+				return 0;
+			}
 
 		}catch (Exception e) 
 		{
