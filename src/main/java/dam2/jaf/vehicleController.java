@@ -1,5 +1,9 @@
 package dam2.jaf;
 
+import java.time.LocalDate;
+
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,9 +12,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Botiga;
+import model.Carnet;
+import model.Empleat;
+import model.TipusVehicle;
+import model.Vehicle;
 
 public class vehicleController {
 
+	private ObservableList<Vehicle> llistaVehicles;
+	private ObservableList<Botiga> llistaBotiga;
+	
+	private FilteredList<Vehicle> llistaFiltrada;
+	
     @FXML
     private AnchorPane anchor;
 
@@ -42,40 +56,40 @@ public class vehicleController {
     private ComboBox<?> cbxTipusVehicle;
 
     @FXML
-    private TableColumn<?, ?> clmCV;
+    private TableColumn<Vehicle, Integer> clmCV;
 
     @FXML
-    private TableColumn<?, ?> clmCanvi;
+    private TableColumn<Vehicle, String> clmCanvi;
 
     @FXML
-    private TableColumn<?, ?> clmCapacitat;
+    private TableColumn<Vehicle, Integer> clmCapacitat;
 
     @FXML
-    private TableColumn<?, ?> clmCarnet;
+    private TableColumn<Vehicle, Carnet> clmCarnet;
 
     @FXML
-    private TableColumn<?, ?> clmDataMatriculacio;
+    private TableColumn<Vehicle, LocalDate> clmDataMatriculacio;
 
     @FXML
-    private TableColumn<?, ?> clmMarca;
+    private TableColumn<Vehicle, String> clmMarca;
 
     @FXML
-    private TableColumn<?, ?> clmMatricula;
+    private TableColumn<Vehicle, String> clmMatricula;
 
     @FXML
-    private TableColumn<?, ?> clmModel;
+    private TableColumn<Vehicle, String> clmModel;
 
     @FXML
-    private TableColumn<?, ?> clmNumPortes;
+    private TableColumn<Vehicle, Integer> clmNumPortes;
 
     @FXML
-    private TableColumn<?, ?> clmNumRodes;
+    private TableColumn<Vehicle, Integer> clmNumRodes;
 
     @FXML
-    private TableColumn<?, ?> clmTipusVehicle;
+    private TableColumn<Vehicle, TipusVehicle> clmTipusVehicle;
 
     @FXML
-    private TableView<?> tblViewVehicle;
+    private TableView<Vehicle> tblViewVehicle;
 
     @FXML
     private TextField textCapacitat;
@@ -101,28 +115,26 @@ public class vehicleController {
     @FXML
     private TextField textTelefon;
 
+   
+
+    
+
+    
+
+    
+
     @FXML
-    void Netejar(ActionEvent event) {
+    void guardarRegistre(ActionEvent event) {
 
     }
-
+    
     @FXML
     void actualizarRegistre(ActionEvent event) {
 
     }
-
-    @FXML
-    void buidar(ActionEvent event) {
-
-    }
-
+    
     @FXML
     void eliminarRegistre(ActionEvent event) {
-
-    }
-
-    @FXML
-    void guardarRegistre(ActionEvent event) {
 
     }
 
@@ -131,4 +143,13 @@ public class vehicleController {
 
     }
 
+    @FXML
+    void buidar(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void Netejar(ActionEvent event) {
+
+    }
 }

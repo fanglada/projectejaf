@@ -26,6 +26,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -267,16 +268,96 @@ public class ConductorController implements Initializable{
     @FXML
     void guardarRegistre(ActionEvent event) {
 
+    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), chcbxCarnet.getCheckModel().getCheckedItems());
+    	
+    	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
+    	int res = conductorDAO.create(App.con, conductor);
+    	
+    	if(res>0) {
+    		llistaConductor.add(conductor);
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("El conductor s'ha afegit correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en afegir el registre");
+    		missatge.setContentText("El conductor no s'ha pogut afegir");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();   		
+    	}
     }
 
     @FXML
     void actualizarRegistre(ActionEvent event) {
 
+    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), chcbxCarnet.getCheckModel().getCheckedItems());
+    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().size());
+    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(0));
+    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(1));
+
+    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(chcbxCarnet.getCheckModel().getCheckedItems().size()-1));
+
+    	System.out.print(chcbxCarnet.getCheckModel().getCheckedItems().get(1));
+
+    	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
+    	int res = conductorDAO.update(App.con, conductor);
+    	
+    	if(res>0) {
+    		
+    		if(tblViewConductor.getSelectionModel().getSelectedIndex()!=-1) {
+    			llistaConductor.set(tblViewConductor.getSelectionModel().getSelectedIndex(),conductor);
+    		}
+    		else {
+    			llistaConductor.set(llistaConductor.size(), conductor);
+    		}
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Resgistre afegit");
+    		missatge.setContentText("El conductor s'ha actualitzat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en actualitzar el registre");
+    		missatge.setContentText("El conductor no s'ha pogut actualitzar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}  	
     }
 
     @FXML
     void eliminarRegistre(ActionEvent event) {
-
+    	
+    	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
+    	int res = conductorDAO.delete(App.con, tblViewConductor.getSelectionModel().getSelectedItem().getDni());
+    	
+    	if(res>0) {
+    		llistaConductor.remove(tblViewConductor.getSelectionModel().getSelectedItem());
+    		
+    		Alert missatge = new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("El registre s'ha eliminat");
+    		missatge.setContentText("El conductor s'ha eliminat correctament");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show();
+    		
+    		Netejar(event);
+    	}else {
+    		
+    		Alert missatge = new Alert(AlertType.ERROR);
+    		missatge.setTitle("Error en eliminar el registre");
+    		missatge.setContentText("El conductor no s'ha pogut eliminar");
+    		missatge.setHeaderText("Resultat:");
+    		missatge.show(); 		
+    	}   	
     }
     
 	void obrirTaula(Conductor conductor) 
