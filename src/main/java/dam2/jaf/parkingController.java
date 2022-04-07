@@ -31,8 +31,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import org.controlsfx.control.CheckComboBox;
-
 public class parkingController implements Initializable {
 	
 	private ObservableList<Botiga> llistaBotigues;
@@ -216,7 +214,7 @@ public class parkingController implements Initializable {
 
 			taulaVehicles.setItems(llistaVehiclesTaula);
 
-			clmCV.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("CV"));
+			clmCV.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("cv"));
 			clmCanvi.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("canvi"));
 			clmCapacitatV.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("capacitat"));
 			clmCarnet.setCellValueFactory(new PropertyValueFactory<Vehicle,Carnet>("carnet"));
@@ -226,7 +224,7 @@ public class parkingController implements Initializable {
 			clmMatricula.setCellValueFactory(new PropertyValueFactory<Vehicle,String>("matricula"));
 			clmNumPortes.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("numPortes"));
 			clmNumRodes.setCellValueFactory(new PropertyValueFactory<Vehicle,Integer>("numRodes"));
-			clmTipusVehicle.setCellValueFactory(new PropertyValueFactory<Vehicle,TipusVehicle>("tipusVehicle"));
+			clmTipusVehicle.setCellValueFactory(new PropertyValueFactory<Vehicle,TipusVehicle>("tipus"));
 
 
 		}
@@ -291,7 +289,7 @@ public class parkingController implements Initializable {
     {
     	llistaVehiclesTaula=FXCollections.observableArrayList();
 
-    	llistaVehiclesTaula.addAll(parking.getVehicles());
+    	llistaVehiclesTaula.addAll(VehicleDAOImpl.BuscarParking(App.con, parking.getIdParking()));
     	
     	try {	    		
     		FXMLLoader loader = new FXMLLoader(App.class.getResource("vehiclesTaula.fxml"));

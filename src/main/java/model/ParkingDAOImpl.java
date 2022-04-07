@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -68,6 +69,47 @@ public class ParkingDAOImpl implements ParkingDAO {
 			return parking;
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static int BuscarVehicle(Connexio con, Parking parking, String id) {
+		
+		try {
+
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE desti="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			if(resultSet.next()) {
+				parking = new Parking(resultSet.getInt("idParking"), BotigaDAOImpl.select(con, resultSet.getInt("idBotiga")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
+			}
+			return 1;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static Parking BuscarVehicle(Connexio con, String id) {
+		Parking parking = null;
+		try {
+
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE desti="+id+";";
+			Statement stm = con.getConnexio().createStatement();
+			ResultSet resultSet= stm.executeQuery(sql);
+
+			if(resultSet.next()) {
+				parking = new Parking(resultSet.getInt("idParking"), BotigaDAOImpl.select(con, resultSet.getInt("idBotiga")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
+			}
+			return parking;
+		}
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;

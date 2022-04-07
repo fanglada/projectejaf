@@ -10,7 +10,6 @@ public class Parking {
 	private String telefon;
 	private String descripcio;
 	private int capacitat;
-	private List<Vehicle> vehicles;
 	
 	public Parking(int idParking, Botiga botiga, String direccio, String telefon, String descripcio,
 			int capacitat) {
@@ -20,7 +19,6 @@ public class Parking {
 		this.telefon = telefon;
 		this.descripcio = descripcio;
 		this.capacitat = capacitat;
-		this.vehicles = new ArrayList<Vehicle>();
 	}
 	
 	public Parking(Botiga botiga, String direccio, String telefon, String descripcio,
@@ -30,28 +28,6 @@ public class Parking {
 		this.telefon = telefon;
 		this.descripcio = descripcio;
 		this.capacitat = capacitat;
-		this.vehicles = new ArrayList<Vehicle>();
-	}
-	
-	public Parking(int idParking, Botiga botiga, String direccio, String telefon, String descripcio,
-			int capacitat, List<Vehicle> vehicle) {
-		this.idParking = idParking;
-		this.botiga = botiga;
-		this.direccio = direccio;
-		this.telefon = telefon;
-		this.descripcio = descripcio;
-		this.capacitat = capacitat;
-		this.vehicles = vehicle;
-	}
-	
-	public Parking(Botiga botiga, String direccio, String telefon, String descripcio,
-			int capacitat, List<Vehicle> vehicle) {
-		this.botiga = botiga;
-		this.direccio = direccio;
-		this.telefon = telefon;
-		this.descripcio = descripcio;
-		this.capacitat = capacitat;
-		this.vehicles = vehicle;
 	}
 
 	public int getIdParking() {
@@ -100,22 +76,6 @@ public class Parking {
 
 	public void setCapacitat(int capacitat) {
 		this.capacitat = capacitat;
-	}
-
-	public List<Vehicle> getVehicles() {
-		return vehicles;
-	}
-
-	public void setVehicles(List<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
-	
-	public void addVehicles(Vehicle vehicle) {
-		this.vehicles.add(vehicle);
-	}
-	
-	public void delVehicles(Vehicle vehicle) {
-		this.vehicles.remove(vehicle);
 	}
 
 	@Override

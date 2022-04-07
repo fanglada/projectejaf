@@ -19,7 +19,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			while(rst.next())
 			{
-				vehicles.add(new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio"))));
+				vehicles.add(new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.BuscarVehicle(con, rst.getString("matricula"))));
 			}
 			
 			return vehicles.size();
@@ -43,7 +43,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			if(rst.next())
 			{
-				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")));
+				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.BuscarVehicle(con, rst.getString("matricula")));
 			}
 			
 			return 1;
@@ -67,7 +67,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 			if(rst.next())
 			{
-				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")));
+				vehicle = new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.select(con, rst.getInt("desti")));
 			}
 			
 			return vehicle;
@@ -80,17 +80,17 @@ public class VehicleDAOImpl implements VehicleDAO {
 		}	
 	}
 	
-	public static int BuscarParking(Connexio con, List<Vehicle> vehicles, String id) {
+	public static int BuscarParking(Connexio con, List<Vehicle> vehicles, int id) {
 		
 		try {
 
-			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle NATURAL JOIN tipusVehicle NATURAL JOIN carnet WHERE matricula='"+id+"' ORDER BY dataHora DESC LIMIT;";
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE desti="+id+";";
 			Statement stm = con.getConnexio().createStatement();
 
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			while(resultSet.next()) {
-				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("decripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numRodes"), resultSet.getInt("numPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio"))));
+				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("decripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numRodes"), resultSet.getInt("numPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio")),ParkingDAOImpl.select(con, resultSet.getInt("desti"))));
 			}
 			return vehicles.size();
 		}
@@ -101,17 +101,16 @@ public class VehicleDAOImpl implements VehicleDAO {
 		}
 	}
 	
-	public static List<Vehicle> BuscarParking(Connexio con, String id) {
+	public static List<Vehicle> BuscarParking(Connexio con, int id) {
 		List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		try {
 
-			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle NATURAL JOIN tipusVehicle NATURAL JOIN carnet WHERE matricula='"+id+"' ORDER BY dataHora DESC LIMIT;";
+			String sql = "SELECT * FROM movimentParking NATURAL JOIN vehicle v NATURAL JOIN tipusVehicle INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE desti="+id+";";
 			Statement stm = con.getConnexio().createStatement();
-
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			while(resultSet.next()) {
-				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("decripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numRodes"), resultSet.getInt("numPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio"))));
+				vehicles.add(new Vehicle(resultSet.getString("matricula"), resultSet.getString("marca"), resultSet.getString("model"), new TipusVehicle(resultSet.getInt("idTipus"), resultSet.getString("descripcio")), resultSet.getString("canvi"), resultSet.getInt("cv"), resultSet.getInt("numeroRodes"), resultSet.getInt("numeroPortes"), resultSet.getDate("dataMatriculacio").toLocalDate(), resultSet.getInt("capacitat"),new Carnet(resultSet.getInt("idCarnet"),resultSet.getString("descripcio")),ParkingDAOImpl.select(con, resultSet.getInt("desti"))));
 			}
 			return vehicles;
 		}

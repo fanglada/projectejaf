@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import dam2.jaf.Connexio;
 
@@ -15,6 +19,14 @@ public interface VehicleDAO {
 	
 	static Vehicle select(Connexio con, String id) {
 		return null;	
+	}
+	
+	static int BuscarParking(Connexio con, List<Vehicle> vehicles, String id) {
+		return 0;
+	}
+	
+	static List<Vehicle> BuscarParking(Connexio con, String id) {
+		return null;
 	}
 	
 	int create(Connexio con, Vehicle vehicle);
