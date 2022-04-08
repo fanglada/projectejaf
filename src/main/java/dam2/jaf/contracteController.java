@@ -169,11 +169,9 @@ public class contracteController implements Initializable{
 				// TODO Auto-generated method stub
 				llistaFiltrada.setPredicate(stringCerca -> {
 					if(newValue == null || newValue.isEmpty()) return true;
-					
-//					if(stringCerca.getClient().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEmpleat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getConductor().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEstat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getVehicle().toString().toLowerCase().contains(newValue.toLowerCase()))
-//						return true;
-					
-					if(stringCerca.getEmpleat().toString().toLowerCase().contains(newValue.toLowerCase())) return true;
+				
+					if(stringCerca.getClient().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEmpleat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEstat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getVehicle().toString().toLowerCase().contains(newValue.toLowerCase()))
+						return true;
 					
 					return false;
 				});
@@ -363,7 +361,7 @@ public class contracteController implements Initializable{
     
     @FXML
     void buidar(ActionEvent event) {
-    	
+    	textCerca.setText(null);
     }
     
     @FXML
