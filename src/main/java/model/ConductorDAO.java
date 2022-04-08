@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 import dam2.jaf.Connexio;
 
@@ -7,6 +10,10 @@ public interface ConductorDAO {
 	
 	static int Tots(Connexio con, List<Conductor> conductors) {
 		return 0;
+	}
+	
+	static int Disponible(Connexio con, List<Conductor> conductors) {
+			return 0;	
 	}
 	
 	static int select(Connexio con, Conductor conductor, String id) {

@@ -44,7 +44,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW());";
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW()) OR DNI='0');";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				

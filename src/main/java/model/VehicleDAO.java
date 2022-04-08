@@ -13,6 +13,11 @@ public interface VehicleDAO {
 		return 0;	
 	}
 	
+	static int Disponible(Connexio con, List<Vehicle> vehicles) {
+			return 0;
+	}
+	
+	
 	static int select(Connexio con, Vehicle vehicle, String id) {
 		return 0;	
 	}
