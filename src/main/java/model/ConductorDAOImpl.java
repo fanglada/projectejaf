@@ -36,6 +36,31 @@ import dam2.jaf.Connexio;
 			}	
 		}
 		
+		public static int Disponible(Connexio con, List<Conductor> conductors) {
+			
+			try 
+			{
+				Connection conection = con.getConnexio();
+				
+				Statement stm = conection.createStatement();
+				
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW());";
+				
+				ResultSet rst = stm.executeQuery(sql);		
+				
+				while(rst.next()){
+					
+					conductors.add(new Conductor(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarConductor(con, rst.getString("DNI"))));
+				}
+
+				return conductors.size();
+			}catch (Exception e) 
+			{
+				e.printStackTrace();
+				return 0;
+			}	
+		}
+		
 		public static int select(Connexio con, Conductor conductor, String id) {
 			try 
 			{
