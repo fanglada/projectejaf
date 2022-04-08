@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.List;
 import dam2.jaf.Connexio;
 
@@ -62,10 +64,12 @@ public class ContracteDAOImpl implements ContracteDAO {
 			
 			stm.executeUpdate();
 			
-			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO MovimentParking VALUES (NULL,?,?,?)");				
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,?,?,?,?)");				
 			stm2.setInt(1, contracte.getVehicle().getParking().getIdParking());
 			stm2.setInt(2, 0);
 			stm2.setString(3, contracte.getVehicle().getMatricula());
+			stm2.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+
 
 			return stm2.executeUpdate();		
 

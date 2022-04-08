@@ -105,7 +105,7 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <CheckComboBox fx:id="chcbxCarnet" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <CheckComboBox fx:id="chcbxCarnet" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                   <GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">

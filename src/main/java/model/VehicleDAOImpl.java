@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,9 +143,10 @@ public class VehicleDAOImpl implements VehicleDAO {
 		
 			stm.executeUpdate();
 			
-			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO MovimentParking VALUES (NULL,NULL,?,?)");				
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,NULL,?,?,?)");				
 			stm2.setInt(1, vehicle.getParking().getIdParking());
 			stm2.setString(2, vehicle.getMatricula());
+			stm2.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
 
 			return stm2.executeUpdate();
 			
