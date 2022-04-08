@@ -105,7 +105,8 @@ public class ContracteDAOImpl implements ContracteDAO {
 				stm.setString(7, contracte.getConductor().getDni());
 			}else 
 			{
-				stm.setNull(7, Types.VARCHAR);
+				stm.setString(7, "0");
+				
 			}
 			stm.setInt(8, contracte.getIdContracte());
 			return stm.executeUpdate();			

@@ -115,7 +115,7 @@ public class contracteController implements Initializable{
 
     private ObservableList<Client> llistaClients;
     private ObservableList<Empleat> llistaEmpleats;
-    private ObservableList<Vehicle> llistaVheicles;
+    private ObservableList<Vehicle> llistaVehicles;
     private ObservableList<Estat> llistaEstats;
     private ObservableList<Conductor> llistaConductors;
     private ObservableList<Contracte> llistaContractes;
@@ -127,7 +127,7 @@ public class contracteController implements Initializable{
 		
     	llistaClients = FXCollections.observableArrayList();
     	llistaEmpleats = FXCollections.observableArrayList();
-    	llistaVheicles = FXCollections.observableArrayList();
+    	llistaVehicles = FXCollections.observableArrayList();
     	llistaEstats = FXCollections.observableArrayList();
     	llistaConductors = FXCollections.observableArrayList();
     	llistaContractes = FXCollections.observableArrayList();
@@ -135,14 +135,14 @@ public class contracteController implements Initializable{
     	
     	ClientDAOImpl.Tots(App.con, llistaClients);
     	EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
-    	VehicleDAOImpl.Disponible(App.con, llistaVheicles);
+    	VehicleDAOImpl.Disponible(App.con, llistaVehicles);
     	EstatDAOImpl.Tots(App.con, llistaEstats);
     	ConductorDAOImpl.Disponible(App.con, llistaConductors);
     	ContracteDAOImpl.Tots(App.con, llistaContractes);
     	
     	cbxClient.setItems(llistaClients);
     	cbxEmpleat.setItems(llistaEmpleats);
-    	cbxVehicle.setItems(llistaVheicles);
+    	cbxVehicle.setItems(llistaVehicles);
     	cbxEstat.setItems(llistaEstats);
     	cbxConductor.setItems(llistaConductors);
     	tblViewContracte.setItems(llistaFiltrada);
@@ -202,6 +202,7 @@ public class contracteController implements Initializable{
         	if (resultat>0)
         	{
         		llistaContractes.add(contracte);
+        		actualitzarDisponibles();
         		Alert missatge=new Alert(AlertType.INFORMATION);
     			missatge.setTitle("Contracte creat");
     			missatge.setContentText("S'ha creat correctament, però sempre va bé comprovar");
@@ -231,6 +232,9 @@ public class contracteController implements Initializable{
     	if (cboxConductor.isSelected()) 
 		{
     		contracte.setConductor(cbxConductor.getValue());
+		}else 
+		{
+			contracte.setConductor(null);
 		}
     	contracte.setDataInici(dateDataInici.getValue());
     	contracte.setDataFi(dateDataFi.getValue());
@@ -242,18 +246,20 @@ public class contracteController implements Initializable{
     	int resultat = ContracteDAO.update(App.con, contracte);
     	if (resultat > 0)
     	{
+    		actualitzarDisponibles();
     		Alert missatge=new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Client actuaizat");
+    		missatge.setTitle("Contracte actuaizat");
 			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
 			Netejar(null);
+			tblViewContracte.refresh();
 			
     	}else 
     	{
     		Alert missatge=new Alert(AlertType.ERROR);
-    		missatge.setTitle("Hi ha un problema, el clinet no s'ha pogut actualitzar");
-			missatge.setContentText("Hi ha un problema, el clinet no s'ha pogut actialitzar");
+    		missatge.setTitle("Hi ha un problema, el contracte no s'ha pogut actualitzar");
+			missatge.setContentText("Hi ha un problema, el contracte no s'ha pogut actialitzar");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
     	}
@@ -275,6 +281,7 @@ public class contracteController implements Initializable{
         	if (resultat>0)
         	{
         		llistaContractes.remove(tblViewContracte.getSelectionModel().getSelectedItem());
+        		actualitzarDisponibles();
         		Alert missatge=new Alert(AlertType.INFORMATION);
     			missatge.setTitle("El contracte s'ha esborrat");
     			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
@@ -284,8 +291,8 @@ public class contracteController implements Initializable{
         	}else 
         	{
         		Alert missatge=new Alert(AlertType.ERROR);
-    			missatge.setTitle("Hi ha un problema, client no s'ha pogut donar de baixa");
-    			missatge.setContentText("Hi ha un problema, client no s'ha pogut donar de baixa");
+    			missatge.setTitle("Hi ha un problema, contracte no s'ha pogut donar de baixa");
+    			missatge.setContentText("Hi ha un problema, contracte no s'ha pogut donar de baixa");
     			missatge.setHeaderText("Alerta:");
     			missatge.show();
         		
@@ -298,6 +305,14 @@ public class contracteController implements Initializable{
     void gestionarConductor(ActionEvent event) {
     	cbxConductor.setValue(null);
     	cbxConductor.setDisable(!cbxConductor.isDisabled());
+    }
+    
+    private void actualitzarDisponibles() 
+    {
+    	llistaConductors.clear();
+		llistaVehicles.clear();
+		ConductorDAOImpl.Disponible(App.con, llistaConductors);
+		VehicleDAOImpl.Disponible(App.con, llistaVehicles);
     }
 
 	@FXML

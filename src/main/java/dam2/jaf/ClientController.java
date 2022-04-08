@@ -334,8 +334,8 @@ public class ClientController implements Initializable {
     	}else 
     	{
     		Alert missatge=new Alert(AlertType.ERROR);
-    		missatge.setTitle("Hi ha un problema, el clinet no s'ha pogut actualitzar");
-			missatge.setContentText("Hi ha un problema, el clinet no s'ha pogut actialitzar");
+    		missatge.setTitle("Hi ha un problema, el client no s'ha pogut actualitzar");
+			missatge.setContentText("Hi ha un problema, el client no s'ha pogut actialitzar");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
     	}
@@ -406,7 +406,7 @@ public class ClientController implements Initializable {
     	textDireccio.setText(client.getDireccio());
     	chcbxCarnet.getCheckModel().clearChecks();
     	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
-	    }
+	}
     
     private Carnet trobarCarnet(Carnet carnet) 
     {
