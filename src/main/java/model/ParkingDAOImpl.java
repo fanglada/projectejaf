@@ -85,7 +85,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			if(resultSet.next()) {
-				parking = new Parking(resultSet.getInt("desti"), BotigaDAOImpl.select(con, resultSet.getInt("desti")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
+				parking = new Parking(resultSet.getInt("desti"), BotigaDAOImpl.select(con, resultSet.getInt("desti")), resultSet.getString("direccio"),resultSet.getString("telefon"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
 			}
 			return 1;
 		}
@@ -105,7 +105,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 			ResultSet resultSet= stm.executeQuery(sql);
 
 			if(resultSet.next()) {
-				parking = new Parking(resultSet.getInt("desti"), BotigaDAOImpl.select(con, resultSet.getInt("desti")), resultSet.getString("telefon"), resultSet.getString("direccio"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
+				parking = new Parking(resultSet.getInt("desti"), BotigaDAOImpl.select(con, resultSet.getInt("desti")), resultSet.getString("direccio"),resultSet.getString("telefon"), resultSet.getString("descripcio"), resultSet.getInt("capacitat"));
 			}
 			return parking;
 		}

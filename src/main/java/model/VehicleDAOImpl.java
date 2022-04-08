@@ -179,8 +179,15 @@ public class VehicleDAOImpl implements VehicleDAO {
 			stm.setString(11, vehicle.getMatricula());
 
 
-		
-			return stm.executeUpdate();
+			stm.executeUpdate();
+			
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,(SELECT desti FROM movimentParking WHERE matricula='"+vehicle.getMatricula()+"' ORDER BY dataHora DESC LIMIT),?,?,?)");				
+			stm2.setInt(1, vehicle.getParking().getIdParking());
+			stm2.setString(2, vehicle.getMatricula());
+			stm2.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+
+			return stm2.executeUpdate();
+			
 		
 		}
 		catch (SQLException e) {
