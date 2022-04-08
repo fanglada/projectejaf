@@ -124,33 +124,38 @@ public class CarnetController  implements Initializable{
    
 	 @FXML
 	    void guardarRegistre(ActionEvent event) {
+		 
+		 if(!textDescripcio.getText().isEmpty())
+		 {
+			 Carnet carnet = new Carnet(textDescripcio.getText());
+		    	
+		    	CarnetDAO carnetDAO = new CarnetDAOImpl();
+		    	int res = carnetDAO.Create(App.con, carnet);
+		    	
+		    	if(res>0)
+		    	{
+		    		llistaCarnets.add(carnet);
+		    		
+		    		Alert missatge = new Alert(AlertType.INFORMATION);
+		    		missatge.setTitle("Registre afegit");
+		    		missatge.setContentText("El carnet s'ha afegit correctament");
+		    		missatge.setHeaderText("Resultat:");
+		    		missatge.show();
+		    		
+		    		Netejar(event);
+		    	}
+		    	else
+		    	{
+		    		
+		       		Alert missatge = new Alert(AlertType.ERROR);
+		    		missatge.setTitle("Registre afegit");
+		    		missatge.setContentText("El carnet no s'ha pogut afegir");
+		    		missatge.setHeaderText("Resultat:");
+		    		missatge.show();
+		    	}
+		 }
 	    	
-	    	Carnet carnet = new Carnet(textDescripcio.getText());
 	    	
-	    	CarnetDAO carnetDAO = new CarnetDAOImpl();
-	    	int res = carnetDAO.Create(App.con, carnet);
-	    	
-	    	if(res>0)
-	    	{
-	    		llistaCarnets.add(carnet);
-	    		
-	    		Alert missatge = new Alert(AlertType.INFORMATION);
-	    		missatge.setTitle("Registre afegit");
-	    		missatge.setContentText("El carnet s'ha afegit correctament");
-	    		missatge.setHeaderText("Resultat:");
-	    		missatge.show();
-	    		
-	    		Netejar(event);
-	    	}
-	    	else
-	    	{
-	    		
-	       		Alert missatge = new Alert(AlertType.ERROR);
-	    		missatge.setTitle("Registre afegit");
-	    		missatge.setContentText("El carnet no s'ha pogut afegir");
-	    		missatge.setHeaderText("Resultat:");
-	    		missatge.show();
-	    	}
 	    }
 
     @FXML

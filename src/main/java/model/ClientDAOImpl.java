@@ -11,6 +11,7 @@ public class ClientDAOImpl implements ClientDAO {
 	public static int Tots(Connexio con, List<Client> clients) {
 		try 
 		{
+
 			Connection conection = con.getConnexio();
 			
 			Statement stm = conection.createStatement();
@@ -23,6 +24,7 @@ public class ClientDAOImpl implements ClientDAO {
 				
 				clients.add(new Client(rst.getString("Dni"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI"))));
 			}
+			
 
 			return clients.size();
 		}
@@ -46,9 +48,11 @@ public class ClientDAOImpl implements ClientDAO {
 			if(rst.next()){
 				
 				client = new Client(rst.getString("DNI"), rst.getString("nom"), rst.getString("cognom1"), rst.getString("cognom2"), rst.getDate("dataNaixement").toLocalDate(), rst.getString("telefon"), rst.getString("direccio"), rst.getString("mail"),CarnetDAOImpl.BuscarClient(con, rst.getString("DNI")));
+			
 			}
 
 			return 1;
+			
 		}catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -88,37 +92,43 @@ public class ClientDAOImpl implements ClientDAO {
 		
 		try 
 		{
-			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO client VALUES (?,?,?,?,?,?,?,?)");
-			stm.setString(1, client.getDni());
-			stm.setString(2, client.getNom());
-			stm.setString(3, client.getCognom1());
-			stm.setString(4, client.getCognom2());
-			stm.setDate(5, Date.valueOf(client.getDataNaixament()));
-			stm.setString(6, client.getTelefon());
-			stm.setString(7, client.getDireccio());
-			stm.setString(8, client.getMail());
-			int aux = stm.executeUpdate();
-			int aux2 = 1;
 			
-			for(int i = 0; i < client.getCarnet().size(); i++) 
+			if(ClientDAOImpl.select(con, client.getDni())!= null)
 			{
-				stm = conection.prepareStatement("INSERT INTO ClientCarnet VALUES (?,?)");
-				stm.setInt(1, client.getCarnet().get(i).getIdCarnet());
-				stm.setString(2, client.getDni());
-				if (stm.executeUpdate() <= 0) 
+				Connection conection = con.getConnexio();
+				PreparedStatement stm = conection.prepareStatement("INSERT INTO client VALUES (?,?,?,?,?,?,?,?)");
+				stm.setString(1, client.getDni());
+				stm.setString(2, client.getNom());
+				stm.setString(3, client.getCognom1());
+				stm.setString(4, client.getCognom2());
+				stm.setDate(5, Date.valueOf(client.getDataNaixament()));
+				stm.setString(6, client.getTelefon());
+				stm.setString(7, client.getDireccio());
+				stm.setString(8, client.getMail());
+				int aux = stm.executeUpdate();
+				int aux2 = 1;
+				
+				for(int i = 0; i < client.getCarnet().size(); i++) 
 				{
-					aux2 = 0;
+					stm = conection.prepareStatement("INSERT INTO ClientCarnet VALUES (?,?)");
+					stm.setInt(1, client.getCarnet().get(i).getIdCarnet());
+					stm.setString(2, client.getDni());
+					if (stm.executeUpdate() <= 0) 
+					{
+						aux2 = 0;
+					}
+				}	
+	
+				if (aux > 0 && aux2 > 0) 
+				{
+					return 1;
+				}else 
+				{
+					return 0;
 				}
-			}	
-
-			if (aux > 0 && aux2 > 0) 
-			{
-				return 1;
-			}else 
-			{
-				return 0;
 			}
+			
+			return 0;
 		
 		}catch (Exception e) 
 		{

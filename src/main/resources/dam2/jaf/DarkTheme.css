@@ -2,9 +2,10 @@
     -fx-background-color: #1d1d1d;
 }
 
-.choice-box > .label {
+.choibox > * {
      -fx-text-fill: black;
 }
+
 
 .date-picker-popup .month-year-pane .label {
 	-fx-text-fill: black;
@@ -19,6 +20,11 @@
 	-fx-text-fill: white;
 }
 
+.input>*{
+		-fx-text-fill: white;
+
+}
+
 .date-picker .text-field {
     -fx-control-inner-background: #1d1d1d;
 }
@@ -26,7 +32,6 @@
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
-    -fx-opacity: 0.6;
 }
 
 .text

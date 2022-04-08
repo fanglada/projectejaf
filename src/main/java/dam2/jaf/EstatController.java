@@ -130,29 +130,32 @@ public class EstatController implements Initializable{
     @FXML
     void guardarRegistre(ActionEvent event) {
     	
-    	Estat estat = new Estat(textDescripcio.getText());
-    	
-    	EstatDAO estatDAO = new EstatDAOImpl();    	
-    	int res = estatDAO.Create(App.con, estat);
-    	
-    	if(res>0) {
-    		llistaEstats.add(estat);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Estat s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("L'Estat no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
+    	if(!textDescripcio.getText().isEmpty())
+    	{
+    		Estat estat = new Estat(textDescripcio.getText());
+        	
+        	EstatDAO estatDAO = new EstatDAOImpl();    	
+        	int res = estatDAO.Create(App.con, estat);
+        	
+        	if(res>0) {
+        		llistaEstats.add(estat);
+        		
+        		Alert missatge = new Alert(AlertType.INFORMATION);
+        		missatge.setTitle("Resgistre afegit");
+        		missatge.setContentText("L'Estat s'ha afegit correctament");
+        		missatge.setHeaderText("Resultat:");
+        		missatge.show();
+        		
+        		Netejar(event);
+        	}else {
+        		
+        		Alert missatge = new Alert(AlertType.ERROR);
+        		missatge.setTitle("Error en afegir el registre");
+        		missatge.setContentText("L'Estat no s'ha pogut afegir");
+        		missatge.setHeaderText("Resultat:");
+        		missatge.show();
+        		
+        	}
     	}
     }
 	

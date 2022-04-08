@@ -58,7 +58,7 @@ public class vehicleController implements Initializable{
 	private Button botoTornar;
 
 	@FXML
-	private ChoiceBox<String> cbxCanvi;
+	private ComboBox<String> cbxCanvi;
 
 	@FXML
 	private ComboBox<Carnet> cbxCarnet;

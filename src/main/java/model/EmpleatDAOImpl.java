@@ -105,20 +105,25 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 	@Override
 	public int create(Connexio con, Empleat empleat) {
 		try {
-			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,NULL)");
-			stm.setString(1, empleat.getDni());
-			stm.setString(2, empleat.getNom());
-			stm.setString(3, empleat.getCognom1());
-			stm.setString(4, empleat.getCognom2());
-			stm.setDate(5, Date.valueOf(empleat.getDataNaixament()));
-			stm.setString(6, empleat.getTelefon());
-			stm.setString(7, empleat.getDireccio());
-			stm.setString(8, empleat.getMail());
-			stm.setInt(9, empleat.getBotiga().getIdBotiga());
-		
-
-			return stm.executeUpdate();
+			
+			if(EmpleatDAOImpl.select(con, empleat.getDni())!= null)
+			{
+				Connection conection = con.getConnexio();
+				PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,NULL)");
+				stm.setString(1, empleat.getDni());
+				stm.setString(2, empleat.getNom());
+				stm.setString(3, empleat.getCognom1());
+				stm.setString(4, empleat.getCognom2());
+				stm.setDate(5, Date.valueOf(empleat.getDataNaixament()));
+				stm.setString(6, empleat.getTelefon());
+				stm.setString(7, empleat.getDireccio());
+				stm.setString(8, empleat.getMail());
+				stm.setInt(9, empleat.getBotiga().getIdBotiga());
+			
+	
+				return stm.executeUpdate();
+			}
+			return 0;
 
 		} catch (Exception e) {
 			e.printStackTrace();

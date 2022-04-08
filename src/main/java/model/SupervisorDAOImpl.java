@@ -37,20 +37,24 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 	public int create(Connexio con, Supervisor supervisor) {
 		try 
 		{
-			Connection conection = con.getConnexio();
-			PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,?)");
-			stm.setString(1, supervisor.getDni());
-			stm.setString(2, supervisor.getNom());
-			stm.setString(3, supervisor.getCognom1());
-			stm.setString(4, supervisor.getCognom2());
-			stm.setDate(5, Date.valueOf(supervisor.getDataNaixament()));
-			stm.setString(6, supervisor.getTelefon());
-			stm.setString(7, supervisor.getDireccio());
-			stm.setString(8, supervisor.getMail());
-			stm.setInt(9, supervisor.getBotiga().getIdBotiga());
-			stm.setString(10, supervisor.getTelefonEmpresa());
-			return stm.executeUpdate();			
-
+			
+			if(EmpleatDAOImpl.select(con, supervisor.getDni())!= null)
+			{
+				Connection conection = con.getConnexio();
+				PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,?)");
+				stm.setString(1, supervisor.getDni());
+				stm.setString(2, supervisor.getNom());
+				stm.setString(3, supervisor.getCognom1());
+				stm.setString(4, supervisor.getCognom2());
+				stm.setDate(5, Date.valueOf(supervisor.getDataNaixament()));
+				stm.setString(6, supervisor.getTelefon());
+				stm.setString(7, supervisor.getDireccio());
+				stm.setString(8, supervisor.getMail());
+				stm.setInt(9, supervisor.getBotiga().getIdBotiga());
+				stm.setString(10, supervisor.getTelefonEmpresa());
+				return stm.executeUpdate();			
+			}
+			return 0;
 		
 		}catch (Exception e) 
 		{

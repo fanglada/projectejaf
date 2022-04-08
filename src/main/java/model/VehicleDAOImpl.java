@@ -127,29 +127,32 @@ public class VehicleDAOImpl implements VehicleDAO {
 		// TODO Auto-generated method stub
 		try 
 		{
-			PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO vehicle VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-			stm.setString(1, vehicle.getMatricula());
-			stm.setInt(2, vehicle.getTipus().getIdTipusVehicle());
-			stm.setString(3, vehicle.getMarca());
-			stm.setString(4, vehicle.getModel());
-			stm.setInt(5, vehicle.getCv());
-			stm.setString(6, vehicle.getCanvi());
-			stm.setInt(7, vehicle.getNumRodes());
-			stm.setInt(8, vehicle.getNumPortes());
-			stm.setDate(9, Date.valueOf(vehicle.getDataMatriculacio()));
-			stm.setInt(10, vehicle.getCapacitat());
-			stm.setInt(11, vehicle.getCarnet().getIdCarnet());
-
-		
-			stm.executeUpdate();
+			if(VehicleDAOImpl.select(con, vehicle.getMatricula())!= null)
+			{
+				PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO vehicle VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+				stm.setString(1, vehicle.getMatricula());
+				stm.setInt(2, vehicle.getTipus().getIdTipusVehicle());
+				stm.setString(3, vehicle.getMarca());
+				stm.setString(4, vehicle.getModel());
+				stm.setInt(5, vehicle.getCv());
+				stm.setString(6, vehicle.getCanvi());
+				stm.setInt(7, vehicle.getNumRodes());
+				stm.setInt(8, vehicle.getNumPortes());
+				stm.setDate(9, Date.valueOf(vehicle.getDataMatriculacio()));
+				stm.setInt(10, vehicle.getCapacitat());
+				stm.setInt(11, vehicle.getCarnet().getIdCarnet());
+	
 			
-			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,NULL,?,?,?)");				
-			stm2.setInt(1, vehicle.getParking().getIdParking());
-			stm2.setString(2, vehicle.getMatricula());
-			stm2.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-
-			return stm2.executeUpdate();
-			
+				stm.executeUpdate();
+				
+				PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,NULL,?,?,?)");				
+				stm2.setInt(1, vehicle.getParking().getIdParking());
+				stm2.setString(2, vehicle.getMatricula());
+				stm2.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+	
+				return stm2.executeUpdate();
+			}
+			return 0;
 	
 		}
 		catch (SQLException e) {

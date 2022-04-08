@@ -282,34 +282,38 @@ public class ConductorController implements Initializable{
     @FXML
     void guardarRegistre(ActionEvent event) {
     	
-    	ArrayList<Carnet> carnets = new ArrayList<Carnet>();
-		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		if(!textDni.getText().isEmpty() && !textNom.getText().isEmpty() && !textCognom1.getText().isEmpty() && !textCognom2.getText().isEmpty() && dateDataNaixament.getValue()!=null && !textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textMail.getText().isEmpty() && chcbxCarnet.getCheckModel().getCheckedItems().size()!=0)
 		{
-			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
-		}
-
-    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
-    	
-    	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
-    	int res = conductorDAO.create(App.con, conductor);
-    	
-    	if(res>0) {
-    		llistaConductor.add(conductor);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("El conductor s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("El conductor no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();   		
+	    	
+	    	ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+			for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+			{
+				carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+			}
+	
+	    	Conductor conductor = new Conductor(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
+	    	
+	    	ConductorDAO conductorDAO = new ConductorDAOImpl();    	
+	    	int res = conductorDAO.create(App.con, conductor);
+	    	
+	    	if(res>0) {
+	    		llistaConductor.add(conductor);
+	    		
+	    		Alert missatge = new Alert(AlertType.INFORMATION);
+	    		missatge.setTitle("Resgistre afegit");
+	    		missatge.setContentText("El conductor s'ha afegit correctament");
+	    		missatge.setHeaderText("Resultat:");
+	    		missatge.show();
+	    		
+	    		Netejar(event);
+	    	}else {
+	    		
+	    		Alert missatge = new Alert(AlertType.ERROR);
+	    		missatge.setTitle("Error en afegir el registre");
+	    		missatge.setContentText("El conductor no s'ha pogut afegir");
+	    		missatge.setHeaderText("Resultat:");
+	    		missatge.show();   		
+	    	}
     	}
     }
 

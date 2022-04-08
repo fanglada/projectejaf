@@ -150,33 +150,37 @@ public class botigaController implements Initializable {
 
     @FXML
     void guardarRegistre(ActionEvent event) {
+    	
+    	if(!textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textDescripcio.getText().isEmpty())
+    	{
+    		Botiga botiga = new Botiga(textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
+        	
+        	BotigaDAO botigaDAO = new BotigaDAOImpl();
+        	int res = botigaDAO.create(App.con, botiga);
+        	
+        	if(res>0)
+        	{
+        		llistaBotigues.add(botiga);
+        		
+        		Alert missatge = new Alert(AlertType.INFORMATION);
+        		missatge.setTitle("Registre afegit");
+        		missatge.setContentText("La Botiga s'ha afegit correctament");
+        		missatge.setHeaderText("Resultat:");
+        		missatge.show();
+        		
+        		Netejar(event);
+        	}
+        	else
+        	{
+        		
+           		Alert missatge = new Alert(AlertType.ERROR);
+        		missatge.setTitle("Error al afegir registre");
+        		missatge.setContentText("La Botiga no s'ha pogut afegir");
+        		missatge.setHeaderText("Resultat:");
+        		missatge.show();
+        	}
+    	}
 
-    	Botiga botiga = new Botiga(textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());
-    	
-    	BotigaDAO botigaDAO = new BotigaDAOImpl();
-    	int res = botigaDAO.create(App.con, botiga);
-    	
-    	if(res>0)
-    	{
-    		llistaBotigues.add(botiga);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Registre afegit");
-    		missatge.setContentText("La Botiga s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}
-    	else
-    	{
-    		
-       		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error al afegir registre");
-    		missatge.setContentText("La Botiga no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    	}
     }
 
     @FXML
@@ -229,7 +233,7 @@ public class botigaController implements Initializable {
     		
     		Alert missatge = new Alert(AlertType.INFORMATION);
     		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("El carnet s'ha eliminat correctament");
+    		missatge.setContentText("La Botiga s'ha eliminat correctament");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     		
@@ -240,7 +244,7 @@ public class botigaController implements Initializable {
     		
        		Alert missatge = new Alert(AlertType.ERROR);
     		missatge.setTitle("Error en eliminar el registre ");
-    		missatge.setContentText("El carnet no s'ha pogut eliminar");
+    		missatge.setContentText("La Botiga no s'ha pogut eliminar");
     		missatge.setHeaderText("Resultat:");
     		missatge.show();
     	}

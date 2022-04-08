@@ -92,38 +92,42 @@ import dam2.jaf.Connexio;
 			
 			try 
 			{
-				Connection conection = con.getConnexio();
-				PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,1,NULL,NULL)");
-				stm.setString(1, conductor.getDni());
-				stm.setString(2, conductor.getNom());
-				stm.setString(3, conductor.getCognom1());
-				stm.setString(4, conductor.getCognom2());
-				stm.setDate(5, Date.valueOf(conductor.getDataNaixament()));
-				stm.setString(6, conductor.getTelefon());
-				stm.setString(7, conductor.getDireccio());
-				stm.setString(8, conductor.getMail());
-
-				int aux = stm.executeUpdate();
-				int aux2 = 1;
-				
-				for(int i = 0; i < conductor.getCarnet().size(); i++) 
+				if(ConductorDAOImpl.select(con, conductor.getDni())!= null)
 				{
-					stm = conection.prepareStatement("INSERT INTO conductorCarnet VALUES (?,?)");
-					stm.setInt(1, conductor.getCarnet().get(i).getIdCarnet());
-					stm.setString(2, conductor.getDni());
-					if (stm.executeUpdate() <= 0) 
+					Connection conection = con.getConnexio();
+					PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,1,NULL,NULL)");
+					stm.setString(1, conductor.getDni());
+					stm.setString(2, conductor.getNom());
+					stm.setString(3, conductor.getCognom1());
+					stm.setString(4, conductor.getCognom2());
+					stm.setDate(5, Date.valueOf(conductor.getDataNaixament()));
+					stm.setString(6, conductor.getTelefon());
+					stm.setString(7, conductor.getDireccio());
+					stm.setString(8, conductor.getMail());
+	
+					int aux = stm.executeUpdate();
+					int aux2 = 1;
+					
+					for(int i = 0; i < conductor.getCarnet().size(); i++) 
 					{
-						aux2 = 0;
-					}
-				}	
-
-				if (aux > 0 && aux2 > 0) 
-				{
-					return 1;
-				}else 
-				{
-					return 0;
-				}			
+						stm = conection.prepareStatement("INSERT INTO conductorCarnet VALUES (?,?)");
+						stm.setInt(1, conductor.getCarnet().get(i).getIdCarnet());
+						stm.setString(2, conductor.getDni());
+						if (stm.executeUpdate() <= 0) 
+						{
+							aux2 = 0;
+						}
+					}	
+	
+					if (aux > 0 && aux2 > 0) 
+					{
+						return 1;
+					}else 
+					{
+						return 0;
+					}			
+				}
+				return 0;
 
 			
 			}catch (Exception e) 

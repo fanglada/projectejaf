@@ -264,34 +264,38 @@ public class ClientController implements Initializable {
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 		
-		ArrayList<Carnet> carnets = new ArrayList<Carnet>();
-		for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+		if(!textDni.getText().isEmpty() && !textNom.getText().isEmpty() && !textCognom1.getText().isEmpty() && !textCognom2.getText().isEmpty() && dateDataNaixament.getValue()!=null && !textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textMail.getText().isEmpty() && chcbxCarnet.getCheckModel().getCheckedItems().size()!=0)
 		{
-			carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+		
+			ArrayList<Carnet> carnets = new ArrayList<Carnet>();
+			for(int i = 0; i < chcbxCarnet.getCheckModel().getCheckedItems().size(); i++) 
+			{
+				carnets.add(chcbxCarnet.getCheckModel().getCheckedItems().get(i));
+			}
+	    	Client client =  new Client(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
+	    	ClientDAO ClientDAO = new ClientDAOImpl();
+	    	int resultat = ClientDAO.create(App.con, client);
+	    	
+	    	if (resultat>0)
+	    	{
+				llistaClients.add(client);
+	    		Alert missatge=new Alert(AlertType.INFORMATION);
+				missatge.setTitle("Client donat d'alta");
+				missatge.setContentText("S'ha pujat correctament, però sempre va bé comprovar");
+				missatge.setHeaderText("Alerta:");
+				missatge.show();
+				Netejar(null);
+				
+	    	}else 
+	    	{
+	    		Alert missatge=new Alert(AlertType.ERROR);
+				missatge.setTitle("Hi ha un problema, client no s'ha pogut donar d'alta");
+				missatge.setContentText("Hi ha un problema, client no s'ha pogut donar d'alta");
+				missatge.setHeaderText("Alerta:");
+				missatge.show();
+	    		
+	    	}
 		}
-    	Client client =  new Client(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), carnets);
-    	ClientDAO ClientDAO = new ClientDAOImpl();
-    	int resultat = ClientDAO.create(App.con, client);
-    	
-    	if (resultat>0)
-    	{
-			llistaClients.add(client);
-    		Alert missatge=new Alert(AlertType.INFORMATION);
-			missatge.setTitle("Client donat d'alta");
-			missatge.setContentText("S'ha pujat correctament, però sempre va bé comprovar");
-			missatge.setHeaderText("Alerta:");
-			missatge.show();
-			Netejar(null);
-			
-    	}else 
-    	{
-    		Alert missatge=new Alert(AlertType.ERROR);
-			missatge.setTitle("Hi ha un problema, client no s'ha pogut donar d'alta");
-			missatge.setContentText("Hi ha un problema, client no s'ha pogut donar d'alta");
-			missatge.setHeaderText("Alerta:");
-			missatge.show();
-    		
-    	}
 
 	}
 	
