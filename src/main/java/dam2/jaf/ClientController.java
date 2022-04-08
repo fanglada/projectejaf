@@ -277,7 +277,7 @@ public class ClientController implements Initializable {
     	{
 			llistaClients.add(client);
     		Alert missatge=new Alert(AlertType.INFORMATION);
-			missatge.setTitle("Bicicleta donada d'alta");
+			missatge.setTitle("Client donat d'alta");
 			missatge.setContentText("S'ha pujat correctament, però sempre va bé comprovar");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
@@ -286,8 +286,8 @@ public class ClientController implements Initializable {
     	}else 
     	{
     		Alert missatge=new Alert(AlertType.ERROR);
-			missatge.setTitle("Hi ha un problema, bicicleta no s'ha pogut donar d'alta");
-			missatge.setContentText("Hi ha un problema, bicicleta no s'ha pogut donar d'alta");
+			missatge.setTitle("Hi ha un problema, client no s'ha pogut donar d'alta");
+			missatge.setContentText("Hi ha un problema, client no s'ha pogut donar d'alta");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
     		
@@ -345,7 +345,7 @@ public class ClientController implements Initializable {
 		
     	Alert confirmacio=new Alert(AlertType.CONFIRMATION);
     	confirmacio.initModality(Modality.WINDOW_MODAL);
-    	confirmacio.setTitle("Estas segur que vols esborrar la bicicleta?");
+    	confirmacio.setTitle("Estas segur que vols esborrar el client?");
     	confirmacio.setContentText("Un cop fet no es pot desfer");
     	
         	
@@ -358,7 +358,7 @@ public class ClientController implements Initializable {
         		llistaClients.remove(tblViewClient.getSelectionModel().getSelectedItem());
         		tblViewClient.refresh();
         		Alert missatge=new Alert(AlertType.INFORMATION);
-    			missatge.setTitle("Bicicleta donada de baixa");
+    			missatge.setTitle("Client es dona de baixa");
     			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
     			missatge.setHeaderText("Alerta:");
     			missatge.show();
@@ -366,8 +366,8 @@ public class ClientController implements Initializable {
         	}else 
         	{
         		Alert missatge=new Alert(AlertType.ERROR);
-    			missatge.setTitle("Hi ha un problema, bicicleta no s'ha pogut donar de baixa");
-    			missatge.setContentText("Hi ha un problema, bicicleta no s'ha pogut donar de baixa");
+    			missatge.setTitle("Hi ha un problema, client no s'ha pogut donar de baixa");
+    			missatge.setContentText("Hi ha un problema, client no s'ha pogut donar de baixa");
     			missatge.setHeaderText("Alerta:");
     			missatge.show();
         		

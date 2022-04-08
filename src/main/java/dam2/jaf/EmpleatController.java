@@ -30,7 +30,7 @@ public class EmpleatController implements Initializable{
 
 	private ObservableList<Empleat> llistaEmpleats;
 	private ObservableList<Botiga> llistaBotiga;
-	
+
 	private FilteredList<Empleat> llistaFiltrada;
 
 	@FXML
@@ -80,7 +80,7 @@ public class EmpleatController implements Initializable{
 
 	@FXML
 	private TableColumn<Empleat, String> clmTelefon;
-	
+
 	@FXML
 	private TableColumn<Empleat, Botiga> clmBotiga;
 
@@ -114,14 +114,12 @@ public class EmpleatController implements Initializable{
 	@FXML
 	private TextField textTelefon;
 
-	@FXML
-	private TextField textTelefonEmpresa;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		App.setTitol("Empleat");
-		
+
 		llistaEmpleats=FXCollections.observableArrayList();
 		llistaBotiga=FXCollections.observableArrayList();
 
@@ -142,7 +140,7 @@ public class EmpleatController implements Initializable{
 		clmBotiga.setCellValueFactory(new PropertyValueFactory<Empleat,Botiga>("botiga"));
 
 		EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
-		
+
 		BotigaDAOImpl.Tots(App.con, llistaBotiga);
 
 		gestionarEvents();
@@ -167,24 +165,24 @@ public class EmpleatController implements Initializable{
 					textTelefon.setText(newValue.getTelefon());
 					cbxBotiga.setValue(newValue.getBotiga()); 
 					textDni.setEditable(false);
-					
+
 					botoActualitzar.setDisable(false);
 					botoEliminar.setDisable(false);
 					botoGuardar.setDisable(true);
 				}
 			}
 		});
-		
+
 		textTelefon.textProperty().addListener(new ChangeListener<>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				// TODO Auto-generated method stub
-		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
-		    		textTelefon.setText(oldValue);
-		        }
+				if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+					textTelefon.setText(oldValue);
+				}
 			}});
-		
+
 		dateDataNaixament.valueProperty().addListener(new ChangeListener<>() {
 
 			@Override
@@ -192,11 +190,11 @@ public class EmpleatController implements Initializable{
 				// TODO Auto-generated method stub
 				if(newValue!=null)
 				{
-				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
-			    		dateDataNaixament.setValue(oldValue);
-			        }
+					if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
+						dateDataNaixament.setValue(oldValue);
+					}
 				}
-		 
+
 			}});
 
 		textCerca.textProperty().addListener(new ChangeListener<String>() {
@@ -208,7 +206,7 @@ public class EmpleatController implements Initializable{
 					if(newValue == null || newValue.isEmpty()) return true;
 
 					if(stringCerca.getNom().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getCognom1().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getCognom2().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getDireccio().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getDni().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getMail().toLowerCase().contains(newValue.toLowerCase()) || stringCerca.getTelefon().toLowerCase().contains(newValue.toLowerCase()))						
-						
+
 						return true;
 
 					return false;
@@ -216,96 +214,99 @@ public class EmpleatController implements Initializable{
 			}			
 		});		
 	}
-	
+
 
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 
-		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
-    	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.create(App.con, empleat);
-    	
-    	if(res>0) {
-    		llistaEmpleats.add(empleat);
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Empleat s'ha afegit correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en afegir el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut afegir");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();   		
-    	}
-    }
-	
+		if(!textDni.getText().isEmpty() && !textNom.getText().isEmpty() && !textCognom1.getText().isEmpty() && !textCognom2.getText().isEmpty() && dateDataNaixament.getValue() !=null && !textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textMail.getText().isEmpty() && cbxBotiga.getValue() !=null) {
+
+			Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
+
+			EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
+			int res = empleatDAO.create(App.con, empleat);
+
+			if(res>0) {
+				llistaEmpleats.add(empleat);
+
+				Alert missatge = new Alert(AlertType.INFORMATION);
+				missatge.setTitle("Resgistre afegit");
+				missatge.setContentText("L'Empleat s'ha afegit correctament");
+				missatge.setHeaderText("Resultat:");
+				missatge.show();
+
+				Netejar(event);
+			}else {
+
+				Alert missatge = new Alert(AlertType.ERROR);
+				missatge.setTitle("Error en afegir el registre");
+				missatge.setContentText("L'Empleat no s'ha pogut afegir");
+				missatge.setHeaderText("Resultat:");
+				missatge.show();   		
+			}
+		}
+	}
+
 	@FXML
 	void actualitzarRegistre(ActionEvent event) {
 
 		Empleat empleat = new Empleat(textDni.getText(), textNom.getText(), textCognom1.getText(), textCognom2.getText(), dateDataNaixament.getValue(), textTelefon.getText(), textDireccio.getText(), textMail.getText(), cbxBotiga.getValue());
-    	
-    	EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.update(App.con, empleat);
-    	
-    	if(res>0) {
-    		
-    		if(tblViewEmpleat.getSelectionModel().getSelectedIndex()!=-1) {
-    			llistaEmpleats.set(tblViewEmpleat.getSelectionModel().getSelectedIndex(),empleat);
-    		}
-    		else {
-    			llistaEmpleats.set(llistaEmpleats.size(), empleat);
-    		}
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Resgistre afegit");
-    		missatge.setContentText("L'Empleat s'ha actualitzat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en actualitzar el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut actualitzar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}  	
-    }
 
-	
+		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
+		int res = empleatDAO.update(App.con, empleat);
+
+		if(res>0) {
+
+			if(tblViewEmpleat.getSelectionModel().getSelectedIndex()!=-1) {
+				llistaEmpleats.set(tblViewEmpleat.getSelectionModel().getSelectedIndex(),empleat);
+			}
+			else {
+				llistaEmpleats.set(llistaEmpleats.size(), empleat);
+			}
+
+			Alert missatge = new Alert(AlertType.INFORMATION);
+			missatge.setTitle("Resgistre afegit");
+			missatge.setContentText("L'Empleat s'ha actualitzat correctament");
+			missatge.setHeaderText("Resultat:");
+			missatge.show();
+
+			Netejar(event);
+		}else {
+
+			Alert missatge = new Alert(AlertType.ERROR);
+			missatge.setTitle("Error en actualitzar el registre");
+			missatge.setContentText("L'Empleat no s'ha pogut actualitzar");
+			missatge.setHeaderText("Resultat:");
+			missatge.show(); 		
+		}  	
+	}
+
+
 	@FXML
 	void eliminarRegistre(ActionEvent event) {
 
 		EmpleatDAO empleatDAO = new EmpleatDAOImpl();    	
-    	int res = empleatDAO.delete(App.con, tblViewEmpleat.getSelectionModel().getSelectedItem().getDni());
-    	
-    	if(res>0) {
-    		llistaEmpleats.remove(tblViewEmpleat.getSelectionModel().getSelectedItem());
-    		
-    		Alert missatge = new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("El registre s'ha eliminat");
-    		missatge.setContentText("L'Empleat s'ha eliminat correctament");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show();
-    		
-    		Netejar(event);
-    	}else {
-    		
-    		Alert missatge = new Alert(AlertType.ERROR);
-    		missatge.setTitle("Error en eliminar el registre");
-    		missatge.setContentText("L'Empleat no s'ha pogut eliminar");
-    		missatge.setHeaderText("Resultat:");
-    		missatge.show(); 		
-    	}   	
-    }
+		int res = empleatDAO.delete(App.con, tblViewEmpleat.getSelectionModel().getSelectedItem().getDni());
+
+		if(res>0) {
+			llistaEmpleats.remove(tblViewEmpleat.getSelectionModel().getSelectedItem());
+
+			Alert missatge = new Alert(AlertType.INFORMATION);
+			missatge.setTitle("El registre s'ha eliminat");
+			missatge.setContentText("L'Empleat s'ha eliminat correctament");
+			missatge.setHeaderText("Resultat:");
+			missatge.show();
+
+			Netejar(event);
+		}else {
+
+			Alert missatge = new Alert(AlertType.ERROR);
+			missatge.setTitle("Error en eliminar el registre");
+			missatge.setContentText("L'Empleat no s'ha pogut eliminar");
+			missatge.setHeaderText("Resultat:");
+			missatge.show(); 		
+		}   	
+	}
 
 	@FXML
 	void tornar(ActionEvent event) throws IOException {
@@ -328,7 +329,7 @@ public class EmpleatController implements Initializable{
 		textTelefon.setText("");
 		dateDataNaixament.setValue(null);
 		cbxBotiga.setValue(null);
-		
+
 		textDni.setEditable(true);
 
 		botoActualitzar.setDisable(true);
