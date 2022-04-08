@@ -34,6 +34,31 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 	}
 	
+	public static int Disponible(Connexio con, List<Vehicle> vehicles) {
+		
+		try {
+			
+			Statement stm = con.getConnexio().createStatement();
+			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet;";
+			
+			ResultSet rst = stm.executeQuery(sql);
+
+			while(rst.next())
+			{
+				vehicles.add(new Vehicle(rst.getString("matricula"),rst.getString("marca"),rst.getString("model"), new TipusVehicle(rst.getInt("idTipus"),rst.getString("descripcio")),rst.getString("Canvi"), rst.getInt("CV"), rst.getInt("numeroRodes"), rst.getInt("numeroPortes"), rst.getDate("dataMatriculacio").toLocalDate(),rst.getInt("capacitat"), new Carnet(rst.getInt("idCarnet"),rst.getString("cdescripcio")),ParkingDAOImpl.BuscarVehicle(con, rst.getString("matricula"))));
+			}
+			
+			return vehicles.size();
+			
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	
 	public static int select(Connexio con, Vehicle vehicle, String id) {
 		try {
 			
