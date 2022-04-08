@@ -168,6 +168,8 @@ public class vehicleController implements Initializable{
 		clmTipusVehicle.setCellValueFactory(new PropertyValueFactory<Vehicle, TipusVehicle>("tipus"));
 		clmParking.setCellValueFactory(new PropertyValueFactory<Vehicle, Parking>("parking"));
 		
+		
+		
 		VehicleDAOImpl.Tots(App.con, llistaVehicles);
 		TipusVehicleDAOImpl.Tots(App.con, llistaTipusVehicles);
 		CarnetDAOImpl.Tots(App.con, llistaCarnets);
@@ -206,6 +208,20 @@ public class vehicleController implements Initializable{
 				}
 			}
 		});
+    	
+    	textDataMatriculacio.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	if (newValue.compareTo(LocalDate.now()) > 0) {
+				   		textDataMatriculacio.setValue(oldValue);
+			        }
+				}
+		 
+			}});
 
 		textCerca.textProperty().addListener(new ChangeListener<String>() {
 
@@ -230,7 +246,7 @@ public class vehicleController implements Initializable{
     void guardarRegistre(ActionEvent event) {
 
     	Vehicle vehicle = new Vehicle(textCodi.getText(), textMarca.getText(), textModel.getText(), cbxTipusVehicle.getValue(), cbxCanvi.getValue(), Integer.valueOf(textCv.getText()), Integer.valueOf(textNumRodes.getText()), Integer.valueOf(textNumPortes.getText()), textDataMatriculacio.getValue(), Integer.valueOf(textCapacitat.getText()), cbxCarnet.getValue(), cbxParking.getValue());
-    	
+    	System.out.println(cbxParking.getValue());
     	VehicleDAO vehicleDAO = new VehicleDAOImpl();    	
     	int res = vehicleDAO.create(App.con, vehicle);
     	

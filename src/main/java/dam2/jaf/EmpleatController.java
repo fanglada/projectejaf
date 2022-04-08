@@ -2,6 +2,7 @@ package dam2.jaf;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -182,7 +183,21 @@ public class EmpleatController implements Initializable{
 		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
 		    		textTelefon.setText(oldValue);
 		        }
-			}});;
+			}});
+		
+		dateDataNaixament.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
+			    		dateDataNaixament.setValue(oldValue);
+			        }
+				}
+		 
+			}});
 
 		textCerca.textProperty().addListener(new ChangeListener<String>() {
 
