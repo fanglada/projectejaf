@@ -20,5 +20,5 @@ public interface ClientDAO {
 	
 	int create(Connexio con, Client client);
 	int update(Connexio con, Client client);
-	int delete(Connexio con, String id);
+	int delete(Connexio con, Client client);
 }

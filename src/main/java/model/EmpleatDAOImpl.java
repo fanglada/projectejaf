@@ -106,7 +106,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 	public int create(Connexio con, Empleat empleat) {
 		try {
 			
-			if(EmpleatDAOImpl.select(con, empleat.getDni())!= null)
+			if(EmpleatDAOImpl.select(con, empleat.getDni())== null)
 			{
 				Connection conection = con.getConnexio();
 				PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,NULL)");
@@ -123,7 +123,7 @@ public class EmpleatDAOImpl implements EmpleatDAO {
 	
 				return stm.executeUpdate();
 			}
-			return 0;
+			return -4;
 
 		} catch (Exception e) {
 			e.printStackTrace();

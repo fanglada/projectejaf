@@ -239,6 +239,44 @@ public class vehicleController implements Initializable{
 				});										
 			}			
 		});		
+		
+		textCv.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textCv.setText(oldValue);
+		        }
+			}});
+		
+		textNumRodes.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textNumRodes.setText(oldValue);
+		        }
+			}});
+		textNumPortes.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textNumPortes.setText(oldValue);
+		        }
+			}});
+		textCapacitat.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textCapacitat.setText(oldValue);
+		        }
+			}});
 	}
 
 
@@ -266,7 +304,13 @@ public class vehicleController implements Initializable{
 
 				Alert missatge = new Alert(AlertType.ERROR);
 				missatge.setTitle("Error en afegir el registre");
-				missatge.setContentText("El vehicle no s'ha pogut afegir");
+				if(res == -4) 
+				{
+					missatge.setContentText("Hi ha un problema, no s'ha pogut donar d'alta, el vheicle ja existeix");
+				}else 
+				{
+					missatge.setContentText("El vehicle no s'ha pogut afegir");
+				}
 				missatge.setHeaderText("Resultat:");
 				missatge.show();   		
 			}
@@ -345,13 +389,13 @@ public class vehicleController implements Initializable{
 
 	@FXML
 	void Netejar(ActionEvent event) {
-		textCapacitat.setText(null);
+		textCapacitat.setText("");
 		textCodi.setText(null);
 		textMarca.setText(null);
 		textModel.setText(null);
-		textNumRodes.setText(null);
-		textNumPortes.setText(null);
-		textCv.setText(null);
+		textNumRodes.setText("");
+		textNumPortes.setText("");
+		textCv.setText("");
 		textDataMatriculacio.setValue(null);
 		cbxCanvi.setValue(null);		
 		cbxCarnet.setValue(null);		

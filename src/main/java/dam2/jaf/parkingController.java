@@ -283,6 +283,16 @@ public class parkingController implements Initializable {
 			}
 
 		});
+		
+		textCapacitat.textProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
+		    		textCapacitat.setText(oldValue);
+		        }
+			}});
 
 	}
 
@@ -432,7 +442,7 @@ public class parkingController implements Initializable {
 		textDescripcio.setText(null);
 		textDireccio.setText(null);
 		textTelefon.setText("");
-		textCapacitat.setText(null);
+		textCapacitat.setText("");
 
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);

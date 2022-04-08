@@ -38,7 +38,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 		try 
 		{
 			
-			if(EmpleatDAOImpl.select(con, supervisor.getDni())!= null)
+			if(EmpleatDAOImpl.select(con, supervisor.getDni())== null)
 			{
 				Connection conection = con.getConnexio();
 				PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,0,?,?)");
@@ -54,7 +54,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
 				stm.setString(10, supervisor.getTelefonEmpresa());
 				return stm.executeUpdate();			
 			}
-			return 0;
+			return -4;
 		
 		}catch (Exception e) 
 		{

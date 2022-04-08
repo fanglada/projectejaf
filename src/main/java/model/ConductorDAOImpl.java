@@ -19,7 +19,7 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL;";
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND DNI!='0';";
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				
@@ -117,7 +117,7 @@ import dam2.jaf.Connexio;
 			
 			try 
 			{
-				if(ConductorDAOImpl.select(con, conductor.getDni())!= null)
+				if(ConductorDAOImpl.select(con, conductor.getDni())== null)
 				{
 					Connection conection = con.getConnexio();
 					PreparedStatement stm = conection.prepareStatement("INSERT INTO treballador VALUES (?,?,?,?,?,?,?,?,1,NULL,NULL)");
@@ -152,7 +152,7 @@ import dam2.jaf.Connexio;
 						return 0;
 					}			
 				}
-				return 0;
+				return -4;
 
 			
 			}catch (Exception e) 

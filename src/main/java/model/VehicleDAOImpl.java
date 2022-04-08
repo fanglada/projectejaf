@@ -152,7 +152,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 		// TODO Auto-generated method stub
 		try 
 		{
-			if(VehicleDAOImpl.select(con, vehicle.getMatricula())!= null)
+			if(VehicleDAOImpl.select(con, vehicle.getMatricula())== null)
 			{
 				PreparedStatement stm = con.getConnexio().prepareStatement("INSERT INTO vehicle VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 				stm.setString(1, vehicle.getMatricula());
@@ -177,7 +177,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 	
 				return stm2.executeUpdate();
 			}
-			return 0;
+			return -4;
 	
 		}
 		catch (SQLException e) {

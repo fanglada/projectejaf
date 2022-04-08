@@ -100,7 +100,7 @@
                         <ComboBox fx:id="cbxEmpleat" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="cbxConductor" disable="true" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <DatePicker fx:id="dateDataInici" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <DatePicker fx:id="dateDataFi" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <DatePicker fx:id="dateDataFi" disable="true" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <CheckBox fx:id="cboxConductor" mnemonicParsing="false" onAction="#gestionarConductor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 							</children>
 						</GridPane>

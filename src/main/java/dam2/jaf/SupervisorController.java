@@ -256,7 +256,13 @@ public class SupervisorController implements Initializable{
 
 				Alert missatge = new Alert(AlertType.ERROR);
 				missatge.setTitle("Error en afegir el registre");
-				missatge.setContentText("El Supervisor no s'ha pogut afegir");
+				if(res == -4) 
+				{
+					missatge.setContentText("Hi ha un problema, no s'ha pogut donar d'alta, el supervisor ja existeix");
+				}else 
+				{
+					missatge.setContentText("El Supervisor no s'ha pogut afegir");
+				}
 				missatge.setHeaderText("Resultat:");
 				missatge.show();   		
 			}

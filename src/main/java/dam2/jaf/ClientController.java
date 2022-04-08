@@ -264,7 +264,7 @@ public class ClientController implements Initializable {
 	@FXML
 	void guardarRegistre(ActionEvent event) {
 		
-		if(!textDni.getText().isEmpty() && !textNom.getText().isEmpty() && !textCognom1.getText().isEmpty() && !textCognom2.getText().isEmpty() && dateDataNaixament.getValue()!=null && !textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textMail.getText().isEmpty() && chcbxCarnet.getCheckModel().getCheckedItems().size()!=0)
+		if(!textDni.getText().isEmpty() && !textNom.getText().isEmpty() && !textCognom1.getText().isEmpty() && !textCognom2.getText().isEmpty() && dateDataNaixament.getValue()!=null && !textTelefon.getText().isEmpty() && !textDireccio.getText().isEmpty() && !textMail.getText().isEmpty())
 		{
 		
 			ArrayList<Carnet> carnets = new ArrayList<Carnet>();
@@ -290,7 +290,13 @@ public class ClientController implements Initializable {
 	    	{
 	    		Alert missatge=new Alert(AlertType.ERROR);
 				missatge.setTitle("Hi ha un problema, client no s'ha pogut donar d'alta");
-				missatge.setContentText("Hi ha un problema, client no s'ha pogut donar d'alta");
+				if(resultat == -4) 
+				{
+					missatge.setContentText("Hi ha un problema, no s'ha pogut donar d'alta, el client ja existeix");
+				}else 
+				{
+					missatge.setContentText("Hi ha un problema, client no s'ha pogut donar d'alta");
+				}
 				missatge.setHeaderText("Alerta:");
 				missatge.show();
 	    		
@@ -354,7 +360,7 @@ public class ClientController implements Initializable {
     	Optional<ButtonType> result = confirmacio.showAndWait();
     	if(result.isPresent() && result.get() == ButtonType.OK) {
         	ClientDAO ClientDAO = new ClientDAOImpl();
-        	int resultat = ClientDAO.delete(App.con, tblViewClient.getSelectionModel().getSelectedItem().getDni());
+        	int resultat = ClientDAO.delete(App.con, tblViewClient.getSelectionModel().getSelectedItem());
         	if (resultat>0)
         	{
         		llistaClients.remove(tblViewClient.getSelectionModel().getSelectedItem());

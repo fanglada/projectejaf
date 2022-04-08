@@ -93,7 +93,7 @@ public class ClientDAOImpl implements ClientDAO {
 		try 
 		{
 			
-			if(ClientDAOImpl.select(con, client.getDni())!= null)
+			if(ClientDAOImpl.select(con, client.getDni())== null)
 			{
 				Connection conection = con.getConnexio();
 				PreparedStatement stm = conection.prepareStatement("INSERT INTO client VALUES (?,?,?,?,?,?,?,?)");
@@ -128,7 +128,7 @@ public class ClientDAOImpl implements ClientDAO {
 				}
 			}
 			
-			return 0;
+			return -4;
 		
 		}catch (Exception e) 
 		{
@@ -186,18 +186,24 @@ public class ClientDAOImpl implements ClientDAO {
 	}
 
 	@Override
-	public int delete(Connexio con, String id) {
+	public int delete(Connexio con, Client client) {
 		try 
 		{
 			Connection conection = con.getConnexio();
 			
-			PreparedStatement stm = conection.prepareStatement("DELETE FROM ClientCarnet WHERE DNIClient=?");
-			stm.setString(1, id);
-			int aux = stm.executeUpdate(), aux2 = 1;
+			PreparedStatement stm;
+			int aux = 1, aux2 = 1;
+			
+			if(client.getCarnet().size() > 0) 
+			{
+				stm = conection.prepareStatement("DELETE FROM ClientCarnet WHERE DNIClient=?");
+				stm.setString(1, client.getDni());
+				aux = stm.executeUpdate();
+			}			
 						
 			stm = conection.prepareStatement("DELETE FROM client WHERE DNI=?");	
 			
-			stm.setString(1, id);
+			stm.setString(1, client.getDni());
 			
 			aux2 = stm.executeUpdate();
 			

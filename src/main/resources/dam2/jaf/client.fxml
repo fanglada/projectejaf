@@ -136,7 +136,7 @@
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewClient" layoutX="2.0" layoutY="478.0" onMouseClicked="#seleccionarClient" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewClient" layoutX="2.0" layoutY="478.0" onMouseClicked="#seleccionarClient" prefHeight="313.0" prefWidth="1010.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="473.0">
 			<columns>
 				<TableColumn fx:id="clmDni" text="Dni" />
 				<TableColumn fx:id="clmNom" prefWidth="91.66665649414062" text="Nom" />

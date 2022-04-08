@@ -15,7 +15,7 @@ public class ParkingDAOImpl implements ParkingDAO {
 		try {
 
 			Statement stm = con.getConnexio().createStatement();
-			String sql = "SELECT * FROM parking";
+			String sql = "SELECT * FROM parking WHERE idParking!='0'";
 
 			ResultSet rst = stm.executeQuery(sql);
 

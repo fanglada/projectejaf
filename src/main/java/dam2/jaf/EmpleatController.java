@@ -240,7 +240,13 @@ public class EmpleatController implements Initializable{
 
 				Alert missatge = new Alert(AlertType.ERROR);
 				missatge.setTitle("Error en afegir el registre");
-				missatge.setContentText("L'Empleat no s'ha pogut afegir");
+				if(res == -4) 
+				{
+					missatge.setContentText("Hi ha un problema, no s'ha pogut donar d'alta, l'empleat ja existeix");
+				}else 
+				{
+					missatge.setContentText("L'Empleat no s'ha pogut afegir");
+				}
 				missatge.setHeaderText("Resultat:");
 				missatge.show();   		
 			}

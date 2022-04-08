@@ -177,6 +177,32 @@ public class contracteController implements Initializable{
 				});
 			}
 		});
+		
+		dateDataInici.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	dateDataFi.setDisable(false);
+				}
+		 
+			}});
+		
+		dateDataFi.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	if (newValue.compareTo(dateDataInici.getValue()) < 0) {
+				   		dateDataFi.setValue(oldValue);
+			        }
+				}
+		 
+			}});
 	}
 	
     @FXML
@@ -379,6 +405,7 @@ public class contracteController implements Initializable{
     	botoGuardar.setDisable(false);
     	botoActualizar.setDisable(true);
     	botoEliminar.setDisable(true);
+    	dateDataFi.setDisable(true);
     	
     }
 
