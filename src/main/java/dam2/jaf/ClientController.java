@@ -329,9 +329,7 @@ public class ClientController implements Initializable {
 			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
-			System.out.println("Abans "  + tblViewClient.getSelectionModel().getSelectedItem().getCarnet().size());
 			Netejar(null);
-			System.out.println("Abans "  + tblViewClient.getSelectionModel().getSelectedItem().getCarnet().size());
 			
     	}else 
     	{
@@ -362,7 +360,7 @@ public class ClientController implements Initializable {
         		llistaClients.remove(tblViewClient.getSelectionModel().getSelectedItem());
         		tblViewClient.refresh();
         		Alert missatge=new Alert(AlertType.INFORMATION);
-    			missatge.setTitle("Client es dona de baixa");
+    			missatge.setTitle("El client s'ha donat de baixa");
     			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
     			missatge.setHeaderText("Alerta:");
     			missatge.show();

@@ -3,6 +3,8 @@ package dam2.jaf;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -26,6 +29,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.util.Callback;
 import model.*;
 
@@ -115,7 +119,7 @@ public class contracteController implements Initializable{
     private ObservableList<Estat> llistaEstats;
     private ObservableList<Conductor> llistaConductors;
     private ObservableList<Contracte> llistaContractes;
-    private ObservableList<Contracte> llistaFiltrada;
+    private FilteredList<Contracte> llistaFiltrada;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -131,9 +135,9 @@ public class contracteController implements Initializable{
     	
     	ClientDAOImpl.Tots(App.con, llistaClients);
     	EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
-    	VehicleDAOImpl.Tots(App.con, llistaVheicles);
+    	VehicleDAOImpl.Disponible(App.con, llistaVheicles);
     	EstatDAOImpl.Tots(App.con, llistaEstats);
-    	ConductorDAOImpl.Tots(App.con, llistaConductors);
+    	ConductorDAOImpl.Disponible(App.con, llistaConductors);
     	ContracteDAOImpl.Tots(App.con, llistaContractes);
     	
     	cbxClient.setItems(llistaClients);
@@ -149,14 +153,32 @@ public class contracteController implements Initializable{
     	clmConductor.setCellValueFactory(new PropertyValueFactory<Contracte,String>("conductor"));
     	clmDataInici.setCellValueFactory(new PropertyValueFactory<Contracte,String>("dataInici"));
     	clmDataFi.setCellValueFactory(new PropertyValueFactory<Contracte,String>("dataFi"));
-    	clmVehicle.setCellValueFactory(new PropertyValueFactory<Contracte,String>("estat"));
-    	clmEstat.setCellValueFactory(new PropertyValueFactory<Contracte,String>("vehicle"));
+    	clmEstat.setCellValueFactory(new PropertyValueFactory<Contracte,String>("estat"));
+    	clmVehicle.setCellValueFactory(new PropertyValueFactory<Contracte,String>("vehicle"));
+    	
+    	gestionarEvents();
 
 	}
 	
 	private void gestionarEvents() {
 		
-		
+		textCerca.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				llistaFiltrada.setPredicate(stringCerca -> {
+					if(newValue == null || newValue.isEmpty()) return true;
+					
+//					if(stringCerca.getClient().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEmpleat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getConductor().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getEstat().toString().toLowerCase().contains(newValue.toLowerCase())||stringCerca.getVehicle().toString().toLowerCase().contains(newValue.toLowerCase()))
+//						return true;
+					
+					if(stringCerca.getEmpleat().toString().toLowerCase().contains(newValue.toLowerCase())) return true;
+					
+					return false;
+				});
+			}
+		});
 	}
 	
     @FXML
@@ -203,18 +225,78 @@ public class contracteController implements Initializable{
 
     @FXML
     void actualizarRegistre(ActionEvent event) {
-
+    	Contracte contracte = tblViewContracte.getSelectionModel().getSelectedItem();
+    	contracte.setClient(cbxClient.getValue());
+    	contracte.setEmpleat(cbxEmpleat.getValue());
+    	if (cboxConductor.isSelected()) 
+		{
+    		contracte.setConductor(cbxConductor.getValue());
+		}
+    	contracte.setDataInici(dateDataInici.getValue());
+    	contracte.setDataFi(dateDataFi.getValue());
+    	contracte.setEstat(cbxEstat.getValue());
+    	contracte.setVehicle(cbxVehicle.getValue());
+    	tblViewContracte.refresh();
+				
+		ContracteDAO ContracteDAO = new ContracteDAOImpl();
+    	int resultat = ContracteDAO.update(App.con, contracte);
+    	if (resultat > 0)
+    	{
+    		Alert missatge=new Alert(AlertType.INFORMATION);
+    		missatge.setTitle("Client actuaizat");
+			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+			Netejar(null);
+			
+    	}else 
+    	{
+    		Alert missatge=new Alert(AlertType.ERROR);
+    		missatge.setTitle("Hi ha un problema, el clinet no s'ha pogut actualitzar");
+			missatge.setContentText("Hi ha un problema, el clinet no s'ha pogut actialitzar");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
     }
 
 
     @FXML
     void eliminarRegistre(ActionEvent event) {
-
+    	Alert confirmacio=new Alert(AlertType.CONFIRMATION);
+    	confirmacio.initModality(Modality.WINDOW_MODAL);
+    	confirmacio.setTitle("Estas segur que vols esborrar el contracte?");
+    	confirmacio.setContentText("Un cop fet no es pot desfer");
+    	
+        	
+    	Optional<ButtonType> result = confirmacio.showAndWait();
+    	if(result.isPresent() && result.get() == ButtonType.OK) {
+    		ContracteDAO ContracteDAO = new ContracteDAOImpl();
+        	int resultat = ContracteDAO.delete(App.con, tblViewContracte.getSelectionModel().getSelectedItem().getIdContracte());
+        	if (resultat>0)
+        	{
+        		llistaContractes.remove(tblViewContracte.getSelectionModel().getSelectedItem());
+        		Alert missatge=new Alert(AlertType.INFORMATION);
+    			missatge.setTitle("El contracte s'ha esborrat");
+    			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
+    			missatge.setHeaderText("Alerta:");
+    			missatge.show();
+    			Netejar(null);
+        	}else 
+        	{
+        		Alert missatge=new Alert(AlertType.ERROR);
+    			missatge.setTitle("Hi ha un problema, client no s'ha pogut donar de baixa");
+    			missatge.setContentText("Hi ha un problema, client no s'ha pogut donar de baixa");
+    			missatge.setHeaderText("Alerta:");
+    			missatge.show();
+        		
+        	}
+    	}
     }
     
 
     @FXML
     void gestionarConductor(ActionEvent event) {
+    	cbxConductor.setValue(null);
     	cbxConductor.setDisable(!cbxConductor.isDisabled());
     }
 
@@ -274,6 +356,7 @@ public class contracteController implements Initializable{
     	textCodi.setText(null);
     	cbxClient.getSelectionModel().select(null);
     	cbxEmpleat.getSelectionModel().select(null);
+    	cbxConductor.getSelectionModel().select(null);
     	cboxConductor.setSelected(false);
     	cbxConductor.setDisable(true);
     	dateDataInici.setValue(null);

@@ -24,7 +24,7 @@ public class ContracteDAOImpl implements ContracteDAO {
 
 			while(resultSet.next()) {
 				
-				if(resultSet.getString("DNIConductor") == null || resultSet.getString("DNIConductor").isEmpty()) 
+				if(resultSet.getString("DNIConductor").equalsIgnoreCase("0")) 
 				{
 					contractes.add(new Contracte(resultSet.getInt("idContracte"), ClientDAOImpl.select(con, resultSet.getString("DNIClient")), EmpleatDAOImpl.select(con, resultSet.getString("DNITreballador")), resultSet.getDate("dataInici").toLocalDate(), resultSet.getDate("dataFi").toLocalDate(),new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")), VehicleDAOImpl.select(con, resultSet.getString("matricula"))));
 				}else 
@@ -59,10 +59,17 @@ public class ContracteDAOImpl implements ContracteDAO {
 				stm.setString(7, contracte.getConductor().getDni());
 			}else 
 			{
-				stm.setNull(7, Types.VARCHAR);
+				stm.setString(7, "0");
 			}
 			
 			stm.executeUpdate();
+			
+			String consultId = "SELECT @@Identity";
+			ResultSet rst = stm.executeQuery(consultId);
+			if (rst.next()) 
+			{
+				contracte.setIdContracte(rst.getInt(1));
+			}
 			
 			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,?,?,?,?)");				
 			stm2.setInt(1, contracte.getVehicle().getParking().getIdParking());
@@ -87,21 +94,21 @@ public class ContracteDAOImpl implements ContracteDAO {
 		{
 			Connection conection = con.getConnexio();
 			PreparedStatement stm = conection.prepareStatement("UPDATE contracte SET matricula=?,dataInici=?,dataFi=?,idEstat=?,DNIClient=?,DNITreballador=?,DNIConductor=? WHERE idContracte=?");
-			stm.setString(7, contracte.getVehicle().getMatricula());
-			stm.setDate(1, Date.valueOf(contracte.getDataInici()));
-			stm.setDate(2, Date.valueOf(contracte.getDataFi()));
-			stm.setInt(3, contracte.getEstat().getIdEstat());
-			stm.setString(4, contracte.getClient().getDni());
-			stm.setString(5, contracte.getEmpleat().getDni());
+			stm.setString(1, contracte.getVehicle().getMatricula());
+			stm.setDate(2, Date.valueOf(contracte.getDataInici()));
+			stm.setDate(3, Date.valueOf(contracte.getDataFi()));
+			stm.setInt(4, contracte.getEstat().getIdEstat());
+			stm.setString(5, contracte.getClient().getDni());
+			stm.setString(6, contracte.getEmpleat().getDni());
 			if (contracte.getConductor() != null) 
 			{
-				stm.setString(6, contracte.getConductor().getDni());
+				stm.setString(7, contracte.getConductor().getDni());
 			}else 
 			{
-				stm.setNull(6, Types.VARCHAR);
+				stm.setNull(7, Types.VARCHAR);
 			}
+			stm.setInt(8, contracte.getIdContracte());
 			return stm.executeUpdate();			
-
 		
 		}catch (Exception e) 
 		{
