@@ -141,10 +141,9 @@ public class ConductorController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		App.setTitol("Conductor");
 
 		if (!taula) {
-			App.setTitol("Client");
+			App.setTitol("Conductor");
 
 			llistaConductor=FXCollections.observableArrayList();
 	    	llistaCarnets=FXCollections.observableArrayList();
@@ -220,6 +219,20 @@ public class ConductorController implements Initializable{
 		    	if (!newValue.matches("-?([0-9]*)?") && newValue!=null) {
 		    		textTelefon.setText(oldValue);
 		        }
+			}});
+		
+		dateDataNaixament.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
+			    		dateDataNaixament.setValue(oldValue);
+			        }
+				}
+		 
 			}});
 		
 		tblViewConductor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Conductor>() {

@@ -227,6 +227,20 @@ public class ClientController implements Initializable {
 		    		textTelefon.setText(oldValue);
 		        }
 			}});
+		
+		dateDataNaixament.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null)
+				{
+				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
+			    		dateDataNaixament.setValue(oldValue);
+			        }
+				}
+		 
+			}});
 			
 			textCerca.textProperty().addListener(new ChangeListener<String>() {
 

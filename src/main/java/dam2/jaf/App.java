@@ -49,7 +49,7 @@ public class App extends Application {
     }
     
     static void setTitol(String titol){
-        stage.setTitle(titol+" - JAFM");
+        stage.setTitle(titol+" - Lloger Vehicles JAFM");
     }
 
 }
