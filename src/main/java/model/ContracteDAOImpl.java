@@ -6,9 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.sql.Types;
-import java.time.LocalDateTime;
 import java.util.List;
 import dam2.jaf.Connexio;
 
@@ -26,10 +24,10 @@ public class ContracteDAOImpl implements ContracteDAO {
 				
 				if(resultSet.getString("DNIConductor") == null || resultSet.getString("DNIConductor").isEmpty()) 
 				{
-					contractes.add(new Contracte(resultSet.getInt("idContracte"), ClientDAOImpl.select(con, resultSet.getString("DNIClient")), EmpleatDAOImpl.select(con, resultSet.getString("DNI")), resultSet.getDate("dataInici").toLocalDate(), resultSet.getDate("dataFi").toLocalDate(),new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")), VehicleDAOImpl.select(con, resultSet.getString("matricula"))));
+					contractes.add(new Contracte(resultSet.getInt("idContracte"), ClientDAOImpl.select(con, resultSet.getString("DNIClient")), EmpleatDAOImpl.select(con, resultSet.getString("DNITreballador")), resultSet.getDate("dataInici").toLocalDate(), resultSet.getDate("dataFi").toLocalDate(),new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")), VehicleDAOImpl.select(con, resultSet.getString("matricula"))));
 				}else 
 				{
-					contractes.add(new Contracte(resultSet.getInt("idContracte"), ClientDAOImpl.select(con, resultSet.getString("DNIClient")), EmpleatDAOImpl.select(con, resultSet.getString("DNI")), ConductorDAOImpl.select(con, resultSet.getString("DNIConductor")) , resultSet.getDate("dataInici").toLocalDate(), resultSet.getDate("dataFi").toLocalDate(),new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")), VehicleDAOImpl.select(con, resultSet.getString("matricula"))));
+					contractes.add(new Contracte(resultSet.getInt("idContracte"), ClientDAOImpl.select(con, resultSet.getString("DNIClient")), EmpleatDAOImpl.select(con, resultSet.getString("DNITreballador")), ConductorDAOImpl.select(con, resultSet.getString("DNIConductor")) , resultSet.getDate("dataInici").toLocalDate(), resultSet.getDate("dataFi").toLocalDate(),new Estat(resultSet.getInt("idEstat"), resultSet.getString("descripcio")), VehicleDAOImpl.select(con, resultSet.getString("matricula"))));
 				}
 				
 			}
@@ -64,12 +62,10 @@ public class ContracteDAOImpl implements ContracteDAO {
 			
 			stm.executeUpdate();
 			
-			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,?,?,?,?)");				
+			PreparedStatement stm2 = con.getConnexio().prepareStatement("INSERT INTO movimentParking VALUES (NULL,?,?,?)");				
 			stm2.setInt(1, contracte.getVehicle().getParking().getIdParking());
 			stm2.setInt(2, 0);
 			stm2.setString(3, contracte.getVehicle().getMatricula());
-			stm2.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
-
 
 			return stm2.executeUpdate();		
 

@@ -89,16 +89,16 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <ComboBox fx:id="cbxClient" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cbxClient" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Estat:" GridPane.rowIndex="8">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <ComboBox fx:id="cbxEstat" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <ComboBox fx:id="cbxVehicle" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <ComboBox fx:id="cbxEmpleat" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="cbxConductor" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbxEstat" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="cbxVehicle" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbxEmpleat" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbxConductor" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <DatePicker fx:id="dateDataInici" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <DatePicker fx:id="dateDataFi" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <CheckBox fx:id="cboxConductor" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -132,7 +132,7 @@
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewContracte" layoutX="2.0" layoutY="478.0" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewContracte" layoutX="2.0" layoutY="478.0" onMouseClicked="#seleccionarClient" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<columns>
 				<TableColumn fx:id="clmCodi" prefWidth="136.66665649414062" text="Codi" />
             <TableColumn fx:id="clmClient" prefWidth="136.66665649414062" text="Client" />
