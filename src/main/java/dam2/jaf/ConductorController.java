@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -137,6 +138,9 @@ public class ConductorController implements Initializable{
 	private Stage stageTaula;
 	
 	private boolean taula = false;
+	
+	private boolean data = true;
+
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -230,7 +234,14 @@ public class ConductorController implements Initializable{
 				{
 				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
 			    		dateDataNaixament.setValue(oldValue);
+			    		
+			    		Alert missatge=new Alert(AlertType.ERROR);
+			    		missatge.setTitle("Hi ha un problema, el conductor ha de ser major d'edat");
+						missatge.setContentText("Hi ha un problema, el conductor ha de ser major d'edat");
+						missatge.setHeaderText("Alerta:");
+						missatge.show();
 			        }
+				   	
 				}
 		 
 			}});
@@ -320,6 +331,15 @@ public class ConductorController implements Initializable{
 	    		missatge.setHeaderText("Resultat:");
 	    		missatge.show();   		
 	    	}
+    	}
+	 	else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
     	}
     }
 
@@ -434,6 +454,16 @@ public class ConductorController implements Initializable{
     }
     
     @FXML
+    void data(MouseEvent event) {
+		if(data)
+		{
+			data=false;
+			dateDataNaixament.setValue(LocalDate.now().minusYears(18));
+
+		}
+    }
+    
+    @FXML
     void buidar(ActionEvent event) {
     	textCerca.setText(null);
 
@@ -457,6 +487,8 @@ public class ConductorController implements Initializable{
 		chcbxCarnet.getCheckModel().clearChecks();
 		
     	textDni.setEditable(true);
+    	data = true;
+
 	}
 
 }

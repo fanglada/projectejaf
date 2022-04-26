@@ -120,10 +120,7 @@ public class contracteController implements Initializable{
     private ObservableList<Conductor> llistaConductors;
     private ObservableList<Contracte> llistaContractes;
     private FilteredList<Contracte> llistaFiltrada;
-    
-    
-    //al fer clic al al cbx vehicle i empleat nomes mostar els disponible per aquelles dates
-    
+        
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -212,6 +209,10 @@ public class contracteController implements Initializable{
 
 				if(newValue!=null)
 				{
+					cbxVehicle.setDisable(false);
+
+				   	cboxConductor.setDisable(false);
+
 				   	if (newValue.compareTo(dateDataInici.getValue()) < 0) {
 				   		dateDataFi.setValue(oldValue);
 			        }
@@ -261,6 +262,15 @@ public class contracteController implements Initializable{
         		
         	}
     		
+    	}
+     	else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
     	}
 
     }
@@ -421,6 +431,11 @@ public class contracteController implements Initializable{
     	botoActualizar.setDisable(true);
     	botoEliminar.setDisable(true);
     	dateDataFi.setDisable(true);
+    	
+		cbxVehicle.setDisable(true);
+	   	cboxConductor.setDisable(true);
+	   	dateDataFi.setDisable(true);
+
     	
     }
 

@@ -96,12 +96,12 @@
                            </padding>
                         </Label>
                         <ComboBox fx:id="cbxEstat" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <ComboBox fx:id="cbxVehicle" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbxVehicle" disable="true" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <ComboBox fx:id="cbxEmpleat" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="cbxConductor" disable="true" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <DatePicker fx:id="dateDataInici" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <DatePicker fx:id="dateDataFi" disable="true" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <CheckBox fx:id="cboxConductor" mnemonicParsing="false" onAction="#gestionarConductor" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="cboxConductor" disable="true" mnemonicParsing="false" onAction="#gestionarConductor" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 							</children>
 						</GridPane>
 						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
@@ -128,11 +128,11 @@
 		<HBox alignment="CENTER" layoutX="6.0" layoutY="430.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0">
 			<children>
 				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
-				<TextField fx:id="textCerca" promptText="Cerca per tots els camps" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" promptText="Cerca per tots els camps" styleClass="input" />
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewContracte" layoutX="2.0" layoutY="478.0" onMouseClicked="#seleccionarClient" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewContracte" layoutX="2.0" layoutY="478.0" onMouseClicked="#seleccionarClient" prefHeight="313.0" prefWidth="1010.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="476.0">
 			<columns>
 				<TableColumn fx:id="clmCodi" prefWidth="136.66665649414062" text="Codi" />
             <TableColumn fx:id="clmClient" prefWidth="136.66665649414062" text="Client" />

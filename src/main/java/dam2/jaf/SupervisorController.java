@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 
@@ -119,6 +120,9 @@ public class SupervisorController implements Initializable{
 
 	@FXML
 	private TextField textTelefonEmpresa;
+	
+	private boolean data = true;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -208,6 +212,12 @@ public class SupervisorController implements Initializable{
 					{
 						if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
 							dateDataNaixament.setValue(oldValue);
+							
+							Alert missatge=new Alert(AlertType.ERROR);
+				    		missatge.setTitle("Hi ha un problema, el supervisor ha de ser major d'edat");
+							missatge.setContentText("Hi ha un problema, el supervisor ha de ser major d'edat");
+							missatge.setHeaderText("Alerta:");
+							missatge.show();
 						}
 					}
 
@@ -267,6 +277,15 @@ public class SupervisorController implements Initializable{
 				missatge.show();   		
 			}
 		}
+	 	else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
 	}
 
 	@FXML
@@ -328,6 +347,16 @@ public class SupervisorController implements Initializable{
 			missatge.show(); 		
 		}   	
 	}
+	
+    @FXML
+    void data(MouseEvent event) {
+		if(data)
+		{
+			data=false;
+			dateDataNaixament.setValue(LocalDate.now().minusYears(18));
+
+		}
+    }
 
 	@FXML
 	void tornar(ActionEvent event) throws IOException {
@@ -356,5 +385,7 @@ public class SupervisorController implements Initializable{
 		botoActualitzar.setDisable(true);
 		botoEliminar.setDisable(true);
 		botoGuardar.setDisable(false);
+		
+    	data = true;
 	}
 }

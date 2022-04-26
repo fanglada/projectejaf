@@ -180,10 +180,20 @@ public class botigaController implements Initializable {
         		missatge.show();
         	}
     	}
+    	else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
 
     }
-
-    @FXML
+    
+    
+	@FXML
     void actualizarRegistre(ActionEvent event) {
     	
     	Botiga botiga = new Botiga(Integer.parseInt(textCodi.getText()),textTelefon.getText(),textDireccio.getText(),textDescripcio.getText());

@@ -145,6 +145,9 @@ public class ClientController implements Initializable {
 	
 	private boolean taula = false;
 	
+	private boolean data = true;
+
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -238,10 +241,16 @@ public class ClientController implements Initializable {
 				{
 				   	if (newValue.compareTo(LocalDate.now().minusYears(18)) > 0) {
 			    		dateDataNaixament.setValue(oldValue);
+			    		
+			    		Alert missatge=new Alert(AlertType.ERROR);
+			    		missatge.setTitle("Hi ha un problema, el client ha de ser major d'edat");
+						missatge.setContentText("Hi ha un problema, el client ha de ser major d'edat");
+						missatge.setHeaderText("Alerta:");
+						missatge.show();
 			        }
 				}
-		 
 			}});
+	
 			
 			textCerca.textProperty().addListener(new ChangeListener<String>() {
 
@@ -302,7 +311,16 @@ public class ClientController implements Initializable {
 				missatge.show();
 	    		
 	    	}
-		}
+		} 	
+		else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
 
 	}
 	
@@ -456,6 +474,16 @@ public class ClientController implements Initializable {
     }
     
     @FXML
+    void data(MouseEvent event) {
+		if(data)
+		{
+			data=false;
+			dateDataNaixament.setValue(LocalDate.now().minusYears(18));
+
+		}
+    }
+    
+    @FXML
 	void tornar(ActionEvent event) throws IOException {
 		App.setRoot("usuaris");
 
@@ -485,6 +513,7 @@ public class ClientController implements Initializable {
 		chcbxCarnet.getCheckModel().clearChecks();
 		
     	textDni.setEditable(true);
+    	data = true;
 
 	}
 

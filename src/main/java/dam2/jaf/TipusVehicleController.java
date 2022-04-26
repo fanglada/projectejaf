@@ -152,6 +152,15 @@ public class TipusVehicleController implements Initializable{
 				missatge.show();    		
 			}
 		}
+	 	else
+    	{
+    	
+	    	Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("Hi ha un problema, alguns camps estan buits");
+			missatge.setContentText("Hi ha un problema, alguns camps estan buits");
+			missatge.setHeaderText("Alerta:");
+			missatge.show();
+    	}
 	}
 
 	@FXML
