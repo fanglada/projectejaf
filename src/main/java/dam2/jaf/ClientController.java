@@ -218,6 +218,7 @@ public class ClientController implements Initializable {
 	
 	private void gestionarEvents() {
 		
+				
 		textTelefon.textProperty().addListener(new ChangeListener<>() {
 
 			@Override
@@ -413,6 +414,7 @@ public class ClientController implements Initializable {
     	chcbxCarnet.getCheckModel().clearChecks();
     	client.getCarnet().stream().forEach((carnet)->{chcbxCarnet.getCheckModel().check(trobarCarnet(carnet));});
 	}
+
     
     private Carnet trobarCarnet(Carnet carnet) 
     {

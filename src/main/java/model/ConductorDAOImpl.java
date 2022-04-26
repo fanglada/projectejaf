@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 
 import dam2.jaf.Connexio;
@@ -36,7 +37,7 @@ import dam2.jaf.Connexio;
 			}	
 		}
 		
-		public static int Disponible(Connexio con, List<Conductor> conductors) {
+		public static int Disponible(Connexio con, List<Conductor> conductors, LocalDate inici,LocalDate fi) {
 			
 			try 
 			{
@@ -44,7 +45,9 @@ import dam2.jaf.Connexio;
 				
 				Statement stm = conection.createStatement();
 				
-				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW()) AND DNI!='0');";
+				//String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW()) AND DNI!='0');";
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE ('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)) AND DNI!='0');";
+
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				

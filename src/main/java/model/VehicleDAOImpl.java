@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +35,14 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 	}
 	
-	public static int Disponible(Connexio con, List<Vehicle> vehicles) {
+	public static int Disponible(Connexio con, List<Vehicle> vehicles, LocalDate inici,LocalDate fi) {
 		
 		try {
 			
 			Statement stm = con.getConnexio().createStatement();
-			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula NOT IN (SELECT matricula FROM contracte WHERE dataFi > NOW());";
-			
+			//String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet;";
+			String sql = "SELECT matricula,t.idTipus,t.descripcio,marca,model,CV,canvi,numeroRodes,numeroPortes,dataMatriculacio,capacitat,c.idCarnet, c.descripcio AS cdescripcio FROM vehicle v NATURAL JOIN tipusVehicle t INNER JOIN carnet c ON c.idCarnet=v.idCarnet WHERE matricula NOT IN (SELECT matricula FROM contracte WHERE ('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi))";
+
 			ResultSet rst = stm.executeQuery(sql);
 
 			while(rst.next())

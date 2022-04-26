@@ -139,7 +139,7 @@
       <HBox alignment="CENTER" layoutX="8.0" layoutY="474.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="-8.0">
          <children>
             <Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
-            <TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+            <TextField fx:id="textCerca" promptText="Cerca per tots els camps" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
             <Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
          </children>
       </HBox>

@@ -121,6 +121,9 @@ public class contracteController implements Initializable{
     private ObservableList<Contracte> llistaContractes;
     private FilteredList<Contracte> llistaFiltrada;
     
+    
+    //al fer clic al al cbx vehicle i empleat nomes mostar els disponible per aquelles dates
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -135,9 +138,7 @@ public class contracteController implements Initializable{
     	
     	ClientDAOImpl.Tots(App.con, llistaClients);
     	EmpleatDAOImpl.Tots(App.con, llistaEmpleats);
-    	VehicleDAOImpl.Disponible(App.con, llistaVehicles);
     	EstatDAOImpl.Tots(App.con, llistaEstats);
-    	ConductorDAOImpl.Disponible(App.con, llistaConductors);
     	ContracteDAOImpl.Tots(App.con, llistaContractes);
     	
     	cbxClient.setItems(llistaClients);
@@ -185,7 +186,20 @@ public class contracteController implements Initializable{
 				// TODO Auto-generated method stub
 				if(newValue!=null)
 				{
+
 				   	dateDataFi.setDisable(false);
+				   	
+					if (newValue.compareTo(LocalDate.now()) < 0) {
+				   		dateDataInici.setValue(oldValue);
+			        }
+					
+					if( dateDataFi.getValue()!=null && newValue.compareTo(dateDataFi.getValue()) > 0)
+					{
+					   	dateDataInici.setValue(oldValue);
+					}
+				   	
+	        		actualitzarDisponibles();
+
 				}
 		 
 			}});
@@ -195,16 +209,20 @@ public class contracteController implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
 				// TODO Auto-generated method stub
+
 				if(newValue!=null)
 				{
 				   	if (newValue.compareTo(dateDataInici.getValue()) < 0) {
 				   		dateDataFi.setValue(oldValue);
 			        }
+	        		actualitzarDisponibles();
+
 				}
+				
 		 
 			}});
 	}
-	
+
     @FXML
     void guardarRegistre(ActionEvent event) {
     	
@@ -226,7 +244,6 @@ public class contracteController implements Initializable{
         	if (resultat>0)
         	{
         		llistaContractes.add(contracte);
-        		actualitzarDisponibles();
         		Alert missatge=new Alert(AlertType.INFORMATION);
     			missatge.setTitle("Contracte creat");
     			missatge.setContentText("S'ha creat correctament, però sempre va bé comprovar");
@@ -270,7 +287,6 @@ public class contracteController implements Initializable{
     	int resultat = ContracteDAO.update(App.con, contracte);
     	if (resultat > 0)
     	{
-    		actualitzarDisponibles();
     		Alert missatge=new Alert(AlertType.INFORMATION);
     		missatge.setTitle("Contracte actuaizat");
 			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
@@ -305,7 +321,6 @@ public class contracteController implements Initializable{
         	if (resultat>0)
         	{
         		llistaContractes.remove(tblViewContracte.getSelectionModel().getSelectedItem());
-        		actualitzarDisponibles();
         		Alert missatge=new Alert(AlertType.INFORMATION);
     			missatge.setTitle("El contracte s'ha esborrat");
     			missatge.setContentText("S'ha esborrat correctament, però sempre va bé comprovar");
@@ -335,8 +350,8 @@ public class contracteController implements Initializable{
     {
     	llistaConductors.clear();
 		llistaVehicles.clear();
-		ConductorDAOImpl.Disponible(App.con, llistaConductors);
-		VehicleDAOImpl.Disponible(App.con, llistaVehicles);
+		ConductorDAOImpl.Disponible(App.con, llistaConductors,dateDataInici.getValue(),dateDataFi.getValue());
+    	VehicleDAOImpl.Disponible(App.con, llistaVehicles, dateDataInici.getValue(),dateDataFi.getValue());
     }
 
 	@FXML
