@@ -1,8 +1,6 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.*;
 import dam2.jaf.Connexio;
 
@@ -12,7 +10,7 @@ public interface ConductorDAO {
 		return 0;
 	}
 	
-	static int Disponible(Connexio con, List<Conductor> conductors) {
+	static int Disponible(Connexio con, List<Conductor> conductors, LocalDate inici,LocalDate fi,Vehicle vehicle) {
 			return 0;	
 	}
 	

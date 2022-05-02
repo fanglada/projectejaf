@@ -1,9 +1,6 @@
 package model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import dam2.jaf.Connexio;
 
@@ -13,7 +10,7 @@ public interface VehicleDAO {
 		return 0;	
 	}
 	
-	static int Disponible(Connexio con, List<Vehicle> vehicles) {
+	static int Disponible(Connexio con, List<Vehicle> vehicles, LocalDate inici,LocalDate fi) {
 			return 0;
 	}
 	

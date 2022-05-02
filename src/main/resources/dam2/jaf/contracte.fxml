@@ -74,7 +74,7 @@
 									</padding>
 								</Label>
 								<TextField fx:id="textCodi" editable="false" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" />
-                        <Label text="Conductor:" GridPane.rowIndex="5">
+                        <Label text="Conductor:" GridPane.rowIndex="6">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
@@ -84,7 +84,7 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <Label text="Vehicle:" GridPane.rowIndex="7">
+                        <Label text="Vehicle:" GridPane.rowIndex="5">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
@@ -96,12 +96,12 @@
                            </padding>
                         </Label>
                         <ComboBox fx:id="cbxEstat" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <ComboBox fx:id="cbxVehicle" disable="true" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbxVehicle" disable="true" prefHeight="35.0" prefWidth="201.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <ComboBox fx:id="cbxEmpleat" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="cbxConductor" disable="true" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ComboBox fx:id="cbxConductor" disable="true" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <DatePicker fx:id="dateDataInici" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <DatePicker fx:id="dateDataFi" disable="true" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <CheckBox fx:id="cboxConductor" disable="true" mnemonicParsing="false" onAction="#gestionarConductor" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="cboxConductor" disable="true" mnemonicParsing="false" onAction="#gestionarConductor" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 							</children>
 						</GridPane>
 						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">

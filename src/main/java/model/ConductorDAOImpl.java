@@ -37,17 +37,16 @@ import dam2.jaf.Connexio;
 			}	
 		}
 		
-		public static int Disponible(Connexio con, List<Conductor> conductors, LocalDate inici,LocalDate fi) {
+		public static int Disponible(Connexio con, List<Conductor> conductors, LocalDate inici,LocalDate fi,Vehicle vehicle) {
 			
 			try 
 			{
 				Connection conection = con.getConnexio();
 				
 				Statement stm = conection.createStatement();
-				
-				//String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE dataFi > NOW()) AND DNI!='0');";
-				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE ('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)) AND DNI!='0');";
-
+//				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE ('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)) AND DNI!='0');";
+				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT c.DNIConductor FROM contracte c INNER JOIN conductorCarnet cc ON c.DNIConductor=cc.DNIConductor WHERE idCarnet!="+vehicle.getCarnet().getIdCarnet()+" AND (('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi))) AND DNI!='0');";
+//REVISAR
 				
 				ResultSet rst = stm.executeQuery(sql);		
 				

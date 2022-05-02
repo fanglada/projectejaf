@@ -195,7 +195,7 @@ public class contracteController implements Initializable{
 					   	dateDataInici.setValue(oldValue);
 					}
 				   	
-	        		actualitzarDisponibles();
+	        		actualitzarDisponiblesVehicle();
 
 				}
 		 
@@ -211,17 +211,36 @@ public class contracteController implements Initializable{
 				{
 					cbxVehicle.setDisable(false);
 
-				   	cboxConductor.setDisable(false);
-
 				   	if (newValue.compareTo(dateDataInici.getValue()) < 0) {
 				   		dateDataFi.setValue(oldValue);
 			        }
-	        		actualitzarDisponibles();
+	        		actualitzarDisponiblesVehicle();
 
 				}
 				
 		 
 			}});
+		
+		cbxVehicle.valueProperty().addListener(new ChangeListener<>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Vehicle> observable, Vehicle oldValue, Vehicle newValue) {
+				// TODO Auto-generated method stub
+
+				if(newValue!=null)
+				{
+
+				   	cboxConductor.setDisable(false);
+
+		
+	        		actualitzarDisponiblesConductor();
+
+				}
+				
+		 
+			}});
+		
+		
 	}
 
     @FXML
@@ -356,12 +375,16 @@ public class contracteController implements Initializable{
     	cbxConductor.setDisable(!cbxConductor.isDisabled());
     }
     
-    private void actualitzarDisponibles() 
+    private void actualitzarDisponiblesVehicle() 
+    {
+		llistaVehicles.clear();
+    	VehicleDAOImpl.Disponible(App.con, llistaVehicles, dateDataInici.getValue(),dateDataFi.getValue());
+    }
+    
+    private void actualitzarDisponiblesConductor()
     {
     	llistaConductors.clear();
-		llistaVehicles.clear();
-		ConductorDAOImpl.Disponible(App.con, llistaConductors,dateDataInici.getValue(),dateDataFi.getValue());
-    	VehicleDAOImpl.Disponible(App.con, llistaVehicles, dateDataInici.getValue(),dateDataFi.getValue());
+		ConductorDAOImpl.Disponible(App.con, llistaConductors,dateDataInici.getValue(),dateDataFi.getValue(),cbxVehicle.getValue());
     }
 
 	@FXML

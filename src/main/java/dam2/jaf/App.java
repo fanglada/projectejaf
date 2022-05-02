@@ -17,7 +17,9 @@ import java.util.*;
  */
 public class App extends Application {
 
-	public static Connexio con = new Connexio("config.xml");
+	public static Connexio con = new Connexio();
+	//public static Connexio con = new Connexio("config.xml");
+
 
     private static Scene scene;
     private static Stage stage;
