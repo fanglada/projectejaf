@@ -35,11 +35,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
 			<version>13</version>
 		</dependency>
@@ -64,7 +59,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.4</version>
 				<configuration>
-					<mainClass>dam2.jaf.MainLauncher</mainClass>
+					<mainClass>dam2.jaf.App</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>

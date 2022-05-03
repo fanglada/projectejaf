@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.*;
 
@@ -17,8 +19,7 @@ import java.util.*;
  */
 public class App extends Application {
 
-	public static Connexio con = new Connexio();
-	//public static Connexio con = new Connexio("config.xml");
+	public static Connexio con = new Connexio("config.xml");
 
 
     private static Scene scene;
@@ -28,11 +29,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
     	this.stage = stage;
-        scene = new Scene(loadFXML("Menu"),1010,700);
+        scene = new Scene(loadFXML("menu"),1010,700);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setMinHeight(700);
         stage.setMinWidth(1010);
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("jafmlogo.png")));
         stage.show();
     }
 
@@ -44,6 +46,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+    
 
     public static void main(String[] args) {
 

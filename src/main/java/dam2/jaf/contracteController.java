@@ -190,9 +190,9 @@ public class contracteController implements Initializable{
 				   		dateDataInici.setValue(oldValue);
 			        }
 					
-					if( dateDataFi.getValue()!=null && newValue.compareTo(dateDataFi.getValue()) > 0)
+					if( dateDataFi.getValue()!=null )//&& newValue.compareTo(dateDataFi.getValue()) > 0
 					{
-					   	dateDataInici.setValue(oldValue);
+						dateDataFi.setValue(null);
 					}
 				   	
 	        		actualitzarDisponiblesVehicle();
@@ -234,6 +234,15 @@ public class contracteController implements Initializable{
 
 		
 	        		actualitzarDisponiblesConductor();
+	        		
+	        		if(!trobarCarnet(newValue.getCarnet())&&!cboxConductor.isSelected())
+	        		{
+	        			Alert missatge=new Alert(AlertType.ERROR);
+	        			missatge.setTitle("No pots conduir aquest vehicle, lloga un conductor");
+	        			missatge.setContentText("No pots conduir aquest vehicle, lloga un conductor");
+	        			missatge.setHeaderText("Alerta:");
+	        			missatge.show();
+	        		}
 
 				}
 				
@@ -248,38 +257,49 @@ public class contracteController implements Initializable{
     	
     	if(cbxClient.getValue() != null && cbxEmpleat.getValue() != null && dateDataInici.getValue() != null && dateDataFi.getValue() != null && cbxVehicle.getValue() !=null && cbxEstat.getValue() != null) 
     	{
-    		
-    		Contracte contracte;
-    		
-    		if (cboxConductor.isSelected()) 
+    		if(trobarCarnet(cbxVehicle.getValue().getCarnet())||cboxConductor.isSelected() ) 
     		{
-    			contracte =  new Contracte(cbxClient.getValue(), cbxEmpleat.getValue(), cbxConductor.getValue(), dateDataInici.getValue(), dateDataFi.getValue(), cbxEstat.getValue(), cbxVehicle.getValue());
-    		}else 
-    		{
-    			contracte =  new Contracte(cbxClient.getValue(), cbxEmpleat.getValue(), dateDataInici.getValue(), dateDataFi.getValue(), cbxEstat.getValue(), cbxVehicle.getValue());
+    		
+	    		Contracte contracte;
+	    		
+	    		if (cboxConductor.isSelected()) 
+	    		{
+	    			contracte =  new Contracte(cbxClient.getValue(), cbxEmpleat.getValue(), cbxConductor.getValue(), dateDataInici.getValue(), dateDataFi.getValue(), cbxEstat.getValue(), cbxVehicle.getValue());
+	    		}else 
+	    		{
+	    			contracte =  new Contracte(cbxClient.getValue(), cbxEmpleat.getValue(), dateDataInici.getValue(), dateDataFi.getValue(), cbxEstat.getValue(), cbxVehicle.getValue());
+	    		}
+	        	ContracteDAO ContracteDAO = new ContracteDAOImpl();
+	        	int resultat = ContracteDAO.create(App.con, contracte);
+	        	
+	        	if (resultat>0)
+	        	{
+	        		llistaContractes.add(contracte);
+	        		Alert missatge=new Alert(AlertType.INFORMATION);
+	    			missatge.setTitle("Contracte creat");
+	    			missatge.setContentText("S'ha creat correctament, però sempre va bé comprovar");
+	    			missatge.setHeaderText("Alerta:");
+	    			missatge.show();
+	    			Netejar(null);
+	    			
+	        	}else 
+	        	{
+	        		Alert missatge=new Alert(AlertType.ERROR);
+	    			missatge.setTitle("Hi ha un problema, no s'ha pogut crear el contracte");
+	    			missatge.setContentText("Hi ha un problema, no s'ha pogut crear el contracte");
+	    			missatge.setHeaderText("Alerta:");
+	    			missatge.show();
+	        		
+	        	}
     		}
-        	ContracteDAO ContracteDAO = new ContracteDAOImpl();
-        	int resultat = ContracteDAO.create(App.con, contracte);
-        	
-        	if (resultat>0)
-        	{
-        		llistaContractes.add(contracte);
-        		Alert missatge=new Alert(AlertType.INFORMATION);
-    			missatge.setTitle("Contracte creat");
-    			missatge.setContentText("S'ha creat correctament, però sempre va bé comprovar");
+    		else
+    		{
+    			Alert missatge=new Alert(AlertType.ERROR);
+    			missatge.setTitle("No pots conduir aquest vehicle, lloga un conductor");
+    			missatge.setContentText("No pots conduir aquest vehicle, lloga un conductor");
     			missatge.setHeaderText("Alerta:");
     			missatge.show();
-    			Netejar(null);
-    			
-        	}else 
-        	{
-        		Alert missatge=new Alert(AlertType.ERROR);
-    			missatge.setTitle("Hi ha un problema, no s'ha pogut crear el contracte");
-    			missatge.setContentText("Hi ha un problema, no s'ha pogut crear el contracte");
-    			missatge.setHeaderText("Alerta:");
-    			missatge.show();
-        		
-        	}
+    		}
     		
     	}
      	else
@@ -296,42 +316,54 @@ public class contracteController implements Initializable{
 
     @FXML
     void actualizarRegistre(ActionEvent event) {
-    	Contracte contracte = tblViewContracte.getSelectionModel().getSelectedItem();
-    	contracte.setClient(cbxClient.getValue());
-    	contracte.setEmpleat(cbxEmpleat.getValue());
-    	if (cboxConductor.isSelected()) 
+    	
+    	if(trobarCarnet(cbxVehicle.getValue().getCarnet())||cboxConductor.isSelected() ) 
 		{
-    		contracte.setConductor(cbxConductor.getValue());
-		}else 
-		{
-			contracte.setConductor(null);
-		}
-    	contracte.setDataInici(dateDataInici.getValue());
-    	contracte.setDataFi(dateDataFi.getValue());
-    	contracte.setEstat(cbxEstat.getValue());
-    	contracte.setVehicle(cbxVehicle.getValue());
-    	tblViewContracte.refresh();
+	    	Contracte contracte = tblViewContracte.getSelectionModel().getSelectedItem();
+	    	contracte.setClient(cbxClient.getValue());
+	    	contracte.setEmpleat(cbxEmpleat.getValue());
+	    	if (cboxConductor.isSelected()) 
+			{
+	    		contracte.setConductor(cbxConductor.getValue());
+			}else 
+			{
+				contracte.setConductor(null);
+			}
+	    	contracte.setDataInici(dateDataInici.getValue());
+	    	contracte.setDataFi(dateDataFi.getValue());
+	    	contracte.setEstat(cbxEstat.getValue());
+	    	contracte.setVehicle(cbxVehicle.getValue());
+	    	tblViewContracte.refresh();
+					
+			ContracteDAO ContracteDAO = new ContracteDAOImpl();
+	    	int resultat = ContracteDAO.update(App.con, contracte);
+	    	if (resultat > 0)
+	    	{
+	    		Alert missatge=new Alert(AlertType.INFORMATION);
+	    		missatge.setTitle("Contracte actuaizat");
+				missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
+				missatge.setHeaderText("Alerta:");
+				missatge.show();
+				Netejar(null);
+				tblViewContracte.refresh();
 				
-		ContracteDAO ContracteDAO = new ContracteDAOImpl();
-    	int resultat = ContracteDAO.update(App.con, contracte);
-    	if (resultat > 0)
-    	{
-    		Alert missatge=new Alert(AlertType.INFORMATION);
-    		missatge.setTitle("Contracte actuaizat");
-			missatge.setContentText("S'ha actualitzat correctament, però sempre va bé comprovar");
+	    	}else 
+	    	{
+	    		Alert missatge=new Alert(AlertType.ERROR);
+	    		missatge.setTitle("Hi ha un problema, el contracte no s'ha pogut actualitzar");
+				missatge.setContentText("Hi ha un problema, el contracte no s'ha pogut actialitzar");
+				missatge.setHeaderText("Alerta:");
+				missatge.show();
+	    	}
+		}
+		else
+		{
+			Alert missatge=new Alert(AlertType.ERROR);
+			missatge.setTitle("No pots conduir aquest vehicle, lloga un conductor");
+			missatge.setContentText("No pots conduir aquest vehicle, lloga un conductor");
 			missatge.setHeaderText("Alerta:");
 			missatge.show();
-			Netejar(null);
-			tblViewContracte.refresh();
-			
-    	}else 
-    	{
-    		Alert missatge=new Alert(AlertType.ERROR);
-    		missatge.setTitle("Hi ha un problema, el contracte no s'ha pogut actualitzar");
-			missatge.setContentText("Hi ha un problema, el contracte no s'ha pogut actialitzar");
-			missatge.setHeaderText("Alerta:");
-			missatge.show();
-    	}
+		}
     }
 
 
@@ -425,11 +457,36 @@ public class contracteController implements Initializable{
     	cbxVehicle.getSelectionModel().select(contracte.getVehicle());
     	cbxEstat.getSelectionModel().select(contracte.getEstat());
 	}
+    
+    private Boolean trobarCarnet(Carnet carnet) 
+    {
+    	if(cbxClient.getValue().getCarnet().size()!=0)
+    	{
+    	  	int i = 0;
+        	while(cbxClient.getValue().getCarnet().get(i).getIdCarnet() != carnet.getIdCarnet())
+        	{
+        		i++;
+        	}
+        	if(cbxClient.getValue().getCarnet().get(i).getIdCarnet() == carnet.getIdCarnet())
+        	{
+        		return true;
+        	}
+        	else
+        	{
+        		return false;
+        	}
+    	}
+    	else
+    	{
+    		return false;
+    	}
+  
+    }
 
     @FXML
     void tornar(ActionEvent event) throws IOException {
     	
-    	App.setRoot("Menu");
+    	App.setRoot("menu");
 
     }
     
