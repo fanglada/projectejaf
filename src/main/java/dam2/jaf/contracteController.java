@@ -449,6 +449,7 @@ public class contracteController implements Initializable{
     	}else 
     	{
     		cboxConductor.setSelected(false);
+        	cbxConductor.setValue(null);
     		cbxConductor.setDisable(true);
     		
     	}
