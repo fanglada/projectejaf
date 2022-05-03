@@ -503,6 +503,7 @@ public class contracteController implements Initializable{
     	cbxConductor.getSelectionModel().select(null);
     	cboxConductor.setSelected(false);
     	cbxConductor.setDisable(true);
+    	cbxConductor.setValue(null);
     	dateDataInici.setValue(null);
     	dateDataFi.setValue(null);
     	cbxVehicle.getSelectionModel().select(null);
