@@ -186,11 +186,11 @@ public class contracteController implements Initializable{
 
 				   	dateDataFi.setDisable(false);
 				   	
-					if (newValue.compareTo(LocalDate.now()) < 0) {
-				   		dateDataInici.setValue(oldValue);
-			        }
+//					if (newValue.compareTo(LocalDate.now()) < 0) {
+//				   		dateDataInici.setValue(oldValue);
+//			        }
 					
-					if( dateDataFi.getValue()!=null )//&& newValue.compareTo(dateDataFi.getValue()) > 0
+					if( dateDataFi.getValue()!=null && newValue.compareTo(dateDataFi.getValue()) > 0)
 					{
 						dateDataFi.setValue(null);
 					}
