@@ -23,21 +23,23 @@
 						<Button fx:id="botoTornar" mnemonicParsing="false" onAction="#tornar" text="Tornar" />
 			</items>
 		</ToolBar>
-		<AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="248.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<children>
-				<GridPane layoutY="12.0" prefHeight="483.0" prefWidth="1010.0" AnchorPane.bottomAnchor="-131.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<GridPane layoutY="12.0" prefHeight="252.0" prefWidth="1010.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0000305175781" />
-						<ColumnConstraints hgrow="SOMETIMES" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="768.6666870117188" minWidth="536.6666870117188" prefWidth="768.6666870117188" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="473.33331298828125" minWidth="241.33331298828125" prefWidth="241.33331298828125" />
 					</columnConstraints>
 					<rowConstraints>
 						<RowConstraints vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<GridPane prefHeight="402.0" prefWidth="527.0">
+						<GridPane prefHeight="246.0" prefWidth="768.0">
 							<columnConstraints>
-								<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="247.3333282470703" minWidth="10.0" prefWidth="213.33334350585938" />
-								<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="307.6666564941406" />
+								<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="247.3333282470703" minWidth="10.0" prefWidth="132.3333282470703" />
+								<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="223.33331298828125" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="184.66668701171875" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="229.99996948242188" />
 							</columnConstraints>
 							<rowConstraints>
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -46,12 +48,6 @@
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
@@ -65,7 +61,7 @@
 										<Insets right="5.0" />
 									</padding>
 								</Label>
-								<Label text="Capacitat:" GridPane.rowIndex="9">
+								<Label text="Capacitat:" GridPane.columnIndex="2" GridPane.rowIndex="3">
 									<padding>
 										<Insets right="5.0" />
 									</padding>
@@ -75,9 +71,9 @@
 										<Insets right="5.0" />
 									</padding>
 								</Label>
-								<TextField fx:id="textCodi" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" />
-								<TextField fx:id="textNumPortes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-								<TextField fx:id="textCapacitat" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+								<TextField fx:id="textCodi" prefHeight="37.0" prefWidth="202.0" styleClass="input" GridPane.columnIndex="1" />
+								<TextField fx:id="textNumPortes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+								<TextField fx:id="textCapacitat" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="3" />
 								<TextField fx:id="textCv" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Canvi:" GridPane.rowIndex="4">
                            <padding>
@@ -89,39 +85,39 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <Label text="Número Portes:" GridPane.rowIndex="7">
+                        <Label text="Número Portes:" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <ComboBox fx:id="cbxCarnet" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <ComboBox fx:id="cbxCarnet" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                         <Label text="Marca:" GridPane.rowIndex="1">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
                         <TextField fx:id="textMarca" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Carnet:" GridPane.rowIndex="10">
+                        <Label text="Carnet:" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
                         <TextField fx:id="textModel" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="cbxTipusVehicle" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Número Rodes:" GridPane.rowIndex="6">
+                        <Label text="Número Rodes:" GridPane.columnIndex="2">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <Label text="Data Matriculació:" GridPane.rowIndex="8">
+                        <Label text="Data Matriculació:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="textNumRodes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <DatePicker fx:id="textDataMatriculacio" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <ComboBox fx:id="cbxParking" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label text="Parking:" GridPane.rowIndex="11">
+                        <TextField fx:id="textNumRodes" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" />
+                        <DatePicker fx:id="textDataMatriculacio" prefHeight="35.0" prefWidth="201.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbxParking" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <Label text="Parking:" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
@@ -129,9 +125,9 @@
                         <ComboBox fx:id="cbxCanvi" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 							</children>
 						</GridPane>
-						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
+						<GridPane prefHeight="483.0" prefWidth="344.0" GridPane.columnIndex="1">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
 							</columnConstraints>
 							<rowConstraints>
 								<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
@@ -150,14 +146,14 @@
 				</GridPane>
 			</children>
 		</AnchorPane>
-		<HBox alignment="CENTER" layoutX="-14.0" layoutY="543.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0">
+		<HBox alignment="CENTER" layoutX="25.0" layoutY="328.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<children>
 				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
-				<TextField fx:id="textCerca" promptText="Cerca per tots els camps" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" promptText="Cerca per tots els camps" styleClass="input" />
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewVehicle" layoutX="2.0" layoutY="592.0" prefHeight="198.0" prefWidth="1010.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="592.0">
+		<TableView fx:id="tblViewVehicle" layoutX="2.0" layoutY="384.0" prefHeight="406.0" prefWidth="1010.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="384.0">
 			<columns>
 				<TableColumn fx:id="clmMatricula" prefWidth="136.66665649414062" text="Matricula" />
             <TableColumn fx:id="clmMarca" prefWidth="136.66665649414062" text="Marca" />

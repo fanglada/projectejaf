@@ -23,21 +23,23 @@
             <Button fx:id="botoTornar" mnemonicParsing="false" onAction="#tornar" text="Tornar" />
          </items>
       </ToolBar>
-    <AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="209.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <GridPane layoutY="12.0" prefHeight="352.0" prefWidth="1010.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane layoutY="12.0" prefHeight="211.0" prefWidth="1010.0" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0000305175781" />
-                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="808.3333129882812" minWidth="533.6666870117188" prefWidth="808.3333129882812" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.33331298828125" minWidth="201.66668701171875" prefWidth="201.66668701171875" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <GridPane prefHeight="315.0" prefWidth="526.0">
+                  <GridPane prefHeight="249.0" prefWidth="808.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="247.3333282470703" minWidth="10.0" prefWidth="213.33334350585938" />
-                      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="307.6666564941406" />
+                      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="298.33331298828125" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="152.66668701171875" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="322.3333282470703" minWidth="10.0" prefWidth="307.6666564941406" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
@@ -45,11 +47,7 @@
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Dni:">
@@ -77,12 +75,12 @@
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <Label text="Telèfon:" GridPane.rowIndex="5">
+                        <Label text="Telèfon:" GridPane.columnIndex="2">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <Label text="Mail:" GridPane.rowIndex="6">
+                        <Label text="Mail:" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
@@ -91,21 +89,21 @@
                         <TextField fx:id="textNom" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="textCognom1" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="textCognom2" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="textTelefon" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField fx:id="textMail" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextField fx:id="textDireccio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label text="Direcció:" GridPane.rowIndex="7">
+                        <TextField fx:id="textTelefon" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" />
+                        <TextField fx:id="textMail" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="textDireccio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Label text="Direcció:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
                         <DatePicker fx:id="dateDataNaixament" onMouseClicked="#data" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Carnet:" GridPane.rowIndex="9">
+                        <Label text="Carnet:" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <padding>
                               <Insets right="5.0" />
                            </padding>
                         </Label>
-                        <CheckComboBox fx:id="chcbxCarnet" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <CheckComboBox fx:id="chcbxCarnet" prefHeight="35.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
@@ -129,14 +127,14 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <HBox alignment="CENTER" layoutX="6.0" layoutY="430.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0">
+      <HBox alignment="CENTER" layoutX="23.0" layoutY="285.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
             <TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" promptText="Cerca per tots els camps" styleClass="input" />
             <Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
          </children>
       </HBox>
-      <TableView fx:id="tblViewConductor" layoutX="2.0" layoutY="478.0" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="tblViewConductor" layoutX="2.0" layoutY="358.0" prefHeight="433.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
           <TableColumn fx:id="clmDni" text="Dni" />
           <TableColumn fx:id="clmNom" prefWidth="91.66665649414062" text="Nom" />

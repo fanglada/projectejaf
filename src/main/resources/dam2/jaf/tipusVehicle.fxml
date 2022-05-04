@@ -21,9 +21,9 @@
 						<Button fx:id="botoTornar" mnemonicParsing="false" onAction="#tornar" text="Tornar" />
 			</items>
 		</ToolBar>
-		<AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<AnchorPane layoutX="-1.0" layoutY="60.0" minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="1010.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<children>
-				<GridPane layoutY="12.0" prefHeight="352.0" prefWidth="1010.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<GridPane layoutY="12.0" prefHeight="200.0" prefWidth="1010.0" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0000305175781" />
 						<ColumnConstraints hgrow="SOMETIMES" />
@@ -42,26 +42,22 @@
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="-Infinity" minHeight="40.0" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
 								<RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Label text="Codi:" GridPane.rowIndex="2">
+								<Label text="Codi:" GridPane.rowIndex="1">
 									<padding>
 										<Insets right="5.0" />
 									</padding>
 								</Label>
-								<Label text="Descripció:" GridPane.rowIndex="5">
+								<Label text="Descripció:" GridPane.rowIndex="3">
 									<padding>
 										<Insets right="5.0" />
 									</padding>
 								</Label>
-								<TextField fx:id="textCodi" editable="false" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-								<TextField fx:id="textDescripcio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+								<TextField fx:id="textCodi" editable="false" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+								<TextField fx:id="textDescripcio" prefHeight="25.0" prefWidth="200.0" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 							</children>
 						</GridPane>
 						<GridPane prefHeight="263.0" prefWidth="483.0" GridPane.columnIndex="1">
@@ -85,14 +81,14 @@
 				</GridPane>
 			</children>
 		</AnchorPane>
-		<HBox alignment="CENTER" layoutX="6.0" layoutY="430.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0">
+		<HBox alignment="CENTER" layoutX="9.0" layoutY="281.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<children>
 				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
-				<TextField fx:id="textCerca" promptText="Cerca per tots els camps" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" promptText="Cerca per tots els camps" styleClass="input" />
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewTipusVehicle" layoutX="2.0" layoutY="478.0" prefHeight="313.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewTipusVehicle" layoutX="2.0" layoutY="349.0" prefHeight="442.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<columns>
 				<TableColumn fx:id="clmCodi" text="Codi" />
 				<TableColumn fx:id="clmDescripcio" prefWidth="192.0" text="Descripció" />

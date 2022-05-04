@@ -125,6 +125,8 @@ public class contracteController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		App.setTitol("Contracte");
+    	
     	llistaClients = FXCollections.observableArrayList();
     	llistaEmpleats = FXCollections.observableArrayList();
     	llistaVehicles = FXCollections.observableArrayList();
