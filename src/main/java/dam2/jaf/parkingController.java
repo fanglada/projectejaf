@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -309,6 +310,7 @@ public class parkingController implements Initializable {
 			Parent root = loader.load();
 			stageTaula = new Stage();
 			stageTaula.initModality(Modality.APPLICATION_MODAL);
+    		stageTaula.getIcons().add(new Image(App.class.getResourceAsStream("jafmlogo.png")));
 			stageTaula.setTitle("Vehicles de: " + parking.getDireccio());
 			stageTaula.setScene(new Scene(root));
 			stageTaula.show(); 

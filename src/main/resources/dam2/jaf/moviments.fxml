@@ -19,11 +19,11 @@
 		<HBox alignment="CENTER" layoutY="75.0" prefHeight="39.0" prefWidth="1022.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 			<children>
 				<Text fill="#ffffffa7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cerca:" wrappingWidth="56.41930389404297" />
-				<TextField fx:id="textCerca" promptText="Cerca per tots els camps" prefHeight="37.0" prefWidth="263.0" styleClass="input" />
+				<TextField fx:id="textCerca" prefHeight="37.0" prefWidth="263.0" promptText="Cerca per tots els camps" styleClass="input" />
 				<Button fx:id="botoBuidar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buidar" prefHeight="37.0" prefWidth="16.0" text="X" />
 			</children>
 		</HBox>
-		<TableView fx:id="tblViewMoviments" layoutX="2.0" layoutY="159.0" prefHeight="632.0" prefWidth="1010.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<TableView fx:id="tblViewMoviments" layoutX="2.0" layoutY="159.0" prefHeight="632.0" prefWidth="1010.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="156.0">
 			<columns>
 				<TableColumn fx:id="clmCodi" prefWidth="136.66665649414062" text="Codi" />
 				<TableColumn fx:id="clmOrigen" prefWidth="114.33334350585938" text="Origen" />

@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -417,8 +418,10 @@ public class ConductorController implements Initializable{
     		FXMLLoader loader = new FXMLLoader(App.class.getResource("carnetsTaula.fxml"));
        		loader.setController(this);
     		Parent root = loader.load();
+
     		stageTaula = new Stage();
     		stageTaula.initModality(Modality.APPLICATION_MODAL);
+    		stageTaula.getIcons().add(new Image(App.class.getResourceAsStream("jafmlogo.png")));
     		stageTaula.setTitle("Carnets de: " + conductor.getNom() + " " + conductor.getCognom1() + " " + conductor.getCognom2());
     		stageTaula.setScene(new Scene(root));
     		stageTaula.show(); 

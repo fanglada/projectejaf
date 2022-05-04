@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -455,6 +456,7 @@ public class ClientController implements Initializable {
     		Parent root = loader.load();
     		stageTaula = new Stage();
     		stageTaula.initModality(Modality.APPLICATION_MODAL);
+    		stageTaula.getIcons().add(new Image(App.class.getResourceAsStream("jafmlogo.png")));
     		stageTaula.setTitle("Carnets de: " + client.getNom() + " " + client.getCognom1() + " " + client.getCognom2());
     		stageTaula.setScene(new Scene(root));
     		stageTaula.show();
