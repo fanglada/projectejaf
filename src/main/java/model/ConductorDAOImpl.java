@@ -46,7 +46,7 @@ import dam2.jaf.Connexio;
 				Statement stm = conection.createStatement();
 //				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT DNIConductor FROM contracte WHERE ('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)) AND DNI!='0');";
 //				String sql = "SELECT * FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND ( dni NOT IN (SELECT c.DNIConductor FROM contracte c INNER JOIN conductorCarnet cc ON c.DNIConductor=cc.DNIConductor WHERE c.DNIConductor IN (SELECT DNI FROM treballador WHERE esConductor IS TRUE AND idBotiga IS NULL AND telefonEmpresa IS NULL AND dni NOT IN (SELECT DISTINCT(c.DNIConductor) FROM contracte c INNER JOIN conductorCarnet cc ON c.DNIConductor=cc.DNIConductor WHERE cc.idCarnet="+vehicle.getCarnet().getIdCarnet()+") AND DNI!='0') AND (('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi))) AND DNI!='0');";
-				String sql = "SELECT * FROM treballador INNER JOIN conductorcarnet ON DNI=DNIConductor AND idCarnet="+vehicle.getCarnet().getIdCarnet()+" WHERE esConductor IS TRUE AND DNI NOT IN (SELECT DNIConductor FROM contracte WHERE DNIConductor!='0' AND (('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)));";
+				String sql = "SELECT * FROM treballador INNER JOIN conductorCarnet ON DNI=DNIConductor AND idCarnet="+vehicle.getCarnet().getIdCarnet()+" WHERE esConductor IS TRUE AND DNI NOT IN (SELECT DNIConductor FROM contracte WHERE DNIConductor!='0' AND (('"+inici+"' BETWEEN dataInici AND dataFi) OR ('"+fi+"' BETWEEN dataInici AND dataFi)));";
 //REVISAR
 				
 				ResultSet rst = stm.executeQuery(sql);		
